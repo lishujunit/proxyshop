@@ -268,7 +268,7 @@
                 <div class="col-md-8 col-lg-6 col-xl-5 order-lg-2 position-relative">
                     <div class="shape bg-soft-primary rounded-circle rellax w-20 h-20" data-rellax-speed="1"
                         style="top: -2rem; right: -1.9rem; transform: translate3d(0px, -14px, 0px);"></div>
-                    <figure class="rounded"><img src="../../assets/img/photos/about7.jpg"
+                    <figure class="rounded"><img src="/img/photos/about7.jpg"
                             srcset="/img/photos/about7@2x.jpg 2x" alt=""></figure>
                 </div>
                 <!--/column -->
