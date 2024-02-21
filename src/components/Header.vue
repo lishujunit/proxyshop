@@ -21,19 +21,37 @@
                                         <div>
                                             <h6 class="dropdown-header">Dedicated 4G</h6>
                                             <ul class="list-unstyled">
-                                                <li><a class="dropdown-item" href="/">🇨🇦 CA 4G Mobile proxies</a></li>
-                                                <li><a class="dropdown-item" href="/">🇺🇸 US 4G Mobile proxies</a></li>
-                                                <li><a class="dropdown-item" href="/">🇬🇧 UK 4G Mobile proxies</a></li>
-                                                <li><a class="dropdown-item" href="/">🇩🇪 DE 4G Mobile proxies</a></li>
-                                                <li><a class="dropdown-item" href="/">🇳🇿 NL 4G Mobile proxies</a></li>
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">🇨🇦 CA 4G Mobile proxies</router-link>
+                                                </li>
+                                                    
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">🇺🇸 US 4G Mobile proxies</router-link>
+                                                </li>
+                                                    
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">🇬🇧 UK 4G Mobile proxies</router-link>
+                                                </li>
+                                                    
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">🇩🇪 DE 4G Mobile proxies</router-link>
+                                                </li>
+                                                    
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">🇳🇿 NL 4G Mobile proxies</router-link>
+                                                </li>
                                             </ul>
                                         </div>
                                         <!-- /.column -->
                                         <div>
                                             <h6 class="dropdown-header">Dedicated 5G</h6>
                                             <ul class="list-unstyled">
-                                                <li><a class="dropdown-item" href="/">🇺🇸 US 5G Mobile proxies</a></li>
-                                                <li><a class="dropdown-item" href="/">🇬🇧 UK 5G Mobile proxies</a></li>
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">>🇺🇸 US 5G Mobile proxies</router-link>
+                                                </li>
+                                                <li>
+                                                    <router-link class="dropdown-item" to="/web/">🇬🇧 UK 5G Mobile proxies</router-link>
+                                                </li>
                                             </ul>
                                         </div>
                                         <!-- <div>
@@ -48,7 +66,7 @@
                                     <!-- /auto-column -->
                                 </div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="/scraping-api">IPv4/IPv6</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">IPv4/IPv6</a></li>
                             <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="/use-cases"
                                     data-bs-toggle="dropdown">Use cases</a>
                                 <ul class="dropdown-menu">
@@ -62,9 +80,15 @@
                             </li> -->
 
                             <!-- <li class="nav-item"><a class="nav-link" href="/contact">Use Case</a></li> -->
-                            <li class="nav-item"><a class="nav-link" href="/web/documentation">Documentation</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/web/feedback">Feedback</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/web/contact">Contact</a></li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/web/documentation">Documentation</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/web/feedback">Feedback</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/web/contact">Contact</router-link>
+                            </li>
                         </ul>
                         <!-- /.navbar-nav -->
                         <div class="d-lg-none mt-auto pt-6 pb-6 order-4">
