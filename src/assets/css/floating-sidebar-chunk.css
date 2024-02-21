@@ -1,0 +1,306 @@
+.floating-sidebar-mobile-container {
+    display: block
+}
+
+@media only screen and (min-width: 48em) {
+    .floating-sidebar-mobile-container {
+        display: none
+    }
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile {
+    font-family: Poppins, Tahoma, sans-serif;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08)
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner {
+    position: relative
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner .sections-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner .sections-selector>div:first-child p {
+    color: #4d4e58;
+    font-weight: 600;
+    font-size: .875rem;
+    line-height: .9375rem
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner .sections-selector .chevron {
+    position: relative
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner .sections-selector .chevron::before {
+    content: "";
+    display: inline;
+    height: 120%;
+    border-left: 1px solid #cecece;
+    left: -15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner .sections-selector .chevron svg {
+    transition: transform .35s
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner ul.sections {
+    display: none;
+    background-color: #fff;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    position: absolute;
+    list-style: none;
+    width: 100%;
+    max-height: 220px;
+    overflow-y: scroll;
+    z-index: 9
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner ul.sections,
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner ul.sections li {
+    font-family: Inter, Tahoma, sans-serif;
+    padding: 0;
+    margin: 0
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner ul.sections li {
+    display: flex;
+    align-items: center;
+    color: #101050;
+    padding: 15px;
+    font-size: .75rem;
+    line-height: .875rem;
+    border-top: 1px solid #cecece;
+    font-weight: 600;
+    height: 55px
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile .inner ul.sections li a {
+    width: 100%
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile.active {
+    border-radius: 4px 4px 0 0
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile.active .chevron svg {
+    transform: rotate(180deg)
+}
+
+.floating-sidebar-mobile-container .floating-sidebar-mobile.active ul.sections {
+    display: block
+}
+
+.Resources.Webinar .floating-sidebar-mobile-container,
+.Resources.Podcast .floating-sidebar-mobile-container,
+.Resources.Guide .floating-sidebar-mobile-container,
+.Resources.Ebook .floating-sidebar-mobile-container {
+    margin-top: 30px
+}
+
+@media only screen and (min-width: 48em) {
+    .Resources:not(.Guide) #main {
+        max-width: calc(995px + 250px)
+    }
+
+    .Resources #main .PostBody {
+        max-width: calc(645px + 250px)
+    }
+
+    .Resources #main .PostBody .alignwide img {
+        max-width: 130%;
+        margin: 0 -105px
+    }
+
+    .Resources #main .PostBody .Content>.at-above-post.addthis_tool:first-child {
+        display: none
+    }
+
+    .Resources #main .PostBody .Content>:first-child {
+        margin-top: 0
+    }
+}
+
+.Resources:not(.CaseStudy) .PostBody .Content.with-sidebar {
+    margin-left: 0
+}
+
+@media only screen and (min-width: 48em) {
+    .Resources:not(.CaseStudy) .PostBody .Content.with-sidebar {
+        margin-left: 250px
+    }
+}
+
+@media only screen and (min-width: 48em) {
+
+    .Resources.CaseStudy .PostBody .Content.with-sidebar>*:not(.CaseStudyHighlight),
+    .Resources.CaseStudy .PostBody .Content.with-sidebar>.CaseStudyHighlight>*:not(.WhiteSectionBg):not(.CaseStudyHighlightBox) {
+        margin-left: 250px !important;
+        width: calc(100% - 250px) !important
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .Resources.CaseStudy .PostBody .Content.with-sidebar .WhiteSectionBg {
+        display: none
+    }
+}
+
+@media only screen and (max-width: 1700px) {
+    .Resources.CaseStudy .PostBody .Content.with-sidebar .WhiteSectionBg {
+        right: -33vw !important
+    }
+
+    .Resources.CaseStudy .PostBody .Content.with-sidebar .WhiteSectionBg {
+        top: 180px
+    }
+}
+
+@media only screen and (min-width: 48em)and (max-width: 60em) {
+    .Resources.CaseStudy .PostBody .Content.with-sidebar .CaseStudyHighlight {
+        margin: 220px 0
+    }
+}
+
+.Resources .Content.with-sidebar {
+    flex: 1
+}
+
+.floating-sidebar-container {
+    display: none;
+    position: absolute;
+    left: 0
+}
+
+.floating-sidebar-container,
+.floating-sidebar-container .floating-sidebar {
+    width: 250px;
+    max-width: 250px
+}
+
+@media only screen and (min-width: 48em) {
+    .floating-sidebar-container {
+        display: block
+    }
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections,
+.floating-sidebar-container .floating-sidebar li {
+    margin: 0;
+    padding: 0
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections {
+    font-family: Poppins, Tahoma, sans-serif;
+    list-style: none;
+    text-indent: 0
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li {
+    font-size: .875rem;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 42px;
+    height: -moz-fit-content;
+    height: fit-content
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .dot svg circle {
+    transition: fill .5s linear
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li.active .dot svg circle,
+.floating-sidebar-container .floating-sidebar ul.sections li.onIt .dot svg circle {
+    fill: #101050;
+    stroke: #101050
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .section {
+    height: 100%;
+    display: flex
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .section .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .section .left .dot {
+    display: flex
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .section .left .progress {
+    width: 2px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    position: relative
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .section .left .progress::before {
+    background: transparent;
+    content: "";
+    width: 2px;
+    height: 0;
+    position: absolute;
+    top: 0;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transition: background .5s linear, height .5s linear
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li:last-child .section .left .progress {
+    display: none
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li.active .left .progress::before {
+    height: 17px;
+    transition: height .5s linear .5s;
+    background: #101050
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li.active.onIt .left .progress::before {
+    height: 0
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .right {
+    display: flex
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .right a {
+    height: 100%;
+    max-height: 40px;
+    margin-left: 15px;
+    color: #4d4e58;
+    font-weight: 600;
+    align-items: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical
+}
+
+.floating-sidebar-container .floating-sidebar ul.sections li .right a:hover {
+    color: #101050;
+    text-decoration: none
+}
+
+.floating-sidebar:not(.inactive) ul li:not(li.active~li):not(.active) .section .left .dot svg circle {
+    fill: #101050
+}
+
+.floating-sidebar:not(.inactive) ul li:not(li.active~li):not(.active) .section .left .progress::before {
+    height: 38px;
+    background: #101050
+}
