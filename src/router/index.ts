@@ -45,6 +45,11 @@ const router = createRouter({
           path: 'documentation',
           name: 'documentation',
           component: () => import('../views/front/documentation/documentation.vue')
+        },
+        {
+          path: 'IPv4-IPv6',
+          name: 'IPv4-IPv6',
+          component: () => import('../views/front/IPv4-IPv6/IPv4-IPv6.vue')
         }
       ],
     },

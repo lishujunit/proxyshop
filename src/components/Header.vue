@@ -66,7 +66,9 @@
                                     <!-- /auto-column -->
                                 </div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="#">IPv4/IPv6</a></li>
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/web/IPv4-IPv6">IPv4/IPv6</router-link>
+                            </li>
                             <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="/use-cases"
                                     data-bs-toggle="dropdown">Use cases</a>
                                 <ul class="dropdown-menu">
