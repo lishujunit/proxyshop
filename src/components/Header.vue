@@ -14,7 +14,10 @@
                     </div>
                     <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
                         <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
+                            <li class="nav-item">
+                                <router-link class="nav-link" to="/web">Mobile Proxies</router-link>
+                            </li>
+                            <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Mobile Proxies</a>
                                 <div class="dropdown-menu dropdown-lg">
                                     <div class="dropdown-lg-content">
@@ -42,7 +45,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <!-- /.column -->
                                         <div>
                                             <h6 class="dropdown-header">Dedicated 5G</h6>
                                             <ul class="list-unstyled">
@@ -54,18 +56,9 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <!-- <div>
-                                            <h6 class="dropdown-header">Social Media</h6>
-                                            <ul class="list-unstyled">
-                                                <li><a class="dropdown-item" href="/social-media-proxies">🇬🇧 UK Social
-                                                        Media</a></li>
-                                            </ul>
-                                        </div> -->
-                                        <!-- /.column -->
                                     </div>
-                                    <!-- /auto-column -->
                                 </div>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <router-link class="nav-link" to="/web/IPv4-IPv6">IPv4/IPv6</router-link>
                             </li>
