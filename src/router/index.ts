@@ -50,22 +50,23 @@ const router = createRouter({
           path: 'IPv4-IPv6',
           name: 'IPv4-IPv6',
           component: () => import('../views/front/IPv4-IPv6/IPv4-IPv6.vue')
-        }
+        },
+        { path: '/:pathMatch(.*)', component: () => import('../views/404/404.vue') }
       ],
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
-      redirect: "/dashboard/dashboardHome",
+      redirect: "/dashboard/proxies",
       children: [
         {
-          path: 'dashboardHome',
-          name: 'dashboardHome',
+          path: 'proxies',
+          name: 'proxies',
           component: () => import('../views/dashboard/home/home.vue')
         },
       ],
-    },
+    }
   ]
 })
 
