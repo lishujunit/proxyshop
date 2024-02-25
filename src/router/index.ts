@@ -48,7 +48,7 @@ const router = createRouter({
         },
         {
           path: 'IPv4-IPv6',
-          name: 'IPv4-IPv6',
+          name: 'web-IPv4-IPv6',
           component: () => import('../views/front/IPv4-IPv6/IPv4-IPv6.vue')
         },
         { path: '/:pathMatch(.*)', component: () => import('../views/404/404.vue') }
@@ -64,6 +64,31 @@ const router = createRouter({
           path: 'proxies',
           name: 'proxies',
           component: () => import('../views/dashboard/home/home.vue')
+        },
+        {
+          path: 'IPv4-IPv6',
+          name: 'dashboard-IPv4-IPv6',
+          component: () => import('../views/dashboard/IPv4-IPv6/IPv4-IPv6.vue')
+        },
+        {
+          path: 'Add-funds',
+          name: 'Add-funds',
+          component: () => import('../views/dashboard/Add-funds/Add-funds.vue')
+        },
+        {
+          path: 'affiliate',
+          name: 'affiliate',
+          component: () => import('../views/dashboard/affiliate/affiliate.vue')
+        },
+        {
+          path: 'settings',
+          name: 'settings',
+          component: () => import('../views/dashboard/settings/settings.vue')
+        },
+        {
+          path: 'api',
+          name: 'api',
+          component: () => import('../views/dashboard/api/api.vue')
         },
       ],
     }
