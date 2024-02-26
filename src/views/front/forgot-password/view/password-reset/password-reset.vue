@@ -9,7 +9,7 @@
                             <p class="lead mb-6 text-start">Type your email below to receive a password reset link</p>
                             <form class="text-start mb-3" method="POST">
                                 <input type="hidden" name="csrfmiddlewaretoken"
-                                    value="lfJfz3i9AOUji9oJJMvXwFeOCxjGWNwkwjUCBEGHR7RUfe9DNKZMR5xlsjVHK3Q1">
+                                    value="abc">
 
                                 <div class="form-floating mb-4">
                                     <input type="email" name="email" autocomplete="email" maxlength="254"
