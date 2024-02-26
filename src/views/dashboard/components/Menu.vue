@@ -18,8 +18,8 @@
                 </li>
 
 
-                <li class="nav-item dash-nav-item">
-                    <router-link class="nav-link" to="/dashboard/IPv4-IPv6">
+                <li class="nav-item dash-nav-item dash-nav-item-disabled">
+                    <router-link disabled class="nav-link" to="">
 
                         <i class="uil uil-brackets-curly pe-1 d-none d-md-inline"></i>
                         <i class="uil uil-brackets-curly pe-1 d-sm-inline d-md-none fs-12"></i>
@@ -87,6 +87,11 @@
     background-color: none;
     text-align: center;
 }
+.dash-nav-item-disabled {
+    .nav-link {
+        color: #afafaf;
+    }
+}
 
 .dash-nav-item-active {
     background-color: var(--bs-grape);
@@ -95,6 +100,9 @@
 
 .dash-nav-item:hover {
     background-color: var(--bs-grape);
+}
+.dash-nav-item-disabled:hover {
+    background-color: transparent;
 }
 
 .dash-nav-link {

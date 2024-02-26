@@ -51,6 +51,36 @@ const router = createRouter({
           name: 'web-IPv4-IPv6',
           component: () => import('../views/front/IPv4-IPv6/IPv4-IPv6.vue')
         },
+        {
+          path: 'forgot-password',
+          name: 'forgot-password',
+          component: () => import('../views/front/forgot-password/forgot-password.vue'),
+          redirect: "forgot-password/password-reset",
+          children: [
+            {
+              path: 'password-reset',
+              name: 'password-reset',
+              component: () => import('../views/front/forgot-password/view/password-reset/password-reset.vue')
+            },
+            {
+              path: 'done',
+              name: 'password-reset-done',
+              component: () => import('../views/front/forgot-password/view/done/done.vue')
+            },
+            {
+              path: 'set-password',
+              name: 'set-password',
+              component: () => import('../views/front/forgot-password/view/set-password/set-password.vue')
+            },
+            
+            {
+              path: 'password-reset-complete',
+              name: 'password-reset-complete',
+              component: () => import('../views/front/forgot-password/view/password-reset-complete/password-reset-complete.vue')
+            }
+          ]
+        },
+
         { path: '/:pathMatch(.*)', component: () => import('../views/404/404.vue') }
       ],
     },
