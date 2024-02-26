@@ -2,7 +2,7 @@ import axios from "axios";
 import { ElMessage } from 'element-plus';
 
 const service = axios.create({
-    baseURL: '/api',
+    baseURL: import.meta.env.VITE_APP_API,
     timeout: 1000 * 60,
     headers: { 'X-Custom-Header': 'foobar' }
 });

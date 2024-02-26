@@ -59,8 +59,11 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { login } from "@/api/front/user";
- import { useStore } from '@/stores/user';
+import { useStore } from '@/stores/user';
+
+ const router = useRouter();
 
 const user = useStore();
 // console.log(user.userData?.token_type, '1 token_type');
@@ -76,6 +79,16 @@ const handleLogin = async () => {
     const res = await login(params);
     if(res) {
         user.updateUserData(res);
+        const next = router.currentRoute.value.query.next;
+        if(next) {
+            router.push({
+                path: next
+            })
+        } else {
+            router.push({
+                path: '/dashboard'
+            })
+        }
     }
 }
 </script>

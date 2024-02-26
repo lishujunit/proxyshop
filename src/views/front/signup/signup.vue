@@ -115,10 +115,13 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { register, limited, country } from "@/api/front/user";
 // import { useCounterStore } from '@/stores/counter';
 
 // const counter = useCounterStore();
+
+const router = useRouter();
 
 const dialogVisible = ref(false);
 

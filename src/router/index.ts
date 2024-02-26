@@ -2,6 +2,8 @@ import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router
 import WebView from '../views/WebView.vue'
 import DashboardView from '../views/DashboardView.vue'
 
+import { useStore } from '@/stores/user';
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -123,6 +125,26 @@ const router = createRouter({
       ],
     }
   ]
+})
+
+router.beforeEach(async (to, from, next) => {
+  const user = useStore();
+  const isAuthenticated = user.userData?.access_token;
+  const toPath = to.path;
+  if(toPath.startsWith('/dashboard')) {
+    if(isAuthenticated) {
+      next();
+    } else {
+      next({
+        path: '/web/signin',
+        query: {
+          next: toPath
+        }
+      })
+    }
+  } else {
+    next();
+  }
 })
 
 export default router

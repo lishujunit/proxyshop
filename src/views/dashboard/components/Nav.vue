@@ -4,19 +4,34 @@
             <div class="navbar-other w-100 d-flex ms-auto w-100">
                 <ul class="navbar-nav flex-row align-items-center ms-auto">
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown">12324324@qq.com (£0.00)</a>
+                            data-bs-toggle="dropdown">{{ user.userData?.user.user_name }} (£ {{user.userData?.user.user_balance}})</a>
                         <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item" href="/dashboard">Dashboard</a>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/dashboard">Dashboard</router-link>
                             </li>
-                            <li class="nav-item"><a class="dropdown-item" href="/dashboard/scraping">Scraping</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="/dashboard/deposit">Deposit</a></li>
+                            <li class="nav-item nav-item-disabled">
+                                <router-link class="dropdown-item" to="">IPv4/IPv6</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/dashboard/Add-funds">Add funds</router-link>
+                            </li>
 
-                            <li class="nav-item"><a class="dropdown-item" href="/dashboard/affiliate">Affiliate</a></li>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/dashboard/Affiliate">Affiliate</router-link>
+                            </li>
 
-                            <li class="nav-item"><a class="dropdown-item" href="/dashboard/settings">Settings</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="/dashboard/api">API</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="/contact">Contact</a></li>
-                            <li class="nav-item"><a class="dropdown-item" href="/logout">Logout</a></li>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/dashboard/settings">Settings</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/dashboard/api">API</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/web/contact">Contact</router-link>
+                            </li>
+                            <li class="nav-item" @click="handleLogout">
+                                <router-link class="dropdown-item" to="">Logout</router-link>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -24,3 +39,27 @@
         </div>
     </nav>
 </template>
+
+<script lang="ts" setup>
+import { useRouter } from "vue-router";
+import { useStore } from '@/stores/user';
+
+const router = useRouter();
+
+const user = useStore();
+
+const handleLogout = () => {
+    user.updateUserData(null);
+    router.push({
+        path: '/web/signin'
+    });
+}
+</script>
+
+<style lang="less" scoped>
+.nav-item-disabled {
+    .dropdown-item {
+        color: #afafaf;
+    }
+}
+</style>
