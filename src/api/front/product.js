@@ -36,6 +36,15 @@ export const order = (params, data) => {
     })
 }
 
+// 已购买的代理设备列表
+export const proxylist = (params) => {
+    return service({
+        url: '/proxy/list',
+        method: 'get',
+        params
+    })
+}
+
 
 
 

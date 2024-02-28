@@ -111,6 +111,8 @@ const router = useRouter();
 const user_id = user.userData?.user.user_id;
 const amount = ref(10);
 
+let frame = null;
+
 const handleRecharge = async () => {
     let params = {
         user_id,
@@ -119,7 +121,8 @@ const handleRecharge = async () => {
     const res = await rechargeurl(params);
     if(res && res.status === 1) {
         let url = res.recharge_url;
-        open(url, '_blank', 'popup=yes,width=1000,height=1000')
+        frame = open(url, '_self', 'popup=yes,width=1000,height=1000')
     }
 }
+// 4242 4242 4242 4242
 </script>

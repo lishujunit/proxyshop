@@ -4,7 +4,7 @@
             <div class="navbar-other w-100 d-flex ms-auto w-100">
                 <ul class="navbar-nav flex-row align-items-center ms-auto">
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                            data-bs-toggle="dropdown">{{ user.userData?.user.user_name }} (£ {{user.userData?.user.user_balance}})</a>
+                            data-bs-toggle="dropdown">{{ user.userData?.user.user_name }}</a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
                                 <router-link class="dropdown-item" to="/dashboard">Dashboard</router-link>

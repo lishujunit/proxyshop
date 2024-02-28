@@ -158,6 +158,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
 import { orderprice, order } from '@/api/front/product.js'
+import { ElMessage } from "element-plus"
 
 const user = useStore();
 const router = useRouter();
@@ -202,6 +203,14 @@ const submitOrder = async () => {
     let data = formData.value;
     data.is_autorenew = data.is_autorenew ? 1 : 0;
     const res = await order(params, data);
+    if(res && res.status) {
+        ElMessage.success(res.message);
+        setTimeout(() => {
+            router.push({
+                path: '/dashboard'
+            })
+        }, 500)
+    }
 }
 
 getOrderprice();

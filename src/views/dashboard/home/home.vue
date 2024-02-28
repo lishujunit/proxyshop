@@ -40,7 +40,7 @@
                     <div class="card card-border-top border-green">
                         <div class="card-body">
                             <h5 class="card-title">Paid Proxies</h5>
-                            <h3 class="text-center card-text">11</h3>
+                            <h3 class="text-center card-text"> {{ proxyData.length }} </h3>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                     <div class="card card-border-top border-green">
                         <div class="card-body">
                             <h5 class="card-title">User balance</h5>
-                            <h3 class="text-center card-text">£0.00</h3>
+                            <h3 class="text-center card-text">${{ userInfoData.user_balance }}</h3>
                         </div>
                     </div>
                 </div>
@@ -83,31 +83,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>CA proxy</td>
-                                        <td>succeed</td>
-                                        <td>@mdo</td>
-                                        <td>4G</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown" aria-expanded="false"
-                                                    style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .5rem;">
-                                                    Create Order
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Connection Details</a></li>
-                                                    <li><a class="dropdown-item" href="#">Configuration</a></li>
-                                                    <li><a class="dropdown-item" href="#">Troubleshooting</a></li>
-                                                    <li><a class="dropdown-item" href="#">Billing</a></li>
-                                                    <li><a class="dropdown-item" href="#">Daily Usage</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <template v-for="(item, index) in proxyData" :key="item.id">
+                                        <tr>
+                                            <th scope="row">{{ index+1 }}</th>
+                                            <td>CA proxy</td>
+                                            <td>succeed</td>
+                                            <td>@mdo</td>
+                                            <td>{{ item.network_type }}</td>
+                                            <td>{{ item.proxy_port }}</td>
+                                            <td>{{ item.end_time }}</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                                        style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .3rem; --bs-btn-font-size: .5rem;">
+                                                        Operate
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Create Order</a></li>
+                                                        <li><a class="dropdown-item" href="#">Connection Details</a></li>
+                                                        <li><a class="dropdown-item" href="#">Configuration</a></li>
+                                                        <li><a class="dropdown-item" href="#">Troubleshooting</a></li>
+                                                        <li><a class="dropdown-item" href="#">Billing</a></li>
+                                                        <li><a class="dropdown-item" href="#">Daily Usage</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
                                 </tbody>
                             </table>
                             <br>
@@ -134,3 +137,35 @@
         </div>
     </section>
 </template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from '@/stores/user';
+import { proxylist } from '@/api/front/product.js'
+import { userInfo } from '@/api/front/user.js'
+
+const proxyData = ref([]);
+const userInfoData = ref();
+
+const getProxylist = async () => {
+    let params = {
+        page: 1,
+        pagenum: 10
+    }
+    const res = await proxylist(params);
+    if(res) {
+        proxyData.value = res;
+    }
+}
+
+const getUserInfo = async () => {
+    const res = await userInfo();
+    if(res) {
+        userInfoData.value = res.user;
+    }
+};
+getUserInfo();
+getProxylist();
+
+</script>

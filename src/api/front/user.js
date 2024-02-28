@@ -42,4 +42,21 @@ export const rechargeurl = (params) => {
     })
 }
 
+// 获取用户信息
+export const userInfo = () => {
+    return service({
+        url: '/user/me/',
+        method: 'get'
+    })
+}
+
+// 用户反馈
+export const feedback = (user_id, data) => {
+    return service({
+        url: `/user/feedback/${user_id}`,
+        method: 'post',
+        data,
+    })
+}
+
 
