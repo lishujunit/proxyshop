@@ -9,12 +9,35 @@ export const productList = () => {
 }
 
 // 代理产品信息
-export const productInfosList = (data) => {
+export const productInfosList = (params) => {
     return service({
         url: '/product/infos',
         method: 'get',
-        params: data
+        params
     })
 }
+
+// 计算订单金额
+export const orderprice = (params) => {
+    return service({
+        url: '/product/orderprice',
+        method: 'get',
+        params
+    })
+}
+
+// 提交订单
+export const order = (params, data) => {
+    return service({
+        url: '/product/order',
+        method: 'post',
+        params,
+        data
+    })
+}
+
+
+
+
 
 

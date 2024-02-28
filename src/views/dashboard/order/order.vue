@@ -15,7 +15,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product_code }}</h5>
+                        <h5 class="card-title">{{ formData.product_code }}</h5>
 
                         <form class="text-start mb-3" id="order-form">
                             <label for="item_num">Number</label>
@@ -144,7 +144,7 @@
 
                             <h1 id="price-display" class="display-5 text-primary">Price: £1 per hour </h1>
                             <br>
-                            <button class="btn btn-primary btn-login mb-2" type="button">Purchase</button>
+                            <button class="btn btn-primary btn-login mb-2" type="button" @click="submitOrder">Purchase</button>
                         </form>
                     </div>
                 </div>
@@ -157,6 +157,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
+import { orderprice, order } from '@/api/front/product.js'
 
 const user = useStore();
 const router = useRouter();
@@ -171,13 +172,33 @@ const formData = ref({
     auth_account: '',
     auth_pwd: '',
     allowed_ips: '',
-    is_autorenew: false,
+    is_autorenew: true,
     proxy_type: 'HTTP',
     rotate_minute: '5',
-    is_rotateip: '0'
+    is_rotateip: '0',
+    product_code: query.product_code,
 });
 
-const product_code = ref(query.product_code);
 const network_type = ref(query.network_type);
+
+const getOrderprice = async () => {
+    let params = {
+        product_id: formData.value.product_id,
+        item_num: formData.value.item_num,
+        discount_code: formData.value.discount_code,
+    };
+    const res = await orderprice(params);
+};
+
+const submitOrder = async () => {
+    let params = {
+        user_id: formData.value.user_id,
+    };
+    let data = formData.value;
+    data.is_autorenew = data.is_autorenew ? 1 : 0;
+    const res = await order(params, data);
+}
+
+getOrderprice();
 
 </script>
