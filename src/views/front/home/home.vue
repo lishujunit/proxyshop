@@ -132,7 +132,7 @@
                                             <li><i class="uil uil-check"></i><span>Fully Dedicated</span></li>
                                             <li><i class="uil uil-check"></i><span>Unbeatable IP Reputation</span></li>
                                         </ul>
-                                        <a href="#" class="btn btn-primary rounded-pill">Choose Plan</a>
+                                        <router-link :to="`/dashboard/order?product_id=${item.id}&product_code=${item.product_code}&proxy_type=${item.network_type}`" class="btn btn-primary rounded-pill">Choose Plan</router-link>
                                     </div>
                                     <!--/.card-body -->
                                 </div>

@@ -122,6 +122,16 @@ const router = createRouter({
           name: 'api',
           component: () => import('../views/dashboard/api/api.vue')
         },
+        {
+          path: 'new-order',
+          name: 'new-order',
+          component: () => import('../views/dashboard/new-order/new-order.vue')
+        },
+        {
+          path: 'order',
+          name: 'order',
+          component: () => import('../views/dashboard/order/order.vue')
+        },
       ],
     }
   ]
@@ -131,6 +141,7 @@ router.beforeEach(async (to, from, next) => {
   const user = useStore();
   const isAuthenticated = user.userData?.access_token;
   const toPath = to.path;
+  const query = to.query;
   if(toPath.startsWith('/dashboard')) {
     if(isAuthenticated) {
       next();
@@ -138,7 +149,8 @@ router.beforeEach(async (to, from, next) => {
       next({
         path: '/web/signin',
         query: {
-          next: toPath
+          next: toPath,
+          ...query
         }
       })
     }

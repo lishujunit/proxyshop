@@ -79,14 +79,18 @@ const handleLogin = async () => {
     const res = await login(params);
     if(res) {
         user.updateUserData(res);
-        const next = router.currentRoute.value.query.next;
+        let query = JSON.parse(JSON.stringify(router.currentRoute.value.query));
+        const next = query.next;
         if(next) {
+            delete query.next;
             router.push({
-                path: next
+                path: next,
+                query
             })
         } else {
             router.push({
-                path: '/dashboard'
+                path: '/dashboard',
+                query
             })
         }
     }

@@ -111,10 +111,10 @@
                                 </tbody>
                             </table>
                             <br>
-                            <a href="/dashboard/new-order" class="btn btn-outline-primary">
+                            <router-link to="/dashboard/new-order" class="btn btn-outline-primary">
                                 <i class="uil uil-plus pe-1"></i>
                                 Create Order
-                            </a>
+                            </router-link>
                             <!-- <a href="/dashboard/export-proxies" class="btn btn-secondary float-md-end">
                                 <i class="uil uil-export pe-1"></i>
                                 Export
