@@ -1,17 +1,22 @@
 import axios from "axios";
 import { ElMessage } from 'element-plus';
+import { useStore } from '@/stores/user';
 
 const service = axios.create({
     baseURL: import.meta.env.VITE_APP_API,
     timeout: 1000 * 60,
-    headers: { 'X-Custom-Header': 'foobar' }
+    // headers: { 'X-Custom-Header': 'foobar' }
 });
 
 // 请求拦截器
 service.interceptors.request.use(
     config => {
-        // 在发送请求之前做些什么，例如设置token
-        // config.headers['X-Token'] = 'your token';
+        const user = useStore();
+        const token_type = user.userData?.token_type;
+        const access_token = user.userData?.access_token;
+        if(token_type && access_token) {
+            config.headers['Authorization'] = `${token_type} ${access_token}`;
+        }
         return config;
     },
     error => {

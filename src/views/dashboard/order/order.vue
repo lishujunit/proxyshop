@@ -32,10 +32,10 @@
                                     id="username-pass" checked="">
                                 <label class="form-check-label" for="username-pass">Username and password</label>
                             </div>
-                            <div class="form-check mb-4">
+                            <!-- <div class="form-check mb-4">
                                 <input class="form-check-input" v-model="formData.auth_method" type="radio" name="auth-method" value="ip" id="ipwhitelist">
                                 <label class="form-check-label" for="ipwhitelist">Allowed IP</label>
-                            </div>
+                            </div> -->
 
                             <div id="user-controls" v-if="formData.auth_method === 'user'">
                                 <div class="row">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
 
-                            <div id="ip-controls" v-if="formData.auth_method === 'ip'">
+                            <div id="ip-controls">
                                 <p>You can supply multiple IP addresses by separating them with a comma. e.g.
                                     192.168.0.1,127.0.0.1</p>
                                 <div class="form-floating mb-4">
@@ -132,9 +132,9 @@
                             <label for="proxy_type">Proxy Type</label>
                             <div class="form-select-wrapper mb-4">
                                 <select name="proxy_type" v-model="formData.proxy_type" class="form-control" id="proxy_type">
-                                    <option value="HTTP">HTTP Proxy</option>
+                                    <option value="http">HTTP Proxy</option>
 
-                                    <option value="SOCKS">SOCKS Proxy</option>
+                                    <option value="socks5">SOCKS Proxy</option>
 
                                 </select>
                             </div>
@@ -142,7 +142,7 @@
 
                             
 
-                            <h1 id="price-display" class="display-5 text-primary">Price: £1 per hour </h1>
+                            <h1 id="price-display" class="display-5 text-primary">Price: {{ order_price }} </h1>
                             <br>
                             <button class="btn btn-primary btn-login mb-2" type="button" @click="submitOrder">Purchase</button>
                         </form>
@@ -163,6 +163,8 @@ const user = useStore();
 const router = useRouter();
 const query = router.currentRoute.value.query;
 
+const order_price = ref(0);
+
 const formData = ref({
     user_id: user.userData?.user.user_id,
     product_id: query.product_id,
@@ -173,7 +175,7 @@ const formData = ref({
     auth_pwd: '',
     allowed_ips: '',
     is_autorenew: true,
-    proxy_type: 'HTTP',
+    proxy_type: 'http',
     rotate_minute: '5',
     is_rotateip: '0',
     product_code: query.product_code,
@@ -188,6 +190,9 @@ const getOrderprice = async () => {
         discount_code: formData.value.discount_code,
     };
     const res = await orderprice(params);
+    if(res && res.status === 1) {
+        order_price.value = res.order_price;
+    }
 };
 
 const submitOrder = async () => {

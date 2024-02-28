@@ -7,7 +7,7 @@
 
                         <h5 class="card-title">Add funds to your account</h5>
 
-                        <form class="text-start mb-3" method="POST" id="deposit-form">
+                        <form class="text-start mb-3" id="deposit-form">
                             <input type="hidden" name="csrfmiddlewaretoken"
                                 value="6LiGyC0DP0gS11k0AEathrR6f2FofSOkhPt3Adob6jdtY65UECEiCRaD5Ohp3881">
 
@@ -33,12 +33,12 @@
                             <br>
 
                             <div class="form-floating mb-4">
-                                <input type="number" name="amount" value="10" min="1" step="0.01" class="form-control"
+                                <input type="number" v-model="amount" name="amount" min="1" step="0.01" class="form-control"
                                     required="" id="id_amount">
                                 <label for="id_amount">Amount</label>
                             </div>
 
-                            <button class="btn btn-primary btn-login mb-2" type="submit">Add Funds</button>
+                            <button class="btn btn-primary btn-login mb-2" type="button" @click="handleRecharge">Add Funds</button>
                         </form>
                     </div>
                 </div>
@@ -98,3 +98,28 @@
         </div>
     </section>
 </template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from '@/stores/user';
+import { rechargeurl } from '@/api/front/user.js'
+
+const user = useStore();
+const router = useRouter();
+
+const user_id = user.userData?.user.user_id;
+const amount = ref(10);
+
+const handleRecharge = async () => {
+    let params = {
+        user_id,
+        amount: amount.value
+    };
+    const res = await rechargeurl(params);
+    if(res && res.status === 1) {
+        let url = res.recharge_url;
+        open(url, '_blank', 'popup=yes,width=1000,height=1000')
+    }
+}
+</script>

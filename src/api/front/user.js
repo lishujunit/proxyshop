@@ -32,3 +32,14 @@ export const login = (data) => {
         }
     })
 }
+
+// 生成账户充值URL
+export const rechargeurl = (params) => {
+    return service({
+        url: '/user/rechargeurl',
+        method: 'post',
+        params,
+    })
+}
+
+
