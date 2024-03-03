@@ -20,7 +20,7 @@
                         <form class="text-start mb-3" id="order-form">
                             <label for="item_num">Number</label>
                             <div class="form-input-wrapper mb-4">
-                                <input v-model="formData.item_num" type="number" class="form-control" id="item_num">
+                                <input v-model="formData.item_num" @change="handleChangeNum" type="number" class="form-control" id="item_num">
                             </div>
 
                             
@@ -194,6 +194,10 @@ const getOrderprice = async () => {
     if(res && res.status === 1) {
         order_price.value = res.order_price;
     }
+};
+
+const handleChangeNum = () => {
+    getOrderprice();
 };
 
 const submitOrder = async () => {

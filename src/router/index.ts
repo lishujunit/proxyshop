@@ -24,6 +24,11 @@ const router = createRouter({
           component: () => import('../views/front/home/home.vue')
         },
         {
+          path: 'user-activate',
+          name: 'user-activate',
+          component: () => import('../views/front/user-activate/user-activate.vue')
+        },
+        {
           path: 'signup',
           name: 'signup',
           component: () => import('../views/front/signup/signup.vue')

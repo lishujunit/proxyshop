@@ -12,7 +12,7 @@
                                 <input type="hidden" name="csrfmiddlewaretoken"
                                     value="Di0VfNOThjn2wIKCySTXzvwCGi3wRcMCOmbihocryCkDtNvwCQnMUVP9w4FxFs6j">
                                 <div class="form-floating password-field mb-4">
-                                    <input type="password" name="new_password1" autocomplete="new-password" required=""
+                                    <input type="password" v-model="new_password1" name="new_password1" autocomplete="new-password" required=""
                                         id="id_new_password1" class="form-control" aria-autocomplete="list">
                                     <span class="password-toggle"><i class="uil uil-eye"></i></span>
                                     <label for="id_new_password1">New password</label>
@@ -20,7 +20,7 @@
 
 
                                 <div class="form-floating password-field mb-4">
-                                    <input type="password" name="new_password2" autocomplete="new-password" required=""
+                                    <input type="password" v-model="new_password2" name="new_password2" autocomplete="new-password" required=""
                                         id="id_new_password2" class="form-control">
                                     <span class="password-toggle"><i class="uil uil-eye"></i></span>
                                     <label for="id_new_password2">New password confirmation</label>
@@ -33,7 +33,7 @@
 
 
                                 <button class="btn btn-primary rounded-pill btn-login w-100 mb-2"
-                                    type="submit">Submit</button>
+                                    type="button" @click="submit">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -42,3 +42,39 @@
         </div>
     </section>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import { resetpassword } from '@/api/front/user';
+import { ElMessage } from 'element-plus';
+const router = useRouter();
+const query = router.currentRoute.value.query;
+
+const new_password1 = ref('');
+const new_password2 = ref('');
+
+const submit = async () => {
+    if(new_password1.value == '' || new_password2.value == '') {
+        ElMessage.error('Please enter your password');
+        return;
+    }
+    if(new_password1.value != new_password2.value) {
+        ElMessage.error('Passwords are inconsistent');
+        return;
+    }
+    if(query.userid && query.token) {
+        let params = {
+            userid: query.userid,
+            token: query.token,
+            new_password: new_password1.value
+        }
+        const res = await resetpassword(params);
+        if(res && res.status === 1) {
+            router.push({
+                path: '/web/forgot-password/password-reset-complete'
+            })
+        }
+    }
+}
+</script>

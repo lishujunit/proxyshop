@@ -38,7 +38,7 @@
                                     <a class="btn btn-primary rounded-pill btn-login w-100 mb-2" @click="handleLogin">Sign In</a>
                                 </form>
                                 <!-- /form -->
-                                <p class="mb-1"><a href="#" class="hover">Forgot Password?</a></p>
+                                <p class="mb-1"><router-link to="/web/forgot-password" class="hover">Forgot Password?</router-link></p>
                                 <p class="mb-0">Don't have an account?  <router-link class="hover" to="/web/signup">Sign up</router-link></p>
                                 <div class="divider-icon my-4">or</div>
                                 <nav class="nav social justify-content-center text-center">

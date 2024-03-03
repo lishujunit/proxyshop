@@ -25,10 +25,10 @@
           <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
             <h2 class="display-4 mb-3 text-center">Drop Us a Line</h2>
             <p class="lead text-center mb-10">Reach out to us from our contact form and we will get back to you shortly.</p>
-            <form class="contact-form needs-validation" method="post" action="./assets/php/contact.php" novalidate="">
+            <form class="contact-form needs-validation" method="post" novalidate="">
               <div class="messages"></div>
               <div class="row gx-4">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="form-floating mb-4">
                     <input id="form_name" type="text" name="name" class="form-control" placeholder="Jane" required="">
                     <label for="form_name">First Name *</label>
@@ -36,7 +36,7 @@
                     <div class="invalid-feedback"> Please enter your first name. </div>
                   </div>
                 </div>
-                <!-- /column -->
+                
                 <div class="col-md-6">
                   <div class="form-floating mb-4">
                     <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Doe" required="">
@@ -45,7 +45,7 @@
                     <div class="invalid-feedback"> Please enter your last name. </div>
                   </div>
                 </div>
-                <!-- /column -->
+                
                 <div class="col-md-6">
                   <div class="form-floating mb-4">
                     <input id="form_email" type="email" name="email" class="form-control" placeholder="jane.doe@example.com" required="">
@@ -54,7 +54,7 @@
                     <div class="invalid-feedback"> Please provide a valid email address. </div>
                   </div>
                 </div>
-                <!-- /column -->
+                
                 <div class="col-md-6">
                   <div class="form-select-wrapper mb-4">
                     <select class="form-select" id="form-select" name="department" required="">
@@ -66,19 +66,26 @@
                     <div class="valid-feedback"> Looks good! </div>
                     <div class="invalid-feedback"> Please select a department. </div>
                   </div>
-                </div>
-                <!-- /column -->
+                </div> -->
                 <div class="col-12">
                   <div class="form-floating mb-4">
-                    <textarea id="form_message" name="message" class="form-control" placeholder="Your message" style="height: 150px" required=""></textarea>
-                    <label for="form_message">Message *</label>
+                    <input id="feed_title" v-model="formData.feed_title" type="text" name="title" class="form-control" placeholder="" required="">
+                    <label for="feed_title">Title *</label>
+                    <div class="valid-feedback"> Looks good! </div>
+                    <div class="invalid-feedback"> Please enter your last name. </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating mb-4">
+                    <textarea id="feed_msg" v-model="formData.feed_msg" name="message" class="form-control" placeholder="Your message" style="height: 150px" required=""></textarea>
+                    <label for="feed_msg">Message *</label>
                     <div class="valid-feedback"> Looks good! </div>
                     <div class="invalid-feedback"> Please enter your messsage. </div>
                   </div>
                 </div>
                 <!-- /column -->
                 <div class="col-12 text-center">
-                  <input type="submit" class="btn btn-primary rounded-pill btn-send mb-3" value="Send message">
+                  <input type="button" @click="submit" class="btn btn-primary rounded-pill btn-send mb-3" value="Send message">
                   <p class="text-muted"><strong>*</strong> These fields are required.</p>
                 </div>
                 <!-- /column -->
@@ -94,3 +101,31 @@
       <!-- /.container -->
     </section>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { useStore } from '@/stores/user';
+import { feedback } from '@/api/front/user';
+import { ElMessage } from 'element-plus';
+
+const user = useStore();
+
+const formData = ref(
+  {
+    feed_title: '',
+    feed_msg: ''
+  }
+);
+
+const submit = async () => {
+  let user_id = user.userData?.user.user_id;
+  if(!user_id) return;
+  let data = formData.value;
+  const res = await feedback(user_id, data);
+  if(res && res.status === 1) {
+    ElMessage.success(res.message);
+    formData.value.feed_title = '';
+    formData.value.feed_msg = '';
+  }
+};
+</script>

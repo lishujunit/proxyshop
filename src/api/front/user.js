@@ -59,4 +59,40 @@ export const feedback = (user_id, data) => {
     })
 }
 
+// 重新发送激活电子邮件
+export const resendemail = (params) => {
+    return service({
+        url: `/user/resendemail`,
+        method: 'get',
+        params,
+    })
+}
+
+// 重新设置密码
+export const resetpassword = (params) => {
+    return service({
+        url: `/user/resetpassword/confirm`,
+        method: 'post',
+        params,
+    })
+}
+
+
+// 账号激活
+export const activate = (params) => {
+    return service({
+        url: `/user/activate`,
+        method: 'get',
+        params,
+    })
+}
+
+// 更新用户信息
+export const updateUserInfo = (user_id, data) => {
+    return service({
+        url: `/user/update/${user_id}`,
+        method: 'post',
+        data,
+    })
+}
 

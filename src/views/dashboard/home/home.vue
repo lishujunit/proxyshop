@@ -48,7 +48,7 @@
                     <div class="card card-border-top border-green">
                         <div class="card-body">
                             <h5 class="card-title">User balance</h5>
-                            <h3 class="text-center card-text">${{ userInfoData.user_balance }}</h3>
+                            <h3 class="text-center card-text">${{ userInfoData?.user_balance }}</h3>
                         </div>
                     </div>
                 </div>

@@ -12,14 +12,14 @@
                                     value="abc">
 
                                 <div class="form-floating mb-4">
-                                    <input type="email" name="email" autocomplete="email" maxlength="254"
+                                    <input type="email" v-model="email" name="email" autocomplete="email" maxlength="254"
                                         class="form-control" required="" id="id_email">
                                     <label for="id_email">Email</label>
                                 </div>
 
 
                                 <button class="btn btn-primary rounded-pill btn-login w-100 mb-2"
-                                    type="submit">Submit</button>
+                                    type="button" @click="submit">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -28,3 +28,28 @@
         </div>
     </section>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import { resendemail } from '@/api/front/user';
+import { ElMessage } from 'element-plus';
+const router = useRouter();
+const email = ref('');
+
+const submit = async () => {
+    if(!email.value) {
+        ElMessage.error('Please enter your email address');
+        return;
+    }
+    let params = {
+        email: email.value
+    }
+    const res = await resendemail(params);
+    if(res) {
+        router.push({
+            path: '/web/forgot-password/done'
+        })
+    }
+}
+</script>
