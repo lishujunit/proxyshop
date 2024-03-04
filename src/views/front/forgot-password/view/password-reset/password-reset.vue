@@ -32,7 +32,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useRouter } from "vue-router";
-import { resendemail } from '@/api/front/user';
+import { resetpassworSend } from '@/api/front/user';
 import { ElMessage } from 'element-plus';
 const router = useRouter();
 const email = ref('');
@@ -45,7 +45,7 @@ const submit = async () => {
     let params = {
         email: email.value
     }
-    const res = await resendemail(params);
+    const res = await resetpassworSend(params);
     if(res) {
         router.push({
             path: '/web/forgot-password/done'

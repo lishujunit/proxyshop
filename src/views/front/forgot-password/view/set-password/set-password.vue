@@ -55,6 +55,7 @@ const new_password1 = ref('');
 const new_password2 = ref('');
 
 const submit = async () => {
+    alert(3)
     if(new_password1.value == '' || new_password2.value == '') {
         ElMessage.error('Please enter your password');
         return;

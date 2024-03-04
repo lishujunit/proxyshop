@@ -68,6 +68,15 @@ export const resendemail = (params) => {
     })
 }
 
+// 发送重置密码邮件
+export const resetpassworSend = (params) => {
+    return service({
+        url: `/user/resetpassword`,
+        method: 'post',
+        params,
+    })
+}
+
 // 重新设置密码
 export const resetpassword = (params) => {
     return service({
