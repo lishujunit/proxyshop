@@ -2,7 +2,7 @@
     <div class="col-auto col-md-2 px-0 bg-soft-primary" style="max-width: 200px">
         <div class="d-flex flex-column align-items-center align-items-sm-start pt-4 text-white min-vh-100">
             <a href="/dashboard" class="px-4">
-                <img class="d-none d-md-block" src="/img/logo-dark.png" srcset="/img/logo-dark@2x.png 2x" alt=""
+                <img class="d-none d-md-block" src="../../../assets/img/logo1.jpg" alt=""
                     width="100%" height="auto">
                 <!-- <img class="d-block d-md-none" src="/img/logo-icon.jpeg" alt="" width="20px" height="16px"> -->
             </a>

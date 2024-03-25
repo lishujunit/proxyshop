@@ -4,7 +4,7 @@
             <div class="container flex-lg-row flex-nowrap align-items-center">
                 <div class="navbar-brand w-100">
                     <a href="/">
-                        <img src="/img/logo_dark.png" srcset="/img/logo-dark@2x.png 2x" alt="">
+                        <img src="../assets/img/logo2.jpg" width="150px" alt="">
                     </a>
                 </div>
                 <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
