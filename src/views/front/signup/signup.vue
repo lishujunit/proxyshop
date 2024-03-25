@@ -66,19 +66,20 @@
                                         <label for="invite_code">Invite code</label>
                                     </div>
                                     <a class="btn btn-primary rounded-pill btn-login w-100 mb-2" @click="handleRegister">Sign Up</a>
+                                    <a v-if="resendEmailShow" class="btn btn-primary rounded-pill btn-login w-100 mb-2" @click="handleResendEmail">Resend activation email</a>
                                     <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
                                 </form>
                                 <!-- /form -->
                                 <p class="mb-0">Already have an account? <router-link class="hover" to="/web/signin">Sign in</router-link>
                                 </p>
-                                <div class="divider-icon my-4">or</div>
+                                <!-- <div class="divider-icon my-4">or</div>
                                 <nav class="nav social justify-content-center text-center">
                                     <a href="#" class="btn btn-circle btn-sm btn-google"><i class="uil uil-google"></i></a>
                                     <a href="#" class="btn btn-circle btn-sm btn-facebook-f"><i
                                             class="uil uil-facebook-f"></i></a>
                                     <a href="#" class="btn btn-circle btn-sm btn-twitter"><i
                                             class="uil uil-twitter"></i></a>
-                                </nav>
+                                </nav> -->
                                 <!--/.social -->
                             </div>
                             <!--/.card-body -->
@@ -116,7 +117,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { register, limited, country } from "@/api/front/user";
+import { register, resendemail, limited, country } from "@/api/front/user";
+import { ElMessage } from 'element-plus'
 // import { useCounterStore } from '@/stores/counter';
 
 // const counter = useCounterStore();
@@ -124,6 +126,8 @@ import { register, limited, country } from "@/api/front/user";
 const router = useRouter();
 
 const dialogVisible = ref(false);
+
+const resendEmailShow = ref(false);
 
 const userForm = ref({
     "username": "",
@@ -134,6 +138,9 @@ const userForm = ref({
     "invite_code": "",
     // "emailactivate_code": "",
 });
+
+userForm.value.invite_code = router.currentRoute.value.query.invitecode || '';
+
 
 const countryList = ref();
 
@@ -151,16 +158,36 @@ const getCountry =  async () => {
 const handleRegister = async () => {
     let params = userForm.value;
     params.emailactivate_code = generateUUID();
-    const res = await register(params);
-    if(res) {
-        dialogVisible.value = true;
-        userForm.value = {
-            "username": "",
-            "password": "",
-            "first_name": "",
-            "last_name": "",
-            "country": "",
-            "invite_code": "",
+    try {
+        const res = await register(params);
+        if(res) {
+            dialogVisible.value = true;
+            userForm.value = {
+                "username": "",
+                "password": "",
+                "first_name": "",
+                "last_name": "",
+                "country": "",
+                "invite_code": "",
+            }
+        }
+    } catch(err) {
+        const msg = err.response.data.detail;
+        if(msg === 'Username already registered') {
+            resendEmailShow.value = true;
+        }
+    }
+}
+
+const handleResendEmail = async () => {
+    const email = userForm.value.username;
+    if(email) {
+        let params = {
+            email
+        }
+        const res = await resendemail(params);
+        if(res.status == 1) {
+            ElMessage.success(res.message);
         }
     }
 }

@@ -3,6 +3,7 @@ import './assets/css/style.css'
 import './assets/css/colors/violet.css'
 import './assets/css/fonts/urbanist.css'
 import './assets/css/floating-sidebar-chunk.css'
+import './assets/css/iconfont.css'
 // import './assets/main.css'
 
 import { createApp } from 'vue'

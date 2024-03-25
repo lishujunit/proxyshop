@@ -25,69 +25,39 @@
 
             <div class="row text-center pt-5">
                 <div class="col-12">
-                    <div class="d-flex flex-row justify-content-center" style="height: 97px; overflow: hidden;">
-                        <el-scrollbar ref="scrollbar" style="height: 120px;">
-                            <!-- <div class="scrollbar-flex-content">
-                            <p v-for="item in 50" :key="item" class="scrollbar-demo-item">
-                                {{ item }}
-                            </p>
-                            </div> -->
-                            <ul class="nav nav-tabs nav-pills mb-3 scrollbar-flex-content" id="pills-tab" role="tablist">
-                                <template v-for="(item, index) in productData" :key="item.product_code">
-                                    <li class="nav-item scrollbar-demo-item" role="presentation">
-                                        <button class="nav-link" @click="handleProductChange(item.product_code)" :class="{active: index == 0}" data-bs-toggle="pill"
-                                            type="button" role="tab" aria-selected="false" :disabled="item.network_type === '5G'">{{ item.product_name }}</button>
-                                    </li>
-                                </template>
+                    <div class="scrollbar-wraper">
+                        <div class="scroll-arrow arrow-left" v-if="isShowArrow" @click="leftScroll">
+                            <span class="iconfont">&#xe685;</span>
+                        </div>
+                        <div class="d-flex flex-row scrollbar-content" id="scrollbarContent"ref="scrollbarContent">
+                            <!-- <el-scrollbar ref="scrollbar" style="height: 120px;">
                                 
-                                <!-- <li class="nav-item scrollbar-demo-item" role="presentation">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content2" type="button"
-                                        role="tab" aria-selected="false">US 4G proxy</button>
-                                </li>
-                                <li class="nav-item scrollbar-demo-item" role="presentation">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content3" type="button"
-                                        role="tab" aria-selected="false" disabled>CA 5G proxy</button>
-                                </li>
-                                <li class="nav-item scrollbar-demo-item" role="presentation">
-                                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content4" type="button"
-                                        role="tab" aria-selected="false" disabled>US 5G proxy</button>
-                                </li> -->
-                            </ul>
-                        </el-scrollbar>
-                        
-                        <!-- <ul class="nav nav-tabs nav-pills">
-                            <li class="nav-item fs-20" style="width: 232px;">
-                                <a class="nav-link active d-flex flex-row justify-content-center align-items-center"
-                                    href="#">
-                                    <span class="fs-40" style="margin-right: 10px">🇨🇦</span>
-                                    <span class="fs-20">Canada</span>
-                                </a>
-                            </li>
-                            <li class="nav-item fs-20" style="width: 232px;">
-                                <a class="nav-link d-flex flex-row justify-content-center align-items-center" href="#">
-                                    <span class="fs-40 flex" style="margin-right: 10px">🇺🇸</span>
-                                    <span class="fs-20">United States</span>
-                                </a>
-                            </li>
-                            <li class="nav-item fs-20" style="width: 232px;">
-                                <a class="nav-link d-flex flex-row justify-content-center align-items-center" href="#">
-                                    <span class="fs-40" style="margin-right: 10px">🇬🇧</span>
-                                    <span class="fs-20">United Kingdom</span>
-                                </a>
-                            </li>
-                            <li class="nav-item fs-20" style="width: 232px;">
-                                <a class="nav-link d-flex flex-row justify-content-center align-items-center" href="#">
-                                    <span class="fs-40" style="margin-right: 10px">🇩🇪</span>
-                                    <span class="fs-20">Germany</span>
-                                </a>
-                            </li>
-                            <li class="nav-item fs-20" style="width: 232px;">
-                                <a class="nav-link d-flex flex-row justify-content-center align-items-center" href="#">
-                                    <span class="fs-40" style="margin-right: 10px">🇳🇿</span>
-                                    <span class="fs-20">Netherlands</span>
-                                </a>
-                            </li>
-                        </ul> -->
+                            </el-scrollbar> -->
+                            <ul class="nav nav-tabs nav-pills scrollbar-flex-content" id="pills-tab" role="tablist">
+                                    <template v-for="(item, index) in productData" :key="item.product_code">
+                                        <li class="nav-item scrollbar-demo-item" role="presentation">
+                                            <button class="nav-link" @click="handleProductChange(item.product_code)" :class="{active: index == 0}" data-bs-toggle="pill"
+                                                type="button" role="tab" aria-selected="false" :disabled="item.network_type === '5G'">{{ item.product_name }}</button>
+                                        </li>
+                                    </template>
+                                    
+                                    <!-- <li class="nav-item scrollbar-demo-item" role="presentation">
+                                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content2" type="button"
+                                            role="tab" aria-selected="false">US 4G proxy</button>
+                                    </li>
+                                    <li class="nav-item scrollbar-demo-item" role="presentation">
+                                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content3" type="button"
+                                            role="tab" aria-selected="false" disabled>CA 5G proxy</button>
+                                    </li>
+                                    <li class="nav-item scrollbar-demo-item" role="presentation">
+                                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content4" type="button"
+                                            role="tab" aria-selected="false" disabled>US 5G proxy</button>
+                                    </li> -->
+                                </ul>
+                        </div>
+                        <div class="scroll-arrow arrow-right" v-if="isShowArrow" @click="rightScroll">
+                            <span class="iconfont">&#xe687;</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,34 +73,27 @@
                             <div v-for="item in infosData" class="col-md-6 col-lg-4" :key="item.id">
                                 <div class="pricing card text-center">
                                     <div class="card-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 412.9"
-                                            data-inject-url="https://sandbox.elemisthemes.com/assets/img/icons/lineal/shopping-basket.svg"
-                                            class="svg-inject icon-svg icon-svg-md text-primary mb-3">
-                                            <path class="lineal-fill" d="M453.8 238.1l-9.6 76.3H67.8l-9.6-76.3z"></path>
-                                            <circle class="lineal-fill" cx="178.1" cy="149.9" r="35.1"></circle>
-                                            <circle class="lineal-fill" cx="333.9" cy="149.9" r="35.1"></circle>
-                                            <path class="lineal-stroke"
-                                                d="M498.6 136.5h-60.2c-7.4-.2-13.6 5.7-13.8 13.1-.2 7.4 5.7 13.6 13.1 13.8h11.8l-7.5 61.3H70.1l-7.5-61.3h68.9c7.4 25.7 34.3 40.6 60 33.1 16-4.6 28.5-17.1 33.1-33.1h62.6c7.4 25.7 34.3 40.6 60 33.2 25.7-7.4 40.6-34.3 33.2-60-4.9-17.1-18.9-30.1-36.3-33.9l-39-94.2c-2.8-6.9-10.7-10.1-17.6-7.3s-10.1 10.7-7.3 17.6l35.7 86.2c-14 5.5-24.6 17.2-28.8 31.6h-62.6c-4.2-14.4-14.8-26.1-28.8-31.7l35.7-86.2c2.8-6.9-.4-14.7-7.3-17.6s-14.7.4-17.6 7.3l-39.1 94.2c-17.4 3.8-31.3 16.9-36.2 33.9H13.4C6 136.7.1 142.9.3 150.3c.2 7.1 5.9 12.9 13.1 13.1h22.1l29.8 237.8c.9 6.7 6.6 11.8 13.3 11.8h354.8c6.8 0 12.5-5 13.3-11.8l29.8-237.8h22c7.4-.2 13.3-6.4 13.1-13.8-.2-7.2-5.9-12.9-13-13.1zm-165-8.2c.4 0 .9.1 1.3.1h.7c11.9.9 20.8 11.3 19.9 23.2-.9 11.9-11.3 20.8-23.2 19.9-11.9-.9-20.8-11.3-19.9-23.2.8-11.1 10-19.7 21.2-20zm-157.1.1h.7c.4 0 .9-.1 1.3-.1 11.9.2 21.4 10 21.3 22-.2 11.9-10 21.4-22 21.3-11.9-.2-21.4-10-21.3-22 .2-11.2 8.9-20.4 20-21.2zm-103 123.1h365.1l-6.3 49.5H79.7l-6.2-49.5zM90.4 386L83 327.9h345.9l-7.4 58.1H90.4z">
-                                            </path>
-                                        </svg>
+                                        <template v-if="item.payment_plan == 'day'">
+                                            <span class="iconfont" style="font-size: 40px;">&#xe6e6;</span>
+                                        </template>
+                                        <template v-else-if="item.payment_plan == 'week'">
+                                            <span class="iconfont" style="font-size: 40px;">&#xe6a8;</span>
+                                        </template>
+                                        <template v-else-if="item.payment_plan == 'month'">
+                                            <span class="iconfont" style="font-size: 40px;">&#xe69d;</span>
+                                        </template>
+                                        
                                         <h4 class="card-title">{{ item.payment_plan }}</h4>
                                         <div class="prices text-dark">
                                             <div class="price price-show"><span class="price-currency">$</span><span
-                                                    class="price-value">{{ item.price }}</span> <span class="price-duration">hour</span>
+                                                    class="price-value">{{ item.price }}</span> <span class="price-duration">{{ item.payment_plan }}</span>
                                             </div>
                                             <!-- <div class="price price-hide price-hidden"><span class="price-currency">$</span><span
                                             class="price-value">99</span> <span class="price-duration">yr</span></div> -->
                                         </div>
                                         <!--/.prices -->
                                         <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
-                                            <li><i class="uil uil-check"></i><span>Fast 4G Speeds</span></li>
-                                            <li><i class="uil uil-check"></i><span>Private & unlimited connection</span></li>
-                                            <li><i class="uil uil-check"></i><span>Same IP used by real users</span></li>
-                                            <li><i class="uil uil-check"></i><span>Automatic rotating IP pool</span></li>
-                                            <li><i class="uil uil-check"></i><span><strong>99.99%</strong> Uptime</span></li>
-                                            <li><i class="uil uil-check"></i><span>Completely Anonymous</span></li>
-                                            <li><i class="uil uil-check"></i><span>Fully Dedicated</span></li>
-                                            <li><i class="uil uil-check"></i><span>Unbeatable IP Reputation</span></li>
+                                            <li v-for="(info, index) in item.plan_desc" :key="index"><i class="uil uil-check"></i><span>{{ info }}</span></li>
                                         </ul>
                                         <router-link :to="`/dashboard/order?product_id=${item.id}&product_code=${item.product_code}&proxy_type=${item.network_type}`" class="btn btn-primary rounded-pill">Choose Plan</router-link>
                                     </div>
@@ -653,9 +616,13 @@
 </section></template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import { productList, productInfosList } from "@/api/front/product.js"
+
+
 const scrollbar = ref(null);
+const scrollX = ref(0);
+const isShowArrow = ref(false);
 
 const productData = ref();
 const infosData = ref();
@@ -665,6 +632,13 @@ const getProductList = async () => {
     if(res) {
         productData.value = res;
         getProductInfosList(res[0].product_code);
+        nextTick(() => {
+            const scrollbarContent = document.querySelector('#scrollbarContent');
+            const pillsTab = document.querySelector('#pills-tab');
+            if(pillsTab?.scrollWidth > scrollbarContent?.clientWidth) {
+                isShowArrow.value = true;
+            }
+        })
     }
 }
 
@@ -687,19 +661,44 @@ const handleProductChange = (product_code: string) => {
 
 getProductList();
 
+const leftScroll = () => {
+    const pillsTab = document.querySelector('#pills-tab');
+    if(scrollX.value == 0) return;
+    scrollX.value = scrollX.value - 202;
+    pillsTab.style.transform = `translateX(-${scrollX.value}px)`
+}
+const rightScroll = () => {
+    const scrollbarContent = document.querySelector('#scrollbarContent');
+    const pillsTab = document.querySelector('#pills-tab');
+    if(scrollX.value >= (pillsTab?.scrollWidth - (scrollbarContent?.clientWidth + scrollX.value))) return;
+    scrollX.value = scrollX.value + 202;
+    pillsTab.style.transform = `translateX(-${scrollX.value}px)`
+}
+
 </script>
 
 <style lang="less">
+.card-body {
+    .iconfont {
+        color: #a07cc5;
+        font-size: 40px;
+    }
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #a07cc5;
+    color: #fff;
+}
 .scrollbar-flex-content {
     display: flex !important;
     flex-wrap: nowrap !important;
+    transition: all 0.5s;
     padding: 10px;
     .scrollbar-demo-item {
         flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 200px;
+        width: 202px;
         // height: 50px;
         // margin: 10px;
         button {
@@ -707,5 +706,33 @@ getProductList();
             justify-content: center;
         }
         }
+}
+
+.scrollbar-wraper {
+    display: flex;
+    box-sizing: border-box;
+    margin: 0 30px;
+    flex: 1;
+    // overflow: hidden;
+    align-items: center;
+    position: relative;
+    .scrollbar-content {
+        flex: 1;
+        overflow: hidden;
+    }
+    .scroll-arrow {
+        position: absolute;
+        z-index: 99;
+        cursor: pointer;
+        .iconfont {
+            font-size: 30px;
+        }
+    }
+    .arrow-left {
+        left: -30px;
+    }
+    .arrow-right {
+        right: -30px;
+    }
 }
 </style>

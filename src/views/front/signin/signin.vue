@@ -40,14 +40,14 @@
                                 <!-- /form -->
                                 <p class="mb-1"><router-link to="/web/forgot-password" class="hover">Forgot Password?</router-link></p>
                                 <p class="mb-0">Don't have an account?  <router-link class="hover" to="/web/signup">Sign up</router-link></p>
-                                <div class="divider-icon my-4">or</div>
+                                <!-- <div class="divider-icon my-4">or</div>
                                 <nav class="nav social justify-content-center text-center">
                                     <a href="#" class="btn btn-circle btn-sm btn-google"><i class="uil uil-google"></i></a>
                                     <a href="#" class="btn btn-circle btn-sm btn-facebook-f"><i
                                             class="uil uil-facebook-f"></i></a>
                                     <a href="#" class="btn btn-circle btn-sm btn-twitter"><i
                                             class="uil uil-twitter"></i></a>
-                                </nav>
+                                </nav> -->
                             </div>
                         </div>
                     </div>
