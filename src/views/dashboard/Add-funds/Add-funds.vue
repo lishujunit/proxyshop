@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h5 class="card-title">Add funds to your account</h5>
+                        <h5 class="card-title">Add funds to your account（$USD）</h5>
 
                         <form class="text-start mb-3" id="deposit-form">
                             <input type="hidden" name="csrfmiddlewaretoken"
@@ -16,18 +16,18 @@
                             <div id="id_provider">
                                 <div>
                                     <div class="form-check">
-                                        <input type="radio" name="provider" value="stripe" class="form-check-input"
-                                            required="" id="id_provider_0" checked="">
-                                        <label class="form-check-label" for="id_provider_0">Cryptocurrency（USDT）</label>
+                                        <input type="radio" name="provider" value="coingate" class="form-check-input"
+                                            required="" id="id_provider_1" checked="">
+                                        <label class="form-check-label" for="id_provider_1">Credit or Debit Card</label>
                                     </div>
                                 </div>
-                                <!-- <div>
+                                <div>
                                     <div class="form-check">
-                                        <input type="radio" name="provider" value="coingate" class="form-check-input"
-                                            required="" id="id_provider_1">
-                                        <label class="form-check-label" for="id_provider_1">Cryptocurrency</label>
+                                        <input type="radio" name="provider" value="stripe" class="form-check-input"
+                                            id="id_provider_0" disabled>
+                                        <label class="form-check-label" for="id_provider_0">Cryptocurrency</label>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
 
                             <br>
@@ -67,27 +67,15 @@
                                     <th scope="col">Amount</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">Time</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">10</th>
-                                    <td>USDT</td>
-                                    <td>succeed</td>
-                                    <td>02-24-2024</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">20</th>
-                                    <td>USDT</td>
-                                    <td>succeed</td>
-                                    <td>02-25-2024</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">30</th>
-                                    <td>USDT</td>
-                                    <td>succeed</td>
-                                    <td>02-23-2024</td>
+                                <tr v-for="item in rechargesList" :key="item.id">
+                                    <th scope="row">{{ item.amount }}</th>
+                                    <td>{{ item.recharge_type }}</td>
+                                    <td>{{ item.status === 1 ? 'succeed' : 'failed' }}</td>
+                                    <td>{{ item.create_time }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -103,13 +91,15 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { rechargeurl } from '@/api/front/user.js'
+import { rechargeurl, recharges } from '@/api/front/user.js'
 
 const user = useStore();
 const router = useRouter();
 
 const user_id = user.userData?.user.user_id;
 const amount = ref(10);
+
+const rechargesList = ref();
 
 let frame = null;
 
@@ -125,4 +115,12 @@ const handleRecharge = async () => {
     }
 }
 // 4242 4242 4242 4242
+
+const getRecharges = async () => {
+    const res = await recharges();
+    if(res) {
+        rechargesList.value = res;
+    }
+}
+getRecharges();
 </script>

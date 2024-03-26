@@ -105,3 +105,28 @@ export const updateUserInfo = (user_id, data) => {
     })
 }
 
+// 充值记录
+export const recharges = () => {
+    return service({
+        url: '/user/recharges',
+        method: 'get',
+    })
+}
+
+// commission数据获取
+export const affiliate = () => {
+    return service({
+        url: '/user/affiliate',
+        method: 'post',
+    })
+}
+
+// 更新api token
+export const updateToken = (id, data) => {
+    return service({
+        url: `/user/update/${id}`,
+        method: 'post',
+        data
+    })
+}
+

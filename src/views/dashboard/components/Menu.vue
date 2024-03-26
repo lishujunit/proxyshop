@@ -7,73 +7,11 @@
                 <!-- <img class="d-block d-md-none" src="/img/logo-icon.jpeg" alt="" width="20px" height="16px"> -->
             </a>
             <ul class="nav nav-pills flex-column mt-4" style="width: 100%;">
-
-
-                <li class="nav-item dash-nav-item-active">
-                    <router-link class="nav-link dash-nav-link-active" to="/dashboard">
-                        <i class="uil uil-server pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-server pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">Proxies</span>
-                    </router-link>
-                </li>
-
-
-                <li class="nav-item dash-nav-item dash-nav-item-disabled">
-                    <router-link disabled class="nav-link" to="">
-
-                        <i class="uil uil-brackets-curly pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-brackets-curly pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">IPv4/IPv6</span>
-                    </router-link>
-                </li>
-
-
-                <li class="nav-item dash-nav-item">
-                    <router-link class="nav-link" to="/dashboard/Add-funds">
-
-                        <i class="uil uil-credit-card pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-credit-card pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">Add funds</span>
-                    </router-link>
-                </li>
-
-
-                <li class="nav-item dash-nav-item">
-                    <router-link class="nav-link" to="/dashboard/affiliate">
-
-                        <i class="uil uil-dollar-sign pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-dollar-sign pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">Affiliate</span>
-                    </router-link>
-                </li>
-
-
-                <li class="nav-item dash-nav-item">
-                    <router-link class="nav-link" to="/dashboard/settings">
-
-                        <i class="uil uil-cog pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-cog pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">Settings</span>
-                    </router-link>
-                </li>
-
-
-                <li class="nav-item dash-nav-item">
-                    <router-link class="nav-link" to="/dashboard/api">
-
-                        <i class="uil uil-code-branch pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-code-branch pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">API</span>
-                    </router-link>
-                </li>
-
-
-                <li class="nav-item dash-nav-item">
-                    <router-link class="nav-link" to="/web/contact">
-
-                        <i class="uil uil-fast-mail pe-1 d-none d-md-inline"></i>
-                        <i class="uil uil-fast-mail pe-1 d-sm-inline d-md-none fs-12"></i>
-                        <span class="lead fs-lg d-none d-md-inline">Contact</span>
+                <li v-for="item in navList" :key="item.name" class="nav-item" :class="{'dash-nav-item-active': itemActivePath === item.link, 'dash-nav-item-disabled': item.disabled}">
+                    <router-link class="nav-link" :class="{'dash-nav-link-active': itemActivePath === item.link}" :to="item.link">
+                        <i :class="['uil', item.class, 'pe-1', 'd-none', 'd-md-inline']"></i>
+                        <i :class="['uil', item.class, 'pe-1', 'd-sm-inline', 'd-md-none', 'fs-12']"></i>
+                        <span class="lead fs-lg d-none d-md-inline">{{ item.name }}</span>
                     </router-link>
                 </li>
 
@@ -81,6 +19,30 @@
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router'
+
+const route = useRoute();
+const itemActivePath = ref('');
+
+watch(() => route.fullPath, (to, from) => {
+    itemActivePath.value = to;
+});
+
+itemActivePath.value = route.fullPath;
+
+const navList = ref([
+    {name: 'Proxies', link: '/dashboard/proxies', disabled: false, class: 'uil-server'},
+    {name: 'IPv4/IPv6', link: '', disabled: true, class: 'uil-brackets-curly'},
+    {name: 'Add funds', link: '/dashboard/Add-funds', disabled: false, class: 'uil-credit-card'},
+    {name: 'Affiliate', link: '/dashboard/affiliate', disabled: false, class: 'uil-dollar-sign'},
+    {name: 'Settings', link: '/dashboard/settings', disabled: false, class: 'uil-cog'},
+    {name: 'API', link: '/dashboard/api', disabled: false, class: 'uil-code-branch'},
+    {name: 'Contact', link: '/web/contact', disabled: false, class: 'uil-fast-mail'},
+])
+</script>
 
 <style lang="less" scoped>
 .dash-nav-item {
