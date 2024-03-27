@@ -45,11 +45,12 @@ export const proxylist = (params) => {
     })
 }
 
-
-
-
-
-
-
-
-
+// 更新订单
+export const orderUpdate = (params, data) => {
+    return service({
+        url: '/proxy/update',
+        method: 'post',
+        params,
+        data
+    })
+}

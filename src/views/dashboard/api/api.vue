@@ -7,8 +7,7 @@
                         <h5 class="card-title">API key</h5>
 
                         <div class="form-floating mb-4">
-                            <input id="name" type="text" class="form-control" readonly=""
-                                value="70a7a792-b35a-454e-9fbd-e1aebd482bde">
+                            <input id="name" type="text" class="form-control" readonly="" v-model="api_token">
                             <label for="name">API key</label>
                         </div>
 
@@ -19,9 +18,7 @@
                         </p>
 
                         <p>
-                            <a href="?action=regenerate"
-                                onclick="return confirm('Are you sure? This cannot be undone and will invalidate your existing key immediately');"
-                                class="btn btn-danger">Regenerate API token</a>
+                            <a @click="handleCreateKey" class="btn btn-danger">Regenerate API token</a>
                         </p>
                         <p>
                             For information on how to use our API please see our <router-link
@@ -54,8 +51,7 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { updateToken } from '@/api/front/user.js';
-import { ElMessage } from "element-plus";
+import { updateToken, userInfo } from '@/api/front/user.js';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
@@ -86,12 +82,25 @@ onMounted(() => {
 
 const user = useStore();
 const user_id = user.userData?.user.user_id;
+const api_token = ref('');
+
+const getUserInfo = async () => {
+    const res = await userInfo();
+    if(res && res.user) {
+        api_token.value = res.user.api_token;
+    }
+}
 
 const updateGetToken = async () => {
     let params = {
         api_token: generateUUID()
     };
     const res = await updateToken(user_id, params);
+    if(res && res.user) {
+        api_token.value = res.user.api_token;
+        user.userData.user.api_token = res.user.api_token;
+        // user.updateUserData(res);
+    }
 }
 
 const generateUUID = () => {
@@ -107,7 +116,14 @@ const generateUUID = () => {
   return uuid.join('');
 }
 
-// updateGetToken();
+const handleCreateKey = () => {
+    const update = confirm('Are you sure? This cannot be undone and will invalidate your existing key immediately');
+    if(update) {
+        updateGetToken();
+    }
+}
+
+getUserInfo();
 </script>
 
 <style lang="less" scoped>

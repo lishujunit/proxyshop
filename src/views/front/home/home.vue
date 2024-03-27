@@ -95,7 +95,7 @@
                                         <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
                                             <li v-for="(info, index) in item.plan_desc" :key="index"><i class="uil uil-check"></i><span>{{ info }}</span></li>
                                         </ul>
-                                        <router-link :to="`/dashboard/order?product_id=${item.id}&product_code=${item.product_code}&proxy_type=${item.network_type}`" class="btn btn-primary rounded-pill">Choose Plan</router-link>
+                                        <router-link :to="`/dashboard/order?product_id=${item.id}&product_code=${item.product_code}&product_name=${item.product_name}&payment_plan=${item.payment_plan}&product_desc=${item.product_desc}`" class="btn btn-primary rounded-pill">Choose Plan</router-link>
                                     </div>
                                     <!--/.card-body -->
                                 </div>
