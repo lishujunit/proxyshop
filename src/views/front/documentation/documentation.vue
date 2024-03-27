@@ -55,9 +55,7 @@
                                             </circle>
                                         </svg> </div>
                                 </div>
-                                <div class="right"> <a class="sidebar-anchor fs-14" target="_self"
-                                        href="#Proxy">
-                                        What Is a Mobile Proxy? </a> </div>
+                                <div class="right"> <a class="sidebar-anchor fs-14" @click="intoView('Proxy')">What Is a Mobile Proxy?</a> </div>
                             </div>
                         </li>
                         <li data-js-floating-sidebar-sectionid="h-how-do-mobile-proxies-work" class="">
@@ -90,8 +88,7 @@
                                             </circle>
                                         </svg> </div>
                                 </div>
-                                <div class="right"> <a class="sidebar-anchor fs-14" target="_self"
-                                        href="#Proxy2"> What Is The Value Of Mobile Proxies? </a> </div>
+                                <div class="right"> <a class="sidebar-anchor fs-14" @click="intoView('Proxy2')"> What Is The Value Of Mobile Proxies? </a> </div>
                             </div>
                         </li>
                     </ul>
@@ -109,7 +106,10 @@
 </section></template>
 
 <script setup lang="ts">
-
+const intoView = (id) => {
+    const el = document.querySelector('#'+id);
+    el?.scrollIntoView({block: 'start', behavior: "smooth"});
+}
 </script>
 
 <style lang="less">
