@@ -30,7 +30,7 @@
                                 <h4 class="card-title">{{ item.payment_plan }}</h4>
                                 <div class="prices text-dark">
                                     <div class="price price-show"><span class="price-currency">$</span><span
-                                            class="price-value">{{ item.price }}</span>
+                                            class="price-value">/{{ item.price }}</span>
                                         <span class="price-duration">{{ item.payment_plan }}</span>
                                     </div>
                                     <!-- <div class="price price-hide price-hidden"><span class="price-currency">$</span><span

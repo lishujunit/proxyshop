@@ -10,7 +10,7 @@
                     <div class="card card-border-top border-green">
                         <div class="card-body">
                             <h5 class="card-title">Paid Proxies</h5>
-                            <h3 class="text-center card-text"> {{ proxyData.length }} </h3>
+                            <h3 class="text-center card-text"> {{ proxy_count }} </h3>
                         </div>
                     </div>
                 </div>
@@ -40,23 +40,23 @@
                         <div class="card-body">
                             <h5 class="card-title">Your proxies</h5>
 
-                            <el-table :data="proxyData" border style="width: 100%">
-                                <el-table-column prop="code_country" label="Country" width="180" />
+                            <el-table :data="proxyData" border :row-class-name="tableRowClassName" style="width: 100%">
+                                <el-table-column prop="code_country" label="Country" width="100" />
                                 <el-table-column prop="product_name" label="Product" width="180" />
                                 <el-table-column prop="dev_virtid" label="Dev ID" width="180" />
-                                <el-table-column prop="status" label="Status" width="180">
+                                <el-table-column prop="status" label="Status" width="90">
                                     <template #default="scope">
                                         {{ scope.row.status == 1 ? 'succeed' : 'failed' }}
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="plan" label="Plan" width="180" />
-                                <el-table-column prop="network_type" label="Network" width="180" />
-                                <el-table-column prop="proxy_port" label="Port" width="180" />
-                                <el-table-column prop="auth_method" label="Auth Method" width="180" />
-                                <el-table-column prop="proxy_type" label="Proxy Type" width="180" />
-                                <el-table-column prop="is_autorenew" label="Autorenew" width="180" />
-                                <el-table-column prop="is_rotateip" label="Rotateip" width="180" />
-                                <el-table-column prop="end_time" label="Expires" width="180" />
+                                <el-table-column prop="plan" label="Plan" width="80" />
+                                <el-table-column prop="network_type" label="Network" width="90" />
+                                <el-table-column prop="proxy_port" label="Port" width="70" />
+                                <el-table-column prop="auth_method" label="Auth Method" width="90" />
+                                <el-table-column prop="proxy_type" label="Proxy Type" width="80" />
+                                <el-table-column prop="is_autorenew" label="Autorenew" width="105" />
+                                <el-table-column prop="is_rotateip" label="Rotateip" width="90" />
+                                <el-table-column prop="end_time" label="Expires" width="170" />
                                 <el-table-column label="Operate" width="150">
                                     <template #default="scope">
                                         <el-dropdown>
@@ -76,6 +76,8 @@
                                 </el-table-column>
                             </el-table>
                             <br>
+                            <el-pagination :current-page="page" background layout="prev, pager, next" :total="proxy_count" @current-change="pangeCurrentChange" />
+                            <br/>
                             <router-link to="/dashboard/new-order" class="btn btn-outline-primary">
                                 <i class="uil uil-plus pe-1"></i>
                                 Create Order
@@ -157,7 +159,7 @@
                                 <div class="form-floating password-field mb-4">
                                     <input type="text" v-model="formData.auth_pwd" name="auth_pwd" class="form-control"
                                         id="auth_pwd" required="">
-                                    <span class="password-toggle"><i class="uil uil-eye"></i></span>
+                                    <!-- <span class="password-toggle"><i class="uil uil-eye"></i></span> -->
                                     <label for="auth_pwd">Proxy Password</label>
                                 </div>
 
@@ -177,11 +179,11 @@
                     </div>
 
 
-                    <div class="form-floating mb-4">
+                    <!-- <div class="form-floating mb-4">
                         <input type="text" name="discount_code" v-model="formData.discount_code" class="form-control"
                             id="discount_code">
                         <label for="discount_code">Discount Code</label>
-                    </div>
+                    </div> -->
 
                     <label for="">Whether to rotate the IP:</label>
                     <div class="form-check">
@@ -235,10 +237,9 @@
 import { ref, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { proxylist } from '@/api/front/product.js'
+import { proxylist, orderUpdate, proxyNum } from '@/api/front/product.js'
 import { userInfo } from '@/api/front/user.js'
 import { ArrowDown } from '@element-plus/icons-vue'
-import { orderUpdate } from '@/api/front/product.js'
 import { ElMessage } from "element-plus"
 
 import Prism from 'prismjs';
@@ -279,6 +280,15 @@ const baseCode = Prism.highlight(code, Prism.languages.bash, 'bash');
 
 const is_autorenew = ref(false);
 
+const proxy_count = ref(0);
+const page = ref(1);
+
+proxyNum().then((res) => {
+    if(res && res.status) {
+        proxy_count.value = res.proxy_count;
+    }
+})
+
 const rotate_minute_options = [
     {value: 3, label: '3 minutes'},
     {value: 4, label: '4 minutes'},
@@ -310,9 +320,14 @@ const rotate_minute_options = [
     {value: 30, label: '30 minutes'},
 ]
 
+const pangeCurrentChange = (val) => {
+    page.value = val;
+    getProxylist();
+}
+
 const getProxylist = async () => {
     let params = {
-        page: 1,
+        page: page.value,
         pagenum: 10
     }
     const res = await proxylist(params);
@@ -358,10 +373,41 @@ const submitOrder = async () => {
         getProxylist();
     }
 }
+
+const tableRowClassName = ({
+  row,
+  rowIndex,
+}: {
+  row: User
+  rowIndex: number
+}) => {
+  if (rowIndex === 1) {
+    return 'warning-row'
+  } else if (rowIndex === 3) {
+    return 'success-row'
+  }
+  return ''
+}
 </script>
 
 <style lang="less" scoped>
 .my-code {
     background-color: #f5f2f0;
+}
+</style>
+
+<style>
+.el-table .warning-row {
+  --el-table-tr-bg-color: var(--el-color-warning-light-9);
+}
+.el-table .success-row {
+  --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
+.el-table th.el-table__cell {
+    /* background-color: #8c8bc1; */
+    background-color: #a07cc5;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
 }
 </style>

@@ -7,8 +7,8 @@
                 <!-- <img class="d-block d-md-none" src="/img/logo-icon.jpeg" alt="" width="20px" height="16px"> -->
             </a>
             <ul class="nav nav-pills flex-column mt-4" style="width: 100%;">
-                <li v-for="item in navList" :key="item.name" class="nav-item" :class="{'dash-nav-item-active': itemActivePath === item.link, 'dash-nav-item-disabled': item.disabled}">
-                    <router-link class="nav-link" :class="{'dash-nav-link-active': itemActivePath === item.link}" :to="item.link">
+                <li v-for="item in navList" :key="item.name" class="nav-item" :class="{'dash-nav-item-active': item.paths.includes(itemActivePath), 'dash-nav-item-disabled': item.disabled}">
+                    <router-link class="nav-link" :class="{'dash-nav-link-active': item.paths.includes(itemActivePath)}" :to="item.link">
                         <i :class="['uil', item.class, 'pe-1', 'd-none', 'd-md-inline']"></i>
                         <i :class="['uil', item.class, 'pe-1', 'd-sm-inline', 'd-md-none', 'fs-12']"></i>
                         <span class="lead fs-lg d-none d-md-inline">{{ item.name }}</span>
@@ -27,20 +27,20 @@ import { useRoute } from 'vue-router'
 const route = useRoute();
 const itemActivePath = ref('');
 
-watch(() => route.fullPath, (to, from) => {
+watch(() => route.path, (to, from) => {
     itemActivePath.value = to;
 });
 
-itemActivePath.value = route.fullPath;
+itemActivePath.value = route.path;
 
 const navList = ref([
-    {name: 'Proxies', link: '/dashboard/proxies', disabled: false, class: 'uil-server'},
-    {name: 'IPv4/IPv6', link: '', disabled: true, class: 'uil-brackets-curly'},
-    {name: 'Add funds', link: '/dashboard/Add-funds', disabled: false, class: 'uil-credit-card'},
-    {name: 'Affiliate', link: '/dashboard/affiliate', disabled: false, class: 'uil-dollar-sign'},
-    {name: 'Settings', link: '/dashboard/settings', disabled: false, class: 'uil-cog'},
-    {name: 'API', link: '/dashboard/api', disabled: false, class: 'uil-code-branch'},
-    {name: 'Contact', link: '/web/contact', disabled: false, class: 'uil-fast-mail'},
+    {name: 'Proxies', link: '/dashboard/proxies', paths: ['/dashboard/proxies', '/dashboard/order', '/dashboard/new-order'], disabled: false, class: 'uil-server'},
+    {name: 'IPv4/IPv6', link: '', paths: [], disabled: true, class: 'uil-brackets-curly'},
+    {name: 'Add funds', link: '/dashboard/Add-funds', paths: ['/dashboard/Add-funds'], disabled: false, class: 'uil-credit-card'},
+    {name: 'Affiliate', link: '/dashboard/affiliate', paths: ['/dashboard/affiliate'], disabled: false, class: 'uil-dollar-sign'},
+    {name: 'Settings', link: '/dashboard/settings', paths: ['/dashboard/settings'], disabled: false, class: 'uil-cog'},
+    {name: 'API', link: '/dashboard/api', paths: ['/dashboard/api'], disabled: false, class: 'uil-code-branch'},
+    {name: 'Contact', link: '/web/contact', paths: ['/web/contact'], disabled: false, class: 'uil-fast-mail'},
 ])
 </script>
 

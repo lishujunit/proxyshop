@@ -30,12 +30,15 @@
                                         <label for="loginEmail">Email</label>
                                     </div>
                                     <div class="form-floating password-field mb-4">
-                                        <input type="password" v-model="password" class="form-control" placeholder="Password"
+                                        <input :type="passwordType" v-model="password" class="form-control" placeholder="Password"
                                             id="loginPassword">
-                                        <span class="password-toggle"><i class="uil uil-eye"></i></span>
+                                            <span @click="handlePswSlash" v-if="!slash" class="password-toggle"><i class="uil uil-eye"></i></span>
+                                            <span @click="handlePswSlash" v-else class="password-toggle"><i class="uil uil-eye-slash"></i></span>
                                         <label for="loginPassword">Password</label>
                                     </div>
                                     <a class="btn btn-primary rounded-pill btn-login w-100 mb-2" @click="handleLogin">Sign In</a>
+                                    <a v-if="resendEmailShow" class="btn btn-primary rounded-pill btn-login w-100 mb-2"
+                                        @click="handleResendEmail">Resend activation email</a>
                                 </form>
                                 <!-- /form -->
                                 <p class="mb-1"><router-link to="/web/forgot-password" class="hover">Forgot Password?</router-link></p>
@@ -60,8 +63,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { login } from "@/api/front/user";
+import { login, resendemail } from "@/api/front/user";
 import { useStore } from '@/stores/user';
+import { ElMessage } from 'element-plus'
 
  const router = useRouter();
 
@@ -71,29 +75,64 @@ const user = useStore();
 const username = ref('');
 const password = ref('');
 
+const slash = ref(false);
+const passwordType = ref('password');
+
+const resendEmailShow = ref(false);
+
+const handlePswSlash = () => {
+    slash.value = !slash.value;
+    if(slash.value) {
+        passwordType.value = 'text';
+    } else {
+        passwordType.value = 'password';
+    }
+}
+
+const handleResendEmail = async () => {
+    const email = username.value;
+    if (email) {
+        let params = {
+            email
+        }
+        const res = await resendemail(params);
+        if (res.status == 1) {
+            ElMessage.success(res.message);
+        }
+    }
+}
+
 const handleLogin = async () => {
     let params = {
         username: username.value,
         password: password.value
     };
-    const res = await login(params);
-    if(res) {
-        user.updateUserData(res);
-        let query = JSON.parse(JSON.stringify(router.currentRoute.value.query));
-        const next = query.next;
-        if(next) {
-            delete query.next;
-            router.push({
-                path: next,
-                query
-            })
-        } else {
-            router.push({
-                path: '/dashboard',
-                query
-            })
+    try {
+        const res = await login(params);
+        if(res) {
+            user.updateUserData(res);
+            let query = JSON.parse(JSON.stringify(router.currentRoute.value.query));
+            const next = query.next;
+            if(next) {
+                delete query.next;
+                router.push({
+                    path: next,
+                    query
+                })
+            } else {
+                router.push({
+                    path: '/dashboard',
+                    query
+                })
+            }
+        }
+    } catch(err) {
+        const msg = err.response.data.detail;
+        if (msg === 'Account not activated yet, please check your email to activate your account.') {
+            resendEmailShow.value = true;
         }
     }
+    
 }
 </script>
 

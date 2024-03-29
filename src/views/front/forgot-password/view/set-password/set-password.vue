@@ -12,17 +12,19 @@
                                 <input type="hidden" name="csrfmiddlewaretoken"
                                     value="Di0VfNOThjn2wIKCySTXzvwCGi3wRcMCOmbihocryCkDtNvwCQnMUVP9w4FxFs6j">
                                 <div class="form-floating password-field mb-4">
-                                    <input type="password" v-model="new_password1" name="new_password1" autocomplete="new-password" required=""
+                                    <input :type="passwordType" v-model="new_password1" name="new_password1" autocomplete="new-password" required=""
                                         id="id_new_password1" class="form-control" aria-autocomplete="list">
-                                    <span class="password-toggle"><i class="uil uil-eye"></i></span>
+                                        <span @click="handlePswSlash" v-if="!slash" class="password-toggle"><i class="uil uil-eye"></i></span>
+                                        <span @click="handlePswSlash" v-else class="password-toggle"><i class="uil uil-eye-slash"></i></span>
                                     <label for="id_new_password1">New password</label>
                                 </div>
 
 
                                 <div class="form-floating password-field mb-4">
-                                    <input type="password" v-model="new_password2" name="new_password2" autocomplete="new-password" required=""
+                                    <input :type="passwordType2" v-model="new_password2" name="new_password2" autocomplete="new-password" required=""
                                         id="id_new_password2" class="form-control">
-                                    <span class="password-toggle"><i class="uil uil-eye"></i></span>
+                                    <span @click="handlePswSlash2" v-if="!slash2" class="password-toggle"><i class="uil uil-eye"></i></span>
+                                    <span @click="handlePswSlash2" v-else class="password-toggle"><i class="uil uil-eye-slash"></i></span>
                                     <label for="id_new_password2">New password confirmation</label>
                                 </div>
                                 <!-- <ul class="errorlist">
@@ -53,6 +55,29 @@ const query = router.currentRoute.value.query;
 
 const new_password1 = ref('');
 const new_password2 = ref('');
+
+const slash = ref(false);
+const passwordType = ref('password');
+
+const slash2 = ref(false);
+const passwordType2 = ref('password');
+
+const handlePswSlash = () => {
+    slash.value = !slash.value;
+    if(slash.value) {
+        passwordType.value = 'text';
+    } else {
+        passwordType.value = 'password';
+    }
+}
+const handlePswSlash2 = () => {
+    slash2.value = !slash2.value;
+    if(slash2.value) {
+        passwordType2.value = 'text';
+    } else {
+        passwordType2.value = 'password';
+    }
+}
 
 const submit = async () => {
     if(new_password1.value == '' || new_password2.value == '') {

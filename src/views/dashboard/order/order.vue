@@ -65,7 +65,7 @@
                                         <div class="form-floating password-field mb-4">
                                             <input type="text" v-model="formData.auth_pwd" name="auth_pwd" class="form-control" id="auth_pwd"
                                                 required="">
-                                            <span class="password-toggle"><i class="uil uil-eye"></i></span>
+                                            <!-- <span class="password-toggle"><i class="uil uil-eye"></i></span> -->
                                             <label for="auth_pwd">Proxy Password</label>
                                         </div>
 
@@ -84,6 +84,7 @@
                             </div>
 
 
+                            <label for="">Discount Code</label>
                             <div class="form-floating mb-4">
                                 <input type="text" name="discount_code" v-model="formData.discount_code" class="form-control" id="discount_code">
                                 <label for="discount_code">Discount Code</label>
@@ -118,10 +119,11 @@
                             <template v-if="formData.is_rotateip == '1'">
                                 <label for="rotate_minute">Minimum time between IP rotations</label>
                                 <div class="form-select-wrapper mb-4">
-                                    <select name="addon_min_rotation_time" v-model="formData.rotate_minute"
+                                    <!-- <select name="addon_min_rotation_time" v-model="formData.rotate_minute"
                                         class="form-control" id="rotate_minute">
                                         <option :value="item.value" v-for="item in rotate_minute_options">{{ item.label }}</option>
-                                    </select>
+                                    </select> -->
+                                    <el-input-number v-model="formData.rotate_minute" :min="3" :max="30" step="1" />
                                 </div>
                             </template>
 
@@ -245,6 +247,19 @@ const submitOrder = async () => {
     };
     let data = formData.value;
     data.is_autorenew = data.is_autorenew ? 1 : 0;
+    // auth_account
+    // auth_pwd
+    let reg = /^[a-zA-Z0-9]{6,20}$/;
+
+    if(!reg.test(data.auth_account)) {
+        ElMessage.error('Account should be 6 to 20 characters long and only contain letters and numbers.');
+        return;
+    }
+    if(!reg.test(data.auth_pwd)) {
+        ElMessage.error('Password should be 6 to 20 characters long and only contain letters and numbers.');
+        return;
+    }
+    
     const res = await order(params, data);
     if(res && res.status) {
         ElMessage.success(res.message);

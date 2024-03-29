@@ -54,3 +54,12 @@ export const orderUpdate = (params, data) => {
         data
     })
 }
+
+
+// 已购买的代理设备数量
+export const proxyNum = () => {
+    return service({
+        url: '/proxy/num',
+        method: 'get'
+    })
+}

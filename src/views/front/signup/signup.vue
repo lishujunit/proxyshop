@@ -31,13 +31,14 @@
                                         <label for="loginName">Name</label>
                                     </div> -->
                                     <div class="form-floating mb-4">
-                                        <input type="email" v-model="userForm.username" class="form-control" placeholder="Email" id="loginEmail">
+                                        <input type="email" v-model="userForm.username" class="form-control"
+                                            placeholder="Email" id="loginEmail">
                                         <label for="loginEmail">Email</label>
                                         <div class="invalid-feedback">3434</div>
                                     </div>
                                     <div class="form-floating password-field mb-4">
-                                        <input type="password" v-model="userForm.password" class="form-control" placeholder="Password"
-                                            id="loginPassword">
+                                        <input type="password" v-model="userForm.password" class="form-control"
+                                            placeholder="Password" id="loginPassword">
                                         <!-- <span class="password-toggle"><i class="uil uil-eye-slash"></i></span> -->
                                         <label for="loginPassword">Password</label>
                                     </div>
@@ -48,29 +49,36 @@
                                         <label for="loginPasswordConfirm">Confirm Password</label>
                                     </div> -->
                                     <div class="form-floating mb-4">
-                                        <input type="text" v-model="userForm.first_name" class="form-control" placeholder="First Name" id="first_name">
+                                        <input type="text" v-model="userForm.first_name" class="form-control"
+                                            placeholder="First Name" id="first_name">
                                         <label for="first_name">First Name</label>
                                     </div>
                                     <div class="form-floating mb-4">
-                                        <input type="text" v-model="userForm.last_name" class="form-control" placeholder="Last Name" id="last_name">
+                                        <input type="text" v-model="userForm.last_name" class="form-control"
+                                            placeholder="Last Name" id="last_name">
                                         <label for="last_name">Last Name</label>
                                     </div>
                                     <div class="mb-4">
                                         <select class="form-select" v-model="userForm.country">
                                             <option disabled value="">Country</option>
-                                            <option v-for="item in countryList" :value="item.code">{{item.name}}</option>
+                                            <option v-for="item in countryList" :value="item.code">{{ item.name }}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="form-floating mb-4">
-                                        <input type="text" v-model="userForm.invite_code" class="form-control" placeholder="Invite code" id="invite_code">
+                                        <input type="text" v-model="userForm.invite_code" class="form-control"
+                                            placeholder="Invite code" id="invite_code">
                                         <label for="invite_code">Invite code</label>
                                     </div>
-                                    <a class="btn btn-primary rounded-pill btn-login w-100 mb-2" @click="handleRegister">Sign Up</a>
-                                    <a v-if="resendEmailShow" class="btn btn-primary rounded-pill btn-login w-100 mb-2" @click="handleResendEmail">Resend activation email</a>
+                                    <a class="btn btn-primary rounded-pill btn-login w-100 mb-2"
+                                        @click="handleRegister">Sign Up</a>
+                                    <a v-if="resendEmailShow" class="btn btn-primary rounded-pill btn-login w-100 mb-2"
+                                        @click="handleResendEmail">Resend activation email</a>
                                     <!-- <button class="btn btn-primary" type="submit">Submit form</button> -->
                                 </form>
                                 <!-- /form -->
-                                <p class="mb-0">Already have an account? <router-link class="hover" to="/web/signin">Sign in</router-link>
+                                <p class="mb-0">Already have an account? <router-link class="hover"
+                                        to="/web/signin">Sign in</router-link>
                                 </p>
                                 <!-- <div class="divider-icon my-4">or</div>
                                 <nav class="nav social justify-content-center text-center">
@@ -94,22 +102,18 @@
         </section>
     </div>
 
-    <el-dialog
-        v-model="dialogVisible"
-        title="Activate Your Account"
-        width="500"
-        :before-close="handleClose"
-    >
+    <el-dialog v-model="dialogVisible" title="Activate Your Account" width="500" :before-close="handleClose">
         <span>
-            Dear User, Thank you for registering with our service! To complete the account activation, please go to your email and click on the link to activate.
+            Dear User, Thank you for registering with our service! To complete the account activation, please go to your
+            email and click on the link to activate.
         </span>
         <template #footer>
-        <div class="dialog-footer">
-            <!-- <el-button @click="dialogVisible = false">Cancel</el-button> -->
-            <el-button type="primary" @click="dialogVisible = false">
-                Confirm
-            </el-button>
-        </div>
+            <div class="dialog-footer">
+                <!-- <el-button @click="dialogVisible = false">Cancel</el-button> -->
+                <el-button type="primary" @click="dialogVisible = false">
+                    Confirm
+                </el-button>
+            </div>
         </template>
     </el-dialog>
 </template>
@@ -148,9 +152,9 @@ const handleClose = () => {
     dialogVisible.value = false;
 }
 
-const getCountry =  async () => {
+const getCountry = async () => {
     const res = await country();
-    if(res) {
+    if (res) {
         countryList.value = res;
     }
 }
@@ -160,20 +164,20 @@ const handleRegister = async () => {
     params.emailactivate_code = generateUUID();
     try {
         const res = await register(params);
-        if(res) {
+        if (res) {
             dialogVisible.value = true;
-            userForm.value = {
-                "username": "",
-                "password": "",
-                "first_name": "",
-                "last_name": "",
-                "country": "",
-                "invite_code": "",
-            }
+            // userForm.value = {
+            //     "username": "",
+            //     "password": "",
+            //     "first_name": "",
+            //     "last_name": "",
+            //     "country": "",
+            //     "invite_code": ""
+            // }
         }
-    } catch(err) {
+    } catch (err) {
         const msg = err.response.data.detail;
-        if(msg === 'Username already registered') {
+        if (msg === 'Username already registered') {
             resendEmailShow.value = true;
         }
     }
@@ -181,28 +185,28 @@ const handleRegister = async () => {
 
 const handleResendEmail = async () => {
     const email = userForm.value.username;
-    if(email) {
+    if (email) {
         let params = {
             email
         }
         const res = await resendemail(params);
-        if(res.status == 1) {
+        if (res.status == 1) {
             ElMessage.success(res.message);
         }
     }
 }
 
 function generateUUID() {
-  const chars = '0123456789abcdef';
-  const uuid = new Array(36);
+    const chars = '0123456789abcdef';
+    const uuid = new Array(36);
 
-  for (let i = 0; i < uuid.length; i++) {
-    uuid[i] = chars[Math.floor(Math.random() * 16)];
-  }
+    for (let i = 0; i < uuid.length; i++) {
+        uuid[i] = chars[Math.floor(Math.random() * 16)];
+    }
 
-  uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
 
-  return uuid.join('');
+    return uuid.join('');
 }
 
 getCountry();
