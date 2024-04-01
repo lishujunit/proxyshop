@@ -34,11 +34,16 @@
                             <p>When you call this endpoint, it will take your proxy down for 5-10 seconds in order for us to get you a new IP address. This is because rotation involves taking the device offline then online again in quick succession.</p>
                         </div>
 
-                        <h5 class="pt-10">cURL</h5>
+                        <div v-for="item in myCodes" :key="item.language">
+                            <h5 class="pt-10">{{ item.language }}</h5>
+                            <pre class="my-code"><code :ref="(el) => {setTtemRefs(el, item.language, item.code)}">{{item.code}}</code></pre>
+                        </div>
+
+                        <!-- <h5 class="pt-10">cURL</h5>
                         <pre class="my-code"><code ref="myCode1"></code></pre>
 
                         <h5 class="pt-10">Python</h5>
-                        <pre class="my-code"><code ref="myCode2"></code></pre>
+                        <pre class="my-code"><code ref="myCode2"></code></pre> -->
                     
                     </div>
                 </div>
@@ -48,14 +53,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { updateToken, userInfo } from '@/api/front/user.js';
+import { updateToken, userInfo, apidemo } from '@/api/front/user.js';
 
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-javascript';
 
 
 const code = `curl -X 'GET' \
@@ -69,20 +75,65 @@ params = {
 }
 response = requests.get('http://proxyshop.io/proxy/redial', params=params)`;
 
+// const items = [
+//     { id: 1, name: 'Item 1' },
+//     { id: 2, name: 'Item 2' },
+//     { id: 3, name: 'Item 3' },
+// ];
+
+const myCodes = ref([]);
+
 const myCode1 = ref(null);
 const myCode2 = ref(null);
 
-onMounted(() => {
-    const baseCode = Prism.highlight(code, Prism.languages.bash, 'bash');
-    myCode1.value.innerHTML = baseCode
+const itemRefs = ref({})
 
-    const pythonCode = Prism.highlight(code2, Prism.languages.python, 'python');
-    myCode2.value.innerHTML = pythonCode
+onMounted(() => {
+    // const baseCode = Prism.highlight(code, Prism.languages.bash, 'bash');
+    // myCode1.value.innerHTML = baseCode
+
+    // const pythonCode = Prism.highlight(code2, Prism.languages.python, 'python');
+    // myCode2.value.innerHTML = pythonCode
+    getApidemo();
 })
 
 const user = useStore();
 const user_id = user.userData?.user.user_id;
 const api_token = ref('');
+
+
+const setTtemRefs = ($event, language, code) => {
+    console.log($event, language);
+    let obj = {
+        [language]: $event,
+        code,
+    }
+    if(!itemRefs.value[language]) {
+        itemRefs.value[language] = obj;
+    }
+}
+
+const getApidemo = async () => {
+    const res = await apidemo();
+    if(res) {
+        myCodes.value = res;
+        nextTick(() => {
+            for(let key in itemRefs.value) {
+                let codeStr;
+                if(key === 'Python') {
+                    codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.python, 'python');
+                } else if(key === 'cURL') {
+                    codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.bash, 'bash');
+                } else if(key === 'NodeJS') {
+                    codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.javascript, 'javascript');
+                } else {
+                    codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.bash, 'bash');
+                }
+                itemRefs.value[key][key].innerHTML = codeStr;
+            }
+        })
+    }
+}
 
 const getUserInfo = async () => {
     const res = await userInfo();
@@ -124,6 +175,7 @@ const handleCreateKey = () => {
 }
 
 getUserInfo();
+
 </script>
 
 <style lang="less" scoped>

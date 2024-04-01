@@ -130,3 +130,19 @@ export const updateToken = (id, data) => {
     })
 }
 
+// api调用事例
+export const apidemo = () => {
+    return service({
+        url: '/proxy/apidemo',
+        method: 'get',
+    })
+}
+
+// 代理调用 Demo
+export const proxyCall = (params) => {
+    return service({
+        url: '/proxy/call',
+        method: 'get',
+        params
+    })
+}

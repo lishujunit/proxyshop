@@ -68,7 +68,7 @@
                                                     <el-dropdown-item
                                                         @click="handleUpdate(scope.row)">Update</el-dropdown-item>
                                                     <el-dropdown-item
-                                                        @click="handleInstruction">Instruction</el-dropdown-item>
+                                                        @click="handleInstruction(scope.row)">Instruction</el-dropdown-item>
                                                 </el-dropdown-menu>
                                             </template>
                                         </el-dropdown>
@@ -238,7 +238,7 @@ import { ref, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
 import { proxylist, orderUpdate, proxyNum } from '@/api/front/product.js'
-import { userInfo } from '@/api/front/user.js'
+import { userInfo, proxyCall } from '@/api/front/user.js'
 import { ArrowDown } from '@element-plus/icons-vue'
 import { ElMessage } from "element-plus"
 
@@ -275,8 +275,6 @@ const dialogTableVisible2 = ref(false);
 const formData = ref({
 
 })
-
-const baseCode = Prism.highlight(code, Prism.languages.bash, 'bash');
 
 const is_autorenew = ref(false);
 
@@ -345,10 +343,23 @@ const getUserInfo = async () => {
 getUserInfo();
 getProxylist();
 
-const handleInstruction = () => {
+const handleInstruction = async (row) => {
+    let params = {
+        auth_method: row.auth_method,
+        proxy_type: row.proxy_type,
+        proxy_port: row.proxy_port,
+        auth_account: row.auth_account,
+        auth_pwd: row.auth_pwd
+    };
+    
+    const res = await proxyCall(params);
+
     dialogTableVisible.value = true;
     nextTick(() => {
-        myCode1.value.innerHTML = baseCode;
+        if(res) {
+            const baseCode = Prism.highlight(res, Prism.languages.bash, 'bash');
+            myCode1.value.innerHTML = baseCode;
+        }
     })
 }
 
