@@ -30,14 +30,31 @@
                             <h5 class="card-title">Rotate your IP address with API key</h5>
                             <h5 class="card-title">Description</h5>
                             <p>This endpoint allows you to rotate the IP of your mobile proxy.</p>
-                            <p><strong>Please note that this endpoint does not require your api_key as a parameter.</strong></p>
+                            <p><strong>Please note that this endpoint require your api_key as a parameter.</strong></p>
                             <p>When you call this endpoint, it will take your proxy down for 5-10 seconds in order for us to get you a new IP address. This is because rotation involves taking the device offline then online again in quick succession.</p>
                         </div>
 
-                        <div v-for="item in myCodes" :key="item.language">
+                        <div class="example">
+                            <h3>Example</h3>
+                            <el-tabs v-model="activeName" class="demo-tabs">
+                                <el-tab-pane v-for="item in myCodes" :key="item.language" :label="item.language" :name="item.language">
+                                    <pre class="my-code"><code :ref="(el) => {setTtemRefs(el, item.language, item.code)}">{{item.code}}</code></pre>
+                                </el-tab-pane>
+                            </el-tabs>
+                            <br>
+                            <h3>Response</h3>
+                            <p>In the case of a successful rotation you will receive the following response.</p>
+                            <pre class="my-code"><code ref="response1"></code></pre>
+                            <br>
+                            <p>If you attempt to rotate to frequently or some other problems, you will receive the following fail response.</p>
+                            <pre class="my-code"><code ref="response2"></code></pre>
+                        </div>
+                        
+
+                        <!-- <div v-for="item in myCodes" :key="item.language">
                             <h5 class="pt-10">{{ item.language }}</h5>
                             <pre class="my-code"><code :ref="(el) => {setTtemRefs(el, item.language, item.code)}">{{item.code}}</code></pre>
-                        </div>
+                        </div> -->
 
                         <!-- <h5 class="pt-10">cURL</h5>
                         <pre class="my-code"><code ref="myCode1"></code></pre>
@@ -59,41 +76,37 @@ import { useStore } from '@/stores/user';
 import { updateToken, userInfo, apidemo } from '@/api/front/user.js';
 
 import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-bash';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
 
 
-const code = `curl -X 'GET' \
-'http://proxyshop.io/proxy/redial?dev_virtid={id}&api_token=344eb219-6a25-4402-9780-a14aefdd6291' \
--H 'accept: application/json'`;
+const code1 = `{
+    "success": true
+}`;
 
-const code2 = `import requests
-params = {
-    'dev_virtid': {id},
-    'api_token': 'MbzOGi',
-}
-response = requests.get('http://proxyshop.io/proxy/redial', params=params)`;
+const code2 = `{
+    "success": false,
+    "reason": "failed reason"
+}`;
 
-// const items = [
-//     { id: 1, name: 'Item 1' },
-//     { id: 2, name: 'Item 2' },
-//     { id: 3, name: 'Item 3' },
-// ];
+const response1 = ref(null);
+const response2 = ref(null);
 
 const myCodes = ref([]);
 
-const myCode1 = ref(null);
-const myCode2 = ref(null);
-
 const itemRefs = ref({})
 
-onMounted(() => {
-    // const baseCode = Prism.highlight(code, Prism.languages.bash, 'bash');
-    // myCode1.value.innerHTML = baseCode
+const activeName = ref('');
 
-    // const pythonCode = Prism.highlight(code2, Prism.languages.python, 'python');
-    // myCode2.value.innerHTML = pythonCode
+onMounted(() => {
+    const responseCode1 = Prism.highlight(code1, Prism.languages.json, 'json');
+    response1.value.innerHTML = responseCode1
+
+    const responseCode2 = Prism.highlight(code2, Prism.languages.json, 'json');
+    response2.value.innerHTML = responseCode2
     getApidemo();
 })
 
@@ -103,7 +116,6 @@ const api_token = ref('');
 
 
 const setTtemRefs = ($event, language, code) => {
-    console.log($event, language);
     let obj = {
         [language]: $event,
         code,
@@ -117,6 +129,7 @@ const getApidemo = async () => {
     const res = await apidemo();
     if(res) {
         myCodes.value = res;
+        activeName.value = res[0].language;
         nextTick(() => {
             for(let key in itemRefs.value) {
                 let codeStr;
@@ -131,6 +144,7 @@ const getApidemo = async () => {
                 }
                 itemRefs.value[key][key].innerHTML = codeStr;
             }
+            Prism.highlightAll();
         })
     }
 }
@@ -179,7 +193,11 @@ getUserInfo();
 </script>
 
 <style lang="less" scoped>
-.my-code {
+.example {
     background-color: #f5f2f0;
+    padding: 20px;
+}
+.my-code {
+    background-color: #fff;
 }
 </style>

@@ -102,7 +102,21 @@
     </section>
 
     <el-dialog v-model="dialogTableVisible" title="Instruction" width="800">
-        <pre class="my-code"><code ref="myCode1"></code></pre>
+        <!-- <pre class="my-code"><code ref="myCode1"></code></pre> -->
+
+        <div class="example">
+            <h3>Use your proxy with curl</h3>
+            <pre class="my-code"><code ref="myCode1"></code></pre>
+            <br>
+            <h3>Rotate your IP address</h3>
+            <p>This endpoint allows you to rotate the IP of your mobile proxy.</p>
+            <el-tabs v-model="activeName" class="demo-tabs">
+                <el-tab-pane v-for="item in myCodes" :key="item.language" :label="item.language" :name="item.language">
+                    <pre class="my-code"><code :ref="(el) => {setTtemRefs(el, item.language, item.code)}">{{item.code}}</code></pre>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+
     </el-dialog>
 
     <el-dialog v-model="dialogTableVisible2" title="Update" width="900">
@@ -238,12 +252,19 @@ import { ref, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
 import { proxylist, orderUpdate, proxyNum } from '@/api/front/product.js'
-import { userInfo, proxyCall } from '@/api/front/user.js'
+import { userInfo, proxyCall, apidemo } from '@/api/front/user.js'
 import { ArrowDown } from '@element-plus/icons-vue'
 import { ElMessage } from "element-plus"
 
 import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+
+
+const user = useStore();
 
 const code = `## 根据 auth_method、proxy_type 拼接 代理的调用方式，拼接方法如下
 
@@ -263,6 +284,12 @@ curl -x socks5://cdn.proxyshop.io:{proxy_port} https://ipinfo.io
 curl -X 'GET' \
   'http://proxyshop.io/proxy/redial?dev_virtid={dev_virtid}&api_token={api_token}' \
   -H 'accept: application/json'`;
+
+const myCodes = ref([]);
+
+const itemRefs = ref({})
+
+const activeName = ref('');
 
 const proxyData = ref([]);
 const userInfoData = ref();
@@ -286,6 +313,16 @@ proxyNum().then((res) => {
         proxy_count.value = res.proxy_count;
     }
 })
+
+const setTtemRefs = ($event, language, code) => {
+    let obj = {
+        [language]: $event,
+        code,
+    }
+    if(!itemRefs.value[language]) {
+        itemRefs.value[language] = obj;
+    }
+}
 
 const rotate_minute_options = [
     {value: 3, label: '3 minutes'},
@@ -344,22 +381,45 @@ getUserInfo();
 getProxylist();
 
 const handleInstruction = async (row) => {
-    let params = {
+    let params1 = {
         auth_method: row.auth_method,
         proxy_type: row.proxy_type,
         proxy_port: row.proxy_port,
         auth_account: row.auth_account,
         auth_pwd: row.auth_pwd
     };
+
+    let params2 = {
+        api_token: user.userData?.user.api_token,
+        dev_virtid: row.dev_virtid,
+    }
     
-    const res = await proxyCall(params);
+    const res = await proxyCall(params1);
+    const res1 = await apidemo(params2);
 
     dialogTableVisible.value = true;
+    myCodes.value = res1;
+    activeName.value = res1[0].language;
     nextTick(() => {
         if(res) {
             const baseCode = Prism.highlight(res, Prism.languages.bash, 'bash');
             myCode1.value.innerHTML = baseCode;
         }
+
+        for(let key in itemRefs.value) {
+            let codeStr;
+            if(key === 'Python') {
+                codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.python, 'python');
+            } else if(key === 'cURL') {
+                codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.bash, 'bash');
+            } else if(key === 'NodeJS') {
+                codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.javascript, 'javascript');
+            } else {
+                codeStr = Prism.highlight(itemRefs.value[key].code, Prism.languages.bash, 'bash');
+            }
+            itemRefs.value[key][key].innerHTML = codeStr;
+        }
+        Prism.highlightAll();
     })
 }
 
@@ -402,8 +462,12 @@ const tableRowClassName = ({
 </script>
 
 <style lang="less" scoped>
-.my-code {
+.example {
     background-color: #f5f2f0;
+    padding: 20px;
+}
+.my-code {
+    background-color: #fff;
 }
 </style>
 
@@ -421,4 +485,5 @@ const tableRowClassName = ({
     font-size: 16px;
     color: #fff;
 }
+
 </style>

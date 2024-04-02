@@ -131,10 +131,11 @@ export const updateToken = (id, data) => {
 }
 
 // api调用事例
-export const apidemo = () => {
+export const apidemo = (params) => {
     return service({
         url: '/proxy/apidemo',
         method: 'get',
+        params
     })
 }
 

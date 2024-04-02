@@ -37,9 +37,10 @@
                                         <div class="invalid-feedback">3434</div>
                                     </div>
                                     <div class="form-floating password-field mb-4">
-                                        <input type="password" v-model="userForm.password" class="form-control"
+                                        <input :type="passwordType" v-model="userForm.password" class="form-control"
                                             placeholder="Password" id="loginPassword">
-                                        <!-- <span class="password-toggle"><i class="uil uil-eye-slash"></i></span> -->
+                                            <span @click="handlePswSlash" v-if="!slash" class="password-toggle"><i class="uil uil-eye"></i></span>
+                                            <span @click="handlePswSlash" v-else class="password-toggle"><i class="uil uil-eye-slash"></i></span>
                                         <label for="loginPassword">Password</label>
                                     </div>
                                     <!-- <div class="form-floating password-field mb-4">
@@ -131,7 +132,19 @@ const router = useRouter();
 
 const dialogVisible = ref(false);
 
+const slash = ref(false);
+const passwordType = ref('password');
+
 const resendEmailShow = ref(false);
+
+const handlePswSlash = () => {
+    slash.value = !slash.value;
+    if(slash.value) {
+        passwordType.value = 'text';
+    } else {
+        passwordType.value = 'password';
+    }
+}
 
 const userForm = ref({
     "username": "",

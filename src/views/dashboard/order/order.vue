@@ -32,7 +32,8 @@
 
                             <label for="item_num">Number</label>
                             <div class="form-input-wrapper mb-4">
-                                <input v-model="formData.item_num" @change="handleChangeNum" type="number" class="form-control" id="item_num">
+                                <el-input-number  id="item_num" v-model="formData.item_num" :step="1" step-strictly :min="1" :max="10" @change="handleChangeNum" />
+                                <!-- <input v-model="formData.item_num" @change="handleChangeNum" type="number" class="form-control" id="item_num"> -->
                             </div>
 
                             
@@ -213,7 +214,7 @@ const formData = ref({
     auth_pwd: '',
     allowed_ips: '',
     is_autorenew: false,
-    proxy_type: 'http',
+    proxy_type: 'socks5',
     rotate_minute: 5,
     is_rotateip: '0',
     product_code: query.product_code,
