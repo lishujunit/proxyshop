@@ -19,7 +19,7 @@ export default defineConfig({
       // '/api': 'http://34.125.122.142:8200',
       // 详细配置
       '/api': {
-        target: 'http://34.125.122.142:8200',
+        target: 'https://proxyshop.io/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }

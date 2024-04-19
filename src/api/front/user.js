@@ -106,10 +106,19 @@ export const updateUserInfo = (user_id, data) => {
 }
 
 // 充值记录
-export const recharges = () => {
+export const recharges = (params) => {
     return service({
         url: '/user/recharges',
         method: 'get',
+        params
+    })
+}
+
+// 充值记录个数
+export const rechargesNum = () => {
+    return service({
+        url: '/user/recharges/num',
+        method: 'get'
     })
 }
 

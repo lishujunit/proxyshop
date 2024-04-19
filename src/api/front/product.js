@@ -63,3 +63,21 @@ export const proxyNum = () => {
         method: 'get'
     })
 }
+
+// 可供切换的区域及数量
+export const regionList = (params) => {
+    return service({
+        url: '/proxy/region-list',
+        method: 'post',
+        params
+    })
+}
+
+// 切换设备所在区域
+export const switchRegion = (params) => {
+    return service({
+        url: '/proxy/switch-region',
+        method: 'post',
+        params
+    })
+}

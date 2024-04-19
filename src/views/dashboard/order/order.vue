@@ -164,7 +164,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
 import { orderprice, order, productInfosList } from '@/api/front/product.js'
-import { ElMessage } from "element-plus"
+import { ElMessage, ElLoading } from "element-plus"
 
 const user = useStore();
 const router = useRouter();
@@ -260,16 +260,26 @@ const submitOrder = async () => {
         ElMessage.error('Password should be 6 to 20 characters long and only contain letters and numbers.');
         return;
     }
-    
-    const res = await order(params, data);
-    if(res && res.status) {
-        ElMessage.success(res.message);
-        setTimeout(() => {
-            router.push({
-                path: '/dashboard'
-            })
-        }, 500)
+
+    const loading = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(255, 255, 255, 0.7)',
+    });
+    try {
+        const res = await order(params, data);
+        if(res && res.status) {
+            ElMessage.success(res.message);
+            setTimeout(() => {
+                router.push({
+                    path: '/dashboard'
+                })
+            }, 500)
+        }
+    } catch(err) {
+        //
     }
+    loading.close();
 }
 
 const handleChangePlan = async () => { 

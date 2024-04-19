@@ -26,8 +26,7 @@
                                 <template v-else-if="item.payment_plan == 'month'">
                                     <span class="iconfont" style="font-size: 40px;">&#xe69d;</span>
                                 </template>
-
-                                <h4 class="card-title">{{ item.payment_plan }}</h4>
+                                <h4 class="card-title">{{ item.product_name }}</h4>
                                 <div class="prices text-dark">
                                     <div class="price price-show"><span class="price-currency">$</span><span
                                             class="price-value">{{ item.price }}/</span>

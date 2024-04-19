@@ -80,6 +80,8 @@
                             </tbody>
                         </table>
 
+                        <br>
+                        <el-pagination :current-page="page" background layout="prev, pager, next" :total="total" @current-change="pangeCurrentChange" />
                     </div>
                 </div>
             </div>
@@ -91,10 +93,14 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { rechargeurl, recharges } from '@/api/front/user.js'
+import { rechargeurl, recharges, rechargesNum } from '@/api/front/user.js'
 
 const user = useStore();
 const router = useRouter();
+
+const total = ref(0);
+const page = ref(1);
+
 
 const user_id = user.userData?.user.user_id;
 const amount = ref(10);
@@ -102,6 +108,11 @@ const amount = ref(10);
 const rechargesList = ref();
 
 let frame = null;
+
+const pangeCurrentChange = (val) => {
+    page.value = val;
+    getRecharges();
+}
 
 const handleRecharge = async () => {
     let params = {
@@ -114,13 +125,19 @@ const handleRecharge = async () => {
         frame = open(url, '_self', 'popup=yes,width=1000,height=1000')
     }
 }
-// 4242 4242 4242 4242
 
 const getRecharges = async () => {
-    const res = await recharges();
+    let params = {
+        pagenum: 10,
+        page: page.value
+    };
+    const res = await recharges(params);
     if(res) {
         rechargesList.value = res;
     }
 }
 getRecharges();
+rechargesNum().then((res) => {
+    total.value = res;
+})
 </script>

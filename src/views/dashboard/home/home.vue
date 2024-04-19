@@ -68,6 +68,8 @@
                                                     <el-dropdown-item
                                                         @click="handleUpdate(scope.row)">Update</el-dropdown-item>
                                                     <el-dropdown-item
+                                                        @click="handleLocation(scope.row)">Location</el-dropdown-item>
+                                                    <el-dropdown-item
                                                         @click="handleInstruction(scope.row)">Instruction</el-dropdown-item>
                                                 </el-dropdown-menu>
                                             </template>
@@ -224,7 +226,7 @@
 
 
                     <div class="form-check mb-4">
-                        <input class="form-check-input" :disabled="!is_autorenew" v-model="formData.is_autorenew"
+                        <input class="form-check-input" v-model="formData.is_autorenew"
                             type="checkbox" name="auto_renew" id="is_autorenew">
                         <label class="form-check-label" for="is_autorenew">Auto Renew</label>
                     </div>
@@ -245,16 +247,35 @@
             </div>
         </div>
     </el-dialog>
+
+
+    <el-dialog
+        v-model="dialogVisible3"
+        title="Connect"
+        width="800"
+        :close-on-click-modal="false"
+        :close-on-press-escape="false"
+    >
+        <el-table :data="regionTableData" style="width: 100%">
+            <el-table-column prop="name" label="LOCAIOTION" />
+            <el-table-column label="STATUS" width="300">
+                <template #default="{row}">
+                    <el-button v-if="row.devnum_avail > 0" type="success" @click="handleSwitchRegion(row)">CONNECT</el-button>
+                    <el-button v-else type="success" plain disabled> LOCATION FULL（TRYAGAIN LATER）</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-dialog>
 </template>
 
 <script lang="ts" setup>
 import { ref, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { proxylist, orderUpdate, proxyNum } from '@/api/front/product.js'
+import { proxylist, orderUpdate, proxyNum, regionList, switchRegion } from '@/api/front/product.js'
 import { userInfo, proxyCall, apidemo } from '@/api/front/user.js'
 import { ArrowDown } from '@element-plus/icons-vue'
-import { ElMessage } from "element-plus"
+import { ElMessage, ElLoading } from "element-plus"
 
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -303,10 +324,11 @@ const formData = ref({
 
 })
 
-const is_autorenew = ref(false);
-
 const proxy_count = ref(0);
 const page = ref(1);
+
+const dialogVisible3 = ref(false);
+const regionTableData = ref();
 
 proxyNum().then((res) => {
     if(res && res.status) {
@@ -426,11 +448,14 @@ const handleInstruction = async (row) => {
 const handleUpdate = (row) => {
     formData.value = JSON.parse(JSON.stringify(row));
 
-    is_autorenew.value = row.is_autorenew;
-
     dialogTableVisible2.value = true;
 }
 const submitOrder = async () => {
+    const loading = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(255, 255, 255, 0.7)',
+    });
     let params = {
         user_id: userInfoData.value.user_id,
     };
@@ -443,6 +468,7 @@ const submitOrder = async () => {
         formData.value = {};
         getProxylist();
     }
+    loading.close();
 }
 
 const tableRowClassName = ({
@@ -458,6 +484,31 @@ const tableRowClassName = ({
     return 'success-row'
   }
   return ''
+}
+const current_dev_virtid = ref('');
+const handleLocation = async ({dev_virtid}: {dev_virtid: string}) => {
+    current_dev_virtid.value = dev_virtid;
+    const res = await regionList({dev_virtid});
+    if(res) {
+        regionTableData.value = res;
+    }
+    dialogVisible3.value = true;
+}
+
+const handleSwitchRegion = async ({id}: {id: string}) => {
+    const loading = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(255, 255, 255, 0.7)',
+    });
+    const dev_virtid = current_dev_virtid.value;
+    try{
+        const res = await switchRegion({dev_virtid, state_id: id});
+        handleLocation({dev_virtid});
+    } catch(err) {
+        //
+    }
+    loading.close();
 }
 </script>
 
