@@ -78,9 +78,9 @@
                                         <input class="form-check-input" v-model="checkService" type="checkbox" value=""
                                             id="flexCheckDefault">
                                         <div class="form-check-label" for="flexCheckDefault">
-                                            have read and agree to the <a class="service-link"
-                                                @click="handleService">service agreement</a> and <a class="service-link"
-                                                @click="handleService">privacy policy</a>
+                                            <a class="service-link" @click="handleService">Terms & Conditions</a> / 
+                                            <a class="service-link" @click="handleService2">Privacy Policy </a>
+                                            
                                         </div>
                                     </div>
 
@@ -133,9 +133,25 @@
         </template>
     </el-dialog>
 
-    <el-dialog v-model="dialogVisible1" title="Service and usage agreement" width="800">
-        <div class="service-content">
-            <p>This License and Service Agreement (the “Agreement”) is an agreement between Mobile Hop and the Client.
+    <el-dialog v-model="dialogVisible1" :title="html_title" width="800">
+        <div class="service-content" v-html="html_tem">
+        
+
+        </div>
+    </el-dialog>
+</template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { register, resendemail, limited, country } from "@/api/front/user";
+import { ElMessage } from 'element-plus'
+// import { useCounterStore } from '@/stores/counter';
+
+// const counter = useCounterStore();
+const html_title = ref('');
+const html_tem = ref(`
+<p>This License and Service Agreement (the “Agreement”) is an agreement between Mobile Hop and the Client.
             </p>
             <p><strong>1. Grant of License</strong></p>
             <p>1.1 Mobile Hop has developed, owns and offers a service which.</p>
@@ -184,18 +200,7 @@
             <p>10.5 No failure or delay on the part of any party hereto in e.</p>
             <p>10.6 Mobile Hop may, at any time, and at its sole discretion.</p>
 
-        </div>
-    </el-dialog>
-</template>
-
-<script lang="ts" setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { register, resendemail, limited, country } from "@/api/front/user";
-import { ElMessage } from 'element-plus'
-// import { useCounterStore } from '@/stores/counter';
-
-// const counter = useCounterStore();
+`)
 
 const router = useRouter();
 
@@ -301,6 +306,62 @@ function generateUUID() {
 const handleService = () => {
     checkService.value = true;
     dialogVisible1.value = true;
+    html_title.value = 'Terms & Conditions'
+    html_tem.value = `
+    Last Updated: February 2024
+    License and Service Agreement
+    This License and Service Agreement (the "Agreement") is between Proxyshop, located at 4112A Main St, Apt P60, Flushing, NY 11355, United States, and you or the entity you represent (referred to as 'Client'), effective as of the date you sign up to Proxyshop or access/use the System or Service.
+    Grant of License
+    Proxyshop offers a service enabling anonymous internet browsing by redirecting communication through other users' devices (the "System"). This service is available for commercial use under this agreement. During the term of this Agreement, Proxyshop grants the Client a limited license to access and use the System solely for internal business operations. Proxyshop reserves all rights not expressly granted.
+    Illegal and Nefarious Activities
+    Proxyshop strictly prohibits using its System or Service for illegal or nefarious purposes, including criminal acts, fraud, harassment, or any activity violating laws or regulations. Violation results in immediate termination of this Agreement.
+    Data Collection Service
+    Proxyshop provides a data collection service ("Service") gathering publicly available data ("Data"), subject to the terms herein. Proxyshop may withhold Service or Data provision if it may infringe laws, regulations, or third-party rights.
+    Disclaimer of Warranties and Terms of Service
+    Proxyshop provides access to the System and Data "as is" and disclaims all warranties, express or implied, including merchantability, fitness for purpose, and accuracy. Proxyshop does not guarantee uninterrupted use or Data delivery, nor accuracy or completeness of information.
+    Warranties and Representations by the Client
+    The Client agrees not to use the System or Service for illegal purposes, distribute malicious software, or engage in activities damaging third-party computers or services. The Client is solely responsible for actions based on System or Data use and must protect account credentials.
+    Consideration
+    Upon registration, the Client must provide a valid payment method. Subscription Fees are non-cancelable and non-refundable, as indicated in the Client's dashboard. The Client agrees to receive electronic invoices and receipts.
+    Limitation of Liability
+    Proxyshop is not liable for consequential damages. Liability is limited to fees received in the one-month period prior to the Event.
+    Temporary Suspension
+    Proxyshop may suspend access immediately if the Client poses security risks, breaches this Agreement, or violates representations and warranties.
+    Disclosure of Information
+    Proxyshop may monitor System use for billing and share information with authorities to comply with the law.
+    Term and Termination
+    This Agreement is effective until terminated. Either party may terminate with written notice. Proxyshop may terminate immediately for cause. Upon termination, outstanding fees are due, and the license terminates.
+    Miscellaneous
+    This Agreement constitutes the entire understanding between the parties. Notices are sent via email. New York law governs, and New York courts have exclusive jurisdiction. Modifications are effective upon posting, and Client's continued use constitutes acceptance.
+    `
+}
+
+const handleService2 = () => {
+    checkService.value = true;
+    dialogVisible1.value = true;
+    html_title.value = 'Privacy Policy'
+    html_tem.value = `
+    <p>Last Updated: February 2024</p>
+    <p>Thank you for using Proxyshop. We value your privacy and are committed to protecting your personal information. This Privacy Policy explains our policies regarding the collection, use, and disclosure of information about you. Please read this Privacy Policy carefully before using our services.</p>
+    <p><strong>Information Collection and Use</strong></p>
+    <p>We collect personal information to provide and improve our services. By using our services, you agree to the collection and use of information. The types of information we collect include, but are not limited to:
+    <ul>
+        <li>· Browsing Data: We may collect and store information about the websites you visit, browser type, and operating system.</li>
+        <li>· Cookies and Similar Technologies: We may use cookies and similar technologies to identify your browser or device and provide a personalized experience.</li>
+    </ul>
+    We do not sell or rent your personal information to third parties unless we obtain your explicit consent or are required by law.</p>
+
+    <p><strong>Information Security</strong></p>
+    <p>We take appropriate security measures to protect your personal information from unauthorized access, use, or disclosure. However, please note that the security of internet transmissions cannot be guaranteed 100%.</p>
+    <p><strong>Cookie Policy</strong></p>
+    <p>We use cookies and similar technologies to optimize user experience and website functionality. You can manage cookie preferences through your browser settings.</p>
+    <p><strong>Children's Privacy</strong></p>
+    <p>Our services are not intended for children under 18. If you are a parent or guardian of a minor and you find that your child has provided personal information to us, please contact us to take appropriate action.</p>
+    <p><string>Changes to Privacy Policy</string></p>
+    <p>We may update our Privacy Policy from time to time. We will post any changes on our website and update this page to reflect the changes. We recommend that you check this Privacy Policy regularly to understand how we protect your personal information.</p>
+    <p><strong>Contact Us</strong></p>
+    <p>If you have any questions or concerns about this Privacy Policy, please feel free to contact us via email.</p>
+    `
 }
 
 getCountry();
