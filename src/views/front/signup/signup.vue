@@ -151,54 +151,6 @@ import { ElMessage } from 'element-plus'
 // const counter = useCounterStore();
 const html_title = ref('');
 const html_tem = ref(`
-<p>This License and Service Agreement (the “Agreement”) is an agreement between Mobile Hop and the Client.
-            </p>
-            <p><strong>1. Grant of License</strong></p>
-            <p>1.1 Mobile Hop has developed, owns and offers a service which.</p>
-            <p>1.2 During the term of this Agreement Mobile Hop grants the Client.</p>
-            <p>1.3 Mobile Hop reserves any and all rights not expressly granted.</p>
-            <p><strong>2. Data Collection Service</strong></p>
-            <p>2.1 Mobile Hop had developed, owns and offers a data collection.</p>
-            <p>2.2 Mobile Hop will not provide the Service or Data where such.</p>
-            <p><strong>3. Disclaimer of Warranties</strong></p>
-            <p>MOBILE HOP IS PROVIDING THE USE OF THE SYSTEM AND THE DATA ON.</p>
-            <p><strong>4. Warranties and Representations by the Client</strong></p>
-            <p>The Client warrants, represents and covenants to Mobile Hop that.</p>
-            <p>4.1 Not use the System or the Services in violation of applicable.</p>
-            <p>4.2 Not use the System to: (i) distribute cracking, warez, RO.</p>
-            <p>4.3 Not use other systems, products or services that infringe.</p>
-            <p>4.4 Not engage in any reselling of the System in whole or in.</p>
-            <p>4.5 Not, and not enable others to, copy, decompile, reverse e.</p>
-            <p>Mobile Hop’s prior written approval. It is hereby clarified t.</p>
-            <p>4.6 To the extent that the use of the System or the Data will.</p>
-            <p>4.7 The Client will be solely responsible for any actions it.</p>
-            <p>4.8 The Client is responsible for protecting its personal use.</p>
-            <p><strong>5. Consideration</strong></p>
-            <p>5.1 Following the free trial period (if granted by Mobile Hop.</p>
-            <p>5.2 Prices are net of any withholding or other taxes and the.</p>
-            <p>5.3 Client consents to receive electronic invoices and receip.</p>
-            <p><strong>6. Limitation of Liability</strong></p>
-            <p>In no event will Mobile Hop be liable under this Agreement fo.</p>
-            <p><strong>7. Temporary Suspension</strong></p>
-            <p>Mobile Hop in its sole discretion and at any time, may suspen.</p>
-            <p>(a) Client’s use of or registration for the System or Service.</p>
-            <p>(b) Client is in breach of this Agreement, including if Clien.</p>
-            <p>(c) Client has violated any of its representation and warrant.</p>
-            <p><strong>8. Disclosure of Information</strong></p>
-            <p>Mobile Hop shall have the right, but not the obligation, to m.</p>
-            <p><strong>9. Term and Termination</strong></p>
-            <p>9.1 This Agreement commences on the Effective Date and shall.</p>
-            <p>9.2 Unless agreed otherwise in a separate schedule or stateme.</p>
-            <p>Mobile Hop shall be entitled to terminate this Agreement imme.</p>
-            <p>regulations. Mobile Hop shall not be liable to the Client or.</p>
-            <p>9.3 Upon termination, any outstanding consideration amounts s.</p>
-            <p><strong>10. Miscellaneous</strong></p>
-            <p>10.1 This Agreement constitutes the entire understanding betw.</p>
-            <p>10.2 All notices or other communications hereunder shall be g.</p>
-            <p>10.3 This Agreement shall be governed by the laws of the Stat.</p>
-            <p>10.4 If any provision of this Agreement will be held by a cou.</p>
-            <p>10.5 No failure or delay on the part of any party hereto in e.</p>
-            <p>10.6 Mobile Hop may, at any time, and at its sole discretion.</p>
 
 `)
 
@@ -308,31 +260,31 @@ const handleService = () => {
     dialogVisible1.value = true;
     html_title.value = 'Terms & Conditions'
     html_tem.value = `
-    Last Updated: February 2024
-    License and Service Agreement
-    This License and Service Agreement (the "Agreement") is between Proxyshop, located at 4112A Main St, Apt P60, Flushing, NY 11355, United States, and you or the entity you represent (referred to as 'Client'), effective as of the date you sign up to Proxyshop or access/use the System or Service.
-    Grant of License
-    Proxyshop offers a service enabling anonymous internet browsing by redirecting communication through other users' devices (the "System"). This service is available for commercial use under this agreement. During the term of this Agreement, Proxyshop grants the Client a limited license to access and use the System solely for internal business operations. Proxyshop reserves all rights not expressly granted.
-    Illegal and Nefarious Activities
-    Proxyshop strictly prohibits using its System or Service for illegal or nefarious purposes, including criminal acts, fraud, harassment, or any activity violating laws or regulations. Violation results in immediate termination of this Agreement.
-    Data Collection Service
-    Proxyshop provides a data collection service ("Service") gathering publicly available data ("Data"), subject to the terms herein. Proxyshop may withhold Service or Data provision if it may infringe laws, regulations, or third-party rights.
-    Disclaimer of Warranties and Terms of Service
-    Proxyshop provides access to the System and Data "as is" and disclaims all warranties, express or implied, including merchantability, fitness for purpose, and accuracy. Proxyshop does not guarantee uninterrupted use or Data delivery, nor accuracy or completeness of information.
-    Warranties and Representations by the Client
-    The Client agrees not to use the System or Service for illegal purposes, distribute malicious software, or engage in activities damaging third-party computers or services. The Client is solely responsible for actions based on System or Data use and must protect account credentials.
-    Consideration
-    Upon registration, the Client must provide a valid payment method. Subscription Fees are non-cancelable and non-refundable, as indicated in the Client's dashboard. The Client agrees to receive electronic invoices and receipts.
-    Limitation of Liability
-    Proxyshop is not liable for consequential damages. Liability is limited to fees received in the one-month period prior to the Event.
-    Temporary Suspension
-    Proxyshop may suspend access immediately if the Client poses security risks, breaches this Agreement, or violates representations and warranties.
-    Disclosure of Information
-    Proxyshop may monitor System use for billing and share information with authorities to comply with the law.
-    Term and Termination
-    This Agreement is effective until terminated. Either party may terminate with written notice. Proxyshop may terminate immediately for cause. Upon termination, outstanding fees are due, and the license terminates.
-    Miscellaneous
-    This Agreement constitutes the entire understanding between the parties. Notices are sent via email. New York law governs, and New York courts have exclusive jurisdiction. Modifications are effective upon posting, and Client's continued use constitutes acceptance.
+    <p style="color: #9f9f9f;">Last Updated: February 2024</p>
+    <p><strong>License and Service Agreement</strong></p>
+    <p>This License and Service Agreement (the "Agreement") is between Proxyshop, located at 4112A Main St, Apt P60, Flushing, NY 11355, United States, and you or the entity you represent (referred to as 'Client'), effective as of the date you sign up to Proxyshop or access/use the System or Service.</p>
+    <p><strong>Grant of License</strong></p>
+    <p>Proxyshop offers a service enabling anonymous internet browsing by redirecting communication through other users' devices (the "System"). This service is available for commercial use under this agreement. During the term of this Agreement, Proxyshop grants the Client a limited license to access and use the System solely for internal business operations. Proxyshop reserves all rights not expressly granted.</p>
+    <p><strong>Illegal and Nefarious Activities</strong></p>
+    <p>Proxyshop strictly prohibits using its System or Service for illegal or nefarious purposes, including criminal acts, fraud, harassment, or any activity violating laws or regulations. Violation results in immediate termination of this Agreement.</p>
+    <p><strong>Data Collection Service</strong></p>
+    <p>Proxyshop provides a data collection service ("Service") gathering publicly available data ("Data"), subject to the terms herein. Proxyshop may withhold Service or Data provision if it may infringe laws, regulations, or third-party rights.</p>
+    <p><strong>Disclaimer of Warranties and Terms of Service</strong></p>
+    <p>Proxyshop provides access to the System and Data "as is" and disclaims all warranties, express or implied, including merchantability, fitness for purpose, and accuracy. Proxyshop does not guarantee uninterrupted use or Data delivery, nor accuracy or completeness of information.</p>
+    <p><strong>Warranties and Representations by the Client</strong></p>
+    <p>The Client agrees not to use the System or Service for illegal purposes, distribute malicious software, or engage in activities damaging third-party computers or services. The Client is solely responsible for actions based on System or Data use and must protect account credentials.</p>
+    <p><strong>Consideration</strong></p>
+    <p>Upon registration, the Client must provide a valid payment method. Subscription Fees are non-cancelable and non-refundable, as indicated in the Client's dashboard. The Client agrees to receive electronic invoices and receipts.</p>
+    <p><strong>Limitation of Liability</strong></p>
+    <p>Proxyshop is not liable for consequential damages. Liability is limited to fees received in the one-month period prior to the Event.</p>
+    <p><strong>Temporary Suspension</strong></p>
+    <p>Proxyshop may suspend access immediately if the Client poses security risks, breaches this Agreement, or violates representations and warranties.</p>
+    <p><strong>Disclosure of Information</strong></p>
+    <p>Proxyshop may monitor System use for billing and share information with authorities to comply with the law.</p>
+    <p><strong>Term and Termination</strong></p>
+    <p>This Agreement is effective until terminated. Either party may terminate with written notice. Proxyshop may terminate immediately for cause. Upon termination, outstanding fees are due, and the license terminates.</p>
+    <p><strong>Miscellaneous</strong></p>
+    <p>This Agreement constitutes the entire understanding between the parties. Notices are sent via email. New York law governs, and New York courts have exclusive jurisdiction. Modifications are effective upon posting, and Client's continued use constitutes acceptance.</p>
     `
 }
 
@@ -341,7 +293,7 @@ const handleService2 = () => {
     dialogVisible1.value = true;
     html_title.value = 'Privacy Policy'
     html_tem.value = `
-    <p>Last Updated: February 2024</p>
+    <p style="color: #9f9f9f;">Last Updated: February 2024</p>
     <p>Thank you for using Proxyshop. We value your privacy and are committed to protecting your personal information. This Privacy Policy explains our policies regarding the collection, use, and disclosure of information about you. Please read this Privacy Policy carefully before using our services.</p>
     <p><strong>Information Collection and Use</strong></p>
     <p>We collect personal information to provide and improve our services. By using our services, you agree to the collection and use of information. The types of information we collect include, but are not limited to:
@@ -379,7 +331,7 @@ getCountry();
 .service-content {
     font-size: 14px;
     padding: 0 20px;
-    height: 400px;
+    height: 500px;
     overflow-y: auto;
 }
 </style>
