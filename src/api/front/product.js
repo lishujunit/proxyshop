@@ -73,6 +73,15 @@ export const regionList = (params) => {
     })
 }
 
+// 当前所在区域
+export const getRegion = (params) => {
+    return service({
+        url: '/proxy/region',
+        method: 'get',
+        params
+    })
+}
+
 // 切换设备所在区域
 export const switchRegion = (params) => {
     return service({

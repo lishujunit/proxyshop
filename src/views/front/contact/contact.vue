@@ -45,7 +45,8 @@
                       </div>
                       <div class="align-self-start justify-content-start">
                         <h5 class="mb-1">Telegram</h5>
-                        <p>@Tunaproxy</p>
+                        <p class="mb-0"><a class="link-body" href="https://t.me/tunaproxysupport" target="_blank">@tunaproxy</a></p>
+                        <p class="mb-3"><a class="link-body" href="https://t.me/proxyshopio" target="_blank">@proxyshop group</a></p>
                       </div>
                     </div>
                     <!--/div -->

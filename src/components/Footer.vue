@@ -11,7 +11,7 @@
                     <!-- /.widget -->
                 </div>
                 <!-- /column -->
-                <div class="col-md-4 col-lg-2 offset-lg-2">
+                <!-- <div class="col-md-4 col-lg-2 offset-lg-2">
                     <div class="widget">
                         <h4 class="widget-title text-white mb-3">Learn More</h4>
                         <ul class="list-unstyled  mb-0">
@@ -23,10 +23,9 @@
                             <li><a href="/blog">Blog</a></li>
                         </ul>
                     </div>
-                    <!-- /.widget -->
-                </div>
+                </div> -->
                 <!-- /column -->
-                <div class="col-md-4 col-lg-2">
+                <div class="col-md-4 col-lg-2 offset-lg-4">
                     <div class="widget">
                         <h4 class="widget-title text-white mb-3">Legal</h4>
                         <ul class="list-unstyled text-reset mb-0">

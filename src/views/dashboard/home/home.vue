@@ -251,7 +251,7 @@
 
     <el-dialog
         v-model="dialogVisible3"
-        title="Connect"
+        :title="is_connect ? 'Connecting '+connect_name : 'Connect'"
         width="800"
         :close-on-click-modal="false"
         :close-on-press-escape="false"
@@ -260,8 +260,17 @@
             <el-table-column prop="name" label="LOCAIOTION" />
             <el-table-column label="STATUS" width="300">
                 <template #default="{row}">
-                    <el-button v-if="row.devnum_avail > 0" type="success" @click="handleSwitchRegion(row)">CONNECT</el-button>
-                    <el-button v-else type="success" plain disabled> LOCATION FULL（TRYAGAIN LATER）</el-button>
+                    <template v-if="row.devnum_avail > 0">
+                        <el-button v-if="is_connect && state_id === row.id" plain type="success" :icon="Connection">
+                            Connecting  Canada,Ontario
+                        </el-button>
+
+                        <el-button v-else type="success" @click="handleSwitchRegion(row)">
+                            Connect
+                        </el-button>
+                    </template>
+                    
+                    <el-button v-else type="info" plain disabled> LOCATION FULL（TRYAGAIN LATER）</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -272,10 +281,11 @@
 import { ref, nextTick } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { proxylist, orderUpdate, proxyNum, regionList, switchRegion } from '@/api/front/product.js'
+import { proxylist, orderUpdate, proxyNum, regionList, switchRegion, getRegion } from '@/api/front/product.js'
 import { userInfo, proxyCall, apidemo } from '@/api/front/user.js'
 import { ArrowDown } from '@element-plus/icons-vue'
 import { ElMessage, ElLoading } from "element-plus"
+import { Connection } from '@element-plus/icons-vue'
 
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
@@ -495,6 +505,10 @@ const handleLocation = async ({dev_virtid}: {dev_virtid: string}) => {
     dialogVisible3.value = true;
 }
 
+const connect_name = ref('');
+const is_connect = ref(false);
+const state_id = ref('');
+
 const handleSwitchRegion = async ({id}: {id: string}) => {
     const loading = ElLoading.service({
         lock: true,
@@ -503,10 +517,19 @@ const handleSwitchRegion = async ({id}: {id: string}) => {
     });
     const dev_virtid = current_dev_virtid.value;
     try{
+        const obj = await getRegion({dev_virtid});
+        connect_name.value = obj.name;
+        is_connect.value = true;
+        state_id.value = id;
         const res = await switchRegion({dev_virtid, state_id: id});
+        connect_name.value = '';
+        is_connect.value = false;
+        state_id.value = '';
         handleLocation({dev_virtid});
     } catch(err) {
-        //
+        connect_name.value = '';
+        is_connect.value = false;
+        state_id.value = '';
     }
     loading.close();
 }

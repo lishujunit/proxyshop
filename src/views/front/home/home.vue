@@ -273,17 +273,15 @@
                 <div class="col-md-8 col-lg-6 col-xl-5 order-lg-2 position-relative">
                     <div class="shape bg-soft-primary rounded-circle rellax w-20 h-20" data-rellax-speed="1"
                         style="top: -2rem; right: -1.9rem; transform: translate3d(0px, -14px, 0px);"></div>
-                    <figure class="rounded"><img src="/img/photos/about7.jpg" srcset="/img/photos/about7@2x.jpg 2x" alt="">
+                    <figure class="rounded"><img src="/img/photos/image.png" srcset="/img/photos/image.png 2x" alt="">
                     </figure>
                 </div>
                 <!--/column -->
                 <div class="col-lg-6">
                     <h2 class="display-4 mb-3">Who Are We?</h2>
-                    <p class="lead fs-lg">We are a digital and branding company that believes in the power of creative
-                        strategy and along with great design.</p>
-                    <p class="mb-6">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commodo cursus magna, vel
-                        scelerisque nisl consectetur et.</p>
+                    <!-- <p class="lead fs-lg">We are a digital and branding company that believes in the power of creative
+                        strategy and along with great design.</p> -->
+                    <p class="mb-6">We are the leaders in mobile Proxy services, catering to provide you the optimal mobile internet experience. There are no network obstacles we can't overcome, only digital territories yet to be explored.</p>
                     <div class="row gx-xl-10 gy-6">
                         <div class="col-md-6">
                             <div class="d-flex flex-row">

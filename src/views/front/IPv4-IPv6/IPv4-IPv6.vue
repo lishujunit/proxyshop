@@ -1,5 +1,9 @@
 <template>
-    <section class="wrapper bg-soft-primary">
+    <section style="padding: 100px 0; text-align: center;">
+        <img src="/img/illustrations/i12.png" />
+    </section>
+    
+    <!-- <section class="wrapper bg-soft-primary">
         <div class="container pt-10 pb-10 pt-md-14 pb-md-10 text-center">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -7,11 +11,8 @@
                     <p class="lead mb-0 px-xl-10 px-xxl-13">We offer prices that fit your business perfectly. Make your
                         client site a success with our products.</p>
                 </div>
-                <!-- /column -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
     </section>
 
     <section class="wrapper">
@@ -22,16 +23,16 @@
                         role="tab" aria-selected="true">Static Residential Proxies</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content2" type="button" role="tab"
-                        aria-selected="false">Rotating Residential Proxies</button>
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content2" type="button"
+                        role="tab" aria-selected="false">Rotating Residential Proxies</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content3" type="button" role="tab"
-                        aria-selected="false">Static Datacenter Proxy</button>
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content3" type="button"
+                        role="tab" aria-selected="false">Static Datacenter Proxy</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content4" type="button" role="tab"
-                        aria-selected="false">Rotating Datacenter Proxy</button>
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-content4" type="button"
+                        role="tab" aria-selected="false">Rotating Datacenter Proxy</button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -54,17 +55,18 @@
                                         <h4 class="card-title">Hourly</h4>
                                         <div class="prices text-dark">
                                             <div class="price price-show"><span class="price-currency">$</span><span
-                                                    class="price-value">1</span> <span class="price-duration">hour</span>
+                                                    class="price-value">1</span> <span
+                                                    class="price-duration">hour</span>
                                             </div>
-                                            <!-- <div class="price price-hide price-hidden"><span class="price-currency">$</span><span
-                                            class="price-value">99</span> <span class="price-duration">yr</span></div> -->
                                         </div>
-                                        <!--/.prices -->
                                         <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
-                                            <li><i class="uil uil-check"></i><span><strong>1</strong> Project </span></li>
-                                            <li><i class="uil uil-check"></i><span><strong>100K</strong> API Access </span>
+                                            <li><i class="uil uil-check"></i><span><strong>1</strong> Project </span>
                                             </li>
-                                            <li><i class="uil uil-check"></i><span><strong>100MB</strong> Storage </span>
+                                            <li><i class="uil uil-check"></i><span><strong>100K</strong> API Access
+                                                </span>
+                                            </li>
+                                            <li><i class="uil uil-check"></i><span><strong>100MB</strong> Storage
+                                                </span>
                                             </li>
                                             <li><i class="uil uil-times bullet-soft-red"></i><span> Weekly
                                                     <strong>Reports</strong>
@@ -74,11 +76,8 @@
                                         </ul>
                                         <a href="#" class="btn btn-primary rounded-pill">Choose Plan</a>
                                     </div>
-                                    <!--/.card-body -->
                                 </div>
-                                <!--/.pricing -->
                             </div>
-                            <!--/column -->
                             <div class="col-md-6 col-lg-4 popular">
                                 <div class="pricing card text-center">
                                     <div class="card-body">
@@ -108,27 +107,28 @@
                                             </div>
                                             <div class="price price-hide price-hidden"><span
                                                     class="price-currency">$</span><span class="price-value">199</span>
-                                                <span class="price-duration">yr</span></div>
+                                                <span class="price-duration">yr</span>
+                                            </div>
                                         </div>
-                                        <!--/.prices -->
                                         <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
-                                            <li><i class="uil uil-check"></i><span><strong>5</strong> Projects </span></li>
-                                            <li><i class="uil uil-check"></i><span><strong>100K</strong> API Access </span>
+                                            <li><i class="uil uil-check"></i><span><strong>5</strong> Projects </span>
                                             </li>
-                                            <li><i class="uil uil-check"></i><span><strong>200MB</strong> Storage </span>
+                                            <li><i class="uil uil-check"></i><span><strong>100K</strong> API Access
+                                                </span>
                                             </li>
-                                            <li><i class="uil uil-check"></i><span> Weekly <strong>Reports</strong></span>
+                                            <li><i class="uil uil-check"></i><span><strong>200MB</strong> Storage
+                                                </span>
+                                            </li>
+                                            <li><i class="uil uil-check"></i><span> Weekly
+                                                    <strong>Reports</strong></span>
                                             </li>
                                             <li><i class="uil uil-times bullet-soft-red"></i><span> 7/24
                                                     <strong>Support</strong></span></li>
                                         </ul>
                                         <a href="#" class="btn btn-primary rounded-pill">Choose Plan</a>
                                     </div>
-                                    <!--/.card-body -->
                                 </div>
-                                <!--/.pricing -->
                             </div>
-                            <!--/column -->
                             <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-0">
                                 <div class="pricing card text-center">
                                     <div class="card-body">
@@ -167,34 +167,49 @@
                                             </div>
                                             <div class="price price-hide price-hidden"><span
                                                     class="price-currency">$</span><span class="price-value">499</span>
-                                                <span class="price-duration">yr</span></div>
+                                                <span class="price-duration">yr</span>
+                                            </div>
                                         </div>
-                                        <!--/.prices -->
                                         <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
-                                            <li><i class="uil uil-check"></i><span><strong>20</strong> Projects </span></li>
-                                            <li><i class="uil uil-check"></i><span><strong>300K</strong> API Access </span>
+                                            <li><i class="uil uil-check"></i><span><strong>20</strong> Projects </span>
                                             </li>
-                                            <li><i class="uil uil-check"></i><span><strong>500MB</strong> Storage </span>
+                                            <li><i class="uil uil-check"></i><span><strong>300K</strong> API Access
+                                                </span>
                                             </li>
-                                            <li><i class="uil uil-check"></i><span> Weekly <strong>Reports</strong></span>
+                                            <li><i class="uil uil-check"></i><span><strong>500MB</strong> Storage
+                                                </span>
+                                            </li>
+                                            <li><i class="uil uil-check"></i><span> Weekly
+                                                    <strong>Reports</strong></span>
                                             </li>
                                             <li><i class="uil uil-check"></i><span> 7/24 <strong>Support</strong></span>
                                             </li>
                                         </ul>
                                         <a href="#" class="btn btn-primary rounded-pill">Choose Plan</a>
                                     </div>
-                                    <!--/.card-body -->
                                 </div>
-                            <!--/.pricing -->
+                            </div>
                         </div>
-                        <!--/column -->
                     </div>
                 </div>
+                <div class="tab-pane fade" id="tab-content2" role="tabpanel" tabindex="0">2</div>
+                <div class="tab-pane fade" id="tab-content3" role="tabpanel" tabindex="0">3</div>
+                <div class="tab-pane fade" id="tab-content4" role="tabpanel" tabindex="0">4</div>
             </div>
-            <div class="tab-pane fade" id="tab-content2" role="tabpanel" tabindex="0">2</div>
-            <div class="tab-pane fade" id="tab-content3" role="tabpanel" tabindex="0">3</div>
-            <div class="tab-pane fade" id="tab-content4" role="tabpanel" tabindex="0">4</div>
         </div>
-    </div>
 
-</section></template>
+    </section> -->
+</template>
+
+<script lang="ts" setup>
+import { onMounted } from 'vue'
+import { ElMessage, ElLoading } from "element-plus"
+
+onMounted(() => {
+    ElMessage({
+        message: 'IPv4/IPv6 switching is currently under development and will be available soon.',
+        type: 'info',
+    })
+})
+    
+</script>
