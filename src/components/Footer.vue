@@ -5,8 +5,7 @@
                 <div class="col-lg-4">
                     <div class="widget">
                         <h3 class="h2 mb-3 text-white">Join our ProxyShop</h3>
-                        <p class="lead mb-5">We are trusted by over 5000+ clients. Gain access to our grid and grow your
-                            business.</p>
+                        <p class="lead mb-5">With the trust of more than 2000 clients, we invite you to join our network. Let us assist you in propelling your business growth. Start now.</p>
                     </div>
                     <!-- /.widget -->
                 </div>
@@ -39,7 +38,7 @@
                 <div class="col-md-4 col-lg-2">
                     <div class="widget">
                         <h4 class="widget-title text-white mb-3">Get in Touch</h4>
-                        <a href="/#/web/contact">Contact</a>
+                        <a href="/#/web/contact">Contact Us</a>
                     </div>
                     <!-- /.widget -->
                 </div>
@@ -50,6 +49,7 @@
             <div class="d-md-flex align-items-center justify-content-between">
                 <p class="mb-2 mb-lg-0">© 2024 ProxyShop. All rights reserved.</p>
                 <nav class="nav social social-white text-md-end">
+                    <a href="https://t.me/tunaproxysupport"><i class="uil uil-telegram"></i></a>
                     <a href="https://twitter.com/tunaproxy"><i class="uil uil-twitter"></i></a>
                     <!-- <a href="https://www.linkedin.com/company/gridpanel"><i class="uil uil-linkedin"></i></a> -->
                 </nav>

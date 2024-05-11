@@ -1,24 +1,54 @@
 <template>
-    <section class="wrapper bg-soft-primary">
+
+<section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="/img/photos/bg16.png" style="background-image: url(/img/photos/bg16.png);">
+<div class="container pt-md-15 pb-md-10 text-center">
+<div class="row">
+    <div class="col-lg-8 col-xl-7 col-xxl-8 mx-auto" data-cues="slideInDown" data-group="page-title" data-disabled="true">
+    <h1 class="display-1 text-white fs-60 mb-4 px-md-15 px-lg-0" data-cue="slideInDown" data-group="page-title" data-show="true" style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">Welcome to the World's Best Mobile Proxy Service Provider <span class="underline-3 style-2 yellow"></span></h1>
+    <p class="lead fs-24 text-white lh-sm mb-7 mx-md-13 mx-lg-10" data-cue="slideInDown" data-group="page-title" data-show="true" style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 300ms; animation-direction: normal; animation-fill-mode: both;">Centered around our clients, we specialize in providing the highest quality, fastest, and cleanest 4GLTE and 5G mobile proxy services all around the United States and Canada.</p>
+    <div data-cue="slideInDown" data-group="page-title" data-show="true" style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: 600ms; animation-direction: normal; animation-fill-mode: both;">
+        <!-- <a class="btn btn-white rounded mb-10 mb-xxl-5">Read More</a> -->
+        <p class="lead fs-20 text-white lh-sm mb-7 mx-md-13 mx-lg-10"><strong>Rapid Expansion:</strong> We are continually expanding our mobile proxy deployment areas at a pace of every two weeks.</p>
+    </div>
+    </div>
+    <!-- /column -->
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container -->
+<div class="overflow-hidden">
+<div class="divider text-light mx-n2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60">
+    <path fill="currentColor" d="M0,0V60H1440V0A5771,5771,0,0,1,0,0Z"></path>
+    </svg>
+</div>
+</div>
+</section>
+
+    <!-- <section class="wrapper bg-soft-primary">
         <div class="container pt-10 pb-10 pt-md-14 text-center">
-            <div class="row">
+            <h1 class="display-3 mb-3">Welcome to the World's Best Mobile Proxy Service Provider</h1>
+            <div class="col-sm-9 col-md-7 col-lg-7 mx-auto pb-5">
+                <p class="lead mb-0 px-xl-10 px-xxl-13">Centered around our clients, we specialize in providing the highest quality, fastest, and cleanest 4GLTE and 5G mobile proxy services all around the United States and Canada.</p>
+            </div>
+            
+            <p><strong>Rapid Expansion:</strong> We are continually expanding our mobile proxy deployment areas at a pace of every two weeks.</p>
+        </div>
+    </section> -->
+
+    <section class="wrapper bg-light my-home">
+        <div class="container py-12">
+            <div class="row text-center pb-15">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                    <h1 class="display-1 mb-3">Our Pricing</h1>
-                    <p class="lead mb-0 px-xl-10 px-xxl-13">We offer prices that fit your business perfectly. Make your
+                    <h1 class="display-2 mb-3">Our Pricing</h1>
+                    <p class="lead mb-0 px-xl-10 px-xxl-13 text-muted">We offer prices that fit your business perfectly. Make your
                         client site a success with our products.</p>
                 </div>
-                <!-- /column -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
 
-    <section class="wrapper bg-light">
-        <div class="container py-14">
             <div class="row text-center">
                 <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                    <h2 class="fs-16 text-uppercase text-muted mb-3">Countries/regions</h2>
+                    <h2 class="fs-20 text-uppercase mb-3">Countries/regions</h2>
                 </div>
                 <!-- /column -->
             </div>
@@ -101,111 +131,6 @@
                                 </div>
                                 <!--/.pricing -->
                             </div>
-                            <!--/column -->
-                            <!-- <div class="col-md-6 col-lg-4 popular">
-                                <div class="pricing card text-center">
-                                    <div class="card-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 479.8 512"
-                                            data-inject-url="https://sandbox.elemisthemes.com/assets/img/icons/lineal/home.svg"
-                                            class="svg-inject icon-svg icon-svg-md text-primary mb-3">
-                                            <path class="lineal-stroke"
-                                                d="M308 512H61.9c-8 0-14.4-6.5-14.4-14.4V227.2c0-4.3 2-8.4 5.4-11.2l178-143.7c5.3-4.3 12.8-4.3 18.1 0L427 216c3.4 2.7 5.4 6.9 5.4 11.2v269.6c-.2 8-6.8 14.3-14.8 14-7.7-.2-13.8-6.4-14-14V234.1L239.9 102 76.3 234.1v249.1H308c8 .2 14.3 6.8 14 14.8-.2 7.6-6.3 13.8-14 14z">
-                                            </path>
-                                            <path class="lineal-stroke"
-                                                d="M465.4 209.8c-3.3 0-6.4-1.1-9-3.2L239.9 32.9 23.5 206.7c-6.2 5-15.3 4-20.3-2.2s-4-15.3 2.2-20.3l225.5-181c5.3-4.2 12.8-4.2 18.1 0l225.5 181c6.2 5 7.2 14.1 2.2 20.3-2.8 3.3-6.9 5.3-11.3 5.3z">
-                                            </path>
-                                            <ellipse transform="rotate(-80.781 239.904 207.686)" class="lineal-fill"
-                                                cx="239.9" cy="207.7" rx="42.9" ry="43"></ellipse>
-                                            <path class="lineal-stroke"
-                                                d="M239.9 265.1c-31.7 0-57.4-25.7-57.4-57.4s25.7-57.4 57.4-57.4 57.4 25.7 57.4 57.4c-.1 31.7-25.7 57.3-57.4 57.4zm0-85.9c-15.8 0-28.5 12.8-28.5 28.5s12.8 28.5 28.5 28.5 28.5-12.8 28.5-28.5c0-15.8-12.8-28.5-28.5-28.5z">
-                                            </path>
-                                            <path class="lineal-fill" d="M171.8 325.7h136.1v171.9H171.8z"></path>
-                                            <path class="lineal-stroke"
-                                                d="M308 512H171.8c-8 0-14.4-6.5-14.4-14.4V325.7c0-8 6.5-14.4 14.4-14.4H308c8 0 14.4 6.5 14.4 14.4v171.9c0 7.9-6.4 14.4-14.4 14.4zm-121.8-28.9h107.3v-143H186.2v143zm234.2-317.7c-7.9 0-14.4-6.5-14.4-14.4V73.3h-28.6c-8 0-14.4-6.5-14.4-14.4s6.5-14.4 14.4-14.4h43c8 0 14.4 6.5 14.4 14.4v92c0 8-6.4 14.4-14.4 14.5 0-.1 0 0 0 0z">
-                                            </path>
-                                        </svg>
-                                        <h4 class="card-title">Premium Plan</h4>
-                                        <div class="prices text-dark">
-                                            <div class="price price-show"><span class="price-currency">$</span><span
-                                                    class="price-value">19</span> <span class="price-duration">mo</span>
-                                            </div>
-                                            <div class="price price-hide price-hidden"><span
-                                                    class="price-currency">$</span><span class="price-value">199</span>
-                                                <span class="price-duration">yr</span>
-                                            </div>
-                                        </div>
-                                        <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
-                                            <li><i class="uil uil-check"></i><span><strong>5</strong> Projects </span></li>
-                                            <li><i class="uil uil-check"></i><span><strong>100K</strong> API Access </span>
-                                            </li>
-                                            <li><i class="uil uil-check"></i><span><strong>200MB</strong> Storage </span>
-                                            </li>
-                                            <li><i class="uil uil-check"></i><span> Weekly <strong>Reports</strong></span>
-                                            </li>
-                                            <li><i class="uil uil-times bullet-soft-red"></i><span> 7/24
-                                                    <strong>Support</strong></span></li>
-                                        </ul>
-                                        <a href="#" class="btn btn-primary rounded-pill">Choose Plan</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-0">
-                                <div class="pricing card text-center">
-                                    <div class="card-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 409.6 380.8"
-                                            data-inject-url="https://sandbox.elemisthemes.com/assets/img/icons/lineal/briefcase-2.svg"
-                                            class="svg-inject icon-svg icon-svg-md text-primary mb-3">
-                                            <path class="lineal-stroke"
-                                                d="M299.9 104.7h-23.8V56.5c0-18.1-14.6-32.7-32.7-32.7h-77.2c-18 0-32.7 14.7-32.7 32.7v48.2h-23.8V56.5C109.8 25.3 135 0 166.2 0h77.2c31.2 0 56.4 25.3 56.5 56.5v48.2z">
-                                            </path>
-                                            <path class="lineal-stroke"
-                                                d="M360.5 380.8H49.1c-27.1 0-49-22-49.1-49.1V119.1C0 92 22 70 49.1 70h311.5c27.1 0 49 22 49.1 49.1v212.7c-.1 27.1-22.1 49-49.2 49zM49.1 93.8c-14 0-25.3 11.3-25.3 25.3v212.7c0 14 11.3 25.3 25.3 25.3h311.5c14 0 25.3-11.3 25.3-25.3V119.1c0-14-11.3-25.3-25.3-25.3H49.1z">
-                                            </path>
-                                            <path class="lineal-fill"
-                                                d="M49.2 81.7c-18.4 0-33.3 14.8-33.3 33.2 0 2.7.3 5.3.9 7.9C35.4 197.9 103.6 254 184.2 254h41.2c80.6 0 148.8-56.1 167.3-131.2 4.3-17.8-6.6-35.8-24.5-40.2-2.6-.6-5.2-.9-7.9-.9H49.2z">
-                                            </path>
-                                            <path class="lineal-stroke"
-                                                d="M225.4 265.9h-41.2c-41.5-.1-81.8-14.2-114.3-40C38 200.5 15.3 165.2 5.4 125.6-.5 101.4 14.3 77 38.6 71.1c3.5-.9 7.1-1.3 10.7-1.3h311.1c24.9 0 45.2 20.2 45.2 45.1 0 3.6-.4 7.2-1.3 10.7-9.9 39.6-32.6 74.8-64.5 100.2-32.6 25.9-72.9 40-114.4 40.1zM49.2 93.6c-6.6 0-12.9 3-16.9 8.2-4.1 5.1-5.5 11.8-3.9 18.2 17.6 71.8 81.9 122.3 155.8 122.2h41.2c73.9.1 138.3-50.4 155.8-122.2 1.6-6.3.1-13-3.9-18.1-4.1-5.2-10.3-8.3-16.9-8.2l-311.2-.1z">
-                                            </path>
-                                            <path class="lineal-fill"
-                                                d="M128.5 288.5h-13.8c-8.9 0-16.1-7.2-16.1-16.1v-48.3c0-8.9 7.2-16.1 16.1-16.1h13.8c8.9 0 16.1 7.2 16.1 16.1v48.3c0 8.9-7.2 16.1-16.1 16.1z">
-                                            </path>
-                                            <path class="lineal-stroke"
-                                                d="M128.5 300.4h-13.8c-15.5 0-28-12.5-28-28v-48.3c0-15.5 12.5-28 28-28h13.8c15.5 0 28 12.5 28 28v48.3c0 15.5-12.5 28-28 28zm-13.8-80.5c-2.3 0-4.2 1.9-4.2 4.2v48.3c0 2.3 1.9 4.2 4.2 4.2h13.8c2.3 0 4.2-1.9 4.2-4.2v-48.3c0-2.3-1.9-4.2-4.2-4.2h-13.8z">
-                                            </path>
-                                            <path class="lineal-fill"
-                                                d="M294.9 288.5h-13.8c-8.9 0-16.1-7.2-16.1-16.1v-48.3c0-8.9 7.2-16.1 16.1-16.1h13.8c8.9 0 16.1 7.2 16.1 16.1v48.3c0 8.9-7.2 16.1-16.1 16.1z">
-                                            </path>
-                                            <path class="lineal-stroke"
-                                                d="M294.9 300.4h-13.8c-15.5 0-28-12.5-28-28v-48.3c0-15.5 12.5-28 28-28h13.8c15.5 0 28 12.5 28 28v48.3c0 15.5-12.5 28-28 28zm-13.8-80.5c-2.3 0-4.2 1.9-4.2 4.2v48.3c0 2.3 1.9 4.2 4.2 4.2h13.8c2.3 0 4.2-1.9 4.2-4.2v-48.3c0-2.3-1.9-4.2-4.2-4.2h-13.8z">
-                                            </path>
-                                        </svg>
-                                        <h4 class="card-title">Corporate Plan</h4>
-                                        <div class="prices text-dark">
-                                            <div class="price price-show"><span class="price-currency">$</span><span
-                                                    class="price-value">49</span> <span class="price-duration">mo</span>
-                                            </div>
-                                            <div class="price price-hide price-hidden"><span
-                                                    class="price-currency">$</span><span class="price-value">499</span>
-                                                <span class="price-duration">yr</span>
-                                            </div>
-                                        </div>
-                                        <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8 text-start">
-                                            <li><i class="uil uil-check"></i><span><strong>20</strong> Projects </span></li>
-                                            <li><i class="uil uil-check"></i><span><strong>300K</strong> API Access </span>
-                                            </li>
-                                            <li><i class="uil uil-check"></i><span><strong>500MB</strong> Storage </span>
-                                            </li>
-                                            <li><i class="uil uil-check"></i><span> Weekly <strong>Reports</strong></span>
-                                            </li>
-                                            <li><i class="uil uil-check"></i><span> 7/24 <strong>Support</strong></span>
-                                            </li>
-                                        </ul>
-                                        <a href="#" class="btn btn-primary rounded-pill">Choose Plan</a>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!--/column -->
                         </div>
                     </div>
                 </div>
@@ -225,8 +150,7 @@
                         </div>
                         <div>
                             <h4>24/7 Support</h4>
-                            <p class="mb-2">Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at
-                                eget. Fusce dapibus tellus.</p>
+                            <p class="mb-2">We ensure 24/7 availability of our customer support and technical staff to guarantee the continuous operation of your business. Should there be any issues, they will be resolved promptly.</p>
                             <a href="#" class="more hover">Learn More</a>
                         </div>
                     </div>
@@ -240,8 +164,7 @@
                         </div>
                         <div>
                             <h4>Daily Updates</h4>
-                            <p class="mb-2">Maecenas faucibus mollis interdum. Vivamus sagittis lacus vel augue laoreet. Sed
-                                posuere consectetur.</p>
+                            <p class="mb-2">We currently cover most major cities in the United States and Canada, and we commit to expanding our mobile device geolocation every two weeks to a month, which will continue to enlarge and refresh our pool of IP addresses.</p>
                             <a href="#" class="more hover">Learn More</a>
                         </div>
                     </div>
@@ -255,8 +178,7 @@
                         </div>
                         <div>
                             <h4>Market Research</h4>
-                            <p class="mb-2">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Praesent commodo
-                                cursus magna scelerisque.</p>
+                            <p class="mb-2">We timely supplement mobile devices in popular cities based on customer feedback, ensuring constant updates to maximize customer value and assist in rapid escalation of commercial scale.</p>
                             <a href="#" class="more hover">Learn More</a>
                         </div>
                     </div>
@@ -281,7 +203,14 @@
                     <h2 class="display-4 mb-3">Who Are We?</h2>
                     <!-- <p class="lead fs-lg">We are a digital and branding company that believes in the power of creative
                         strategy and along with great design.</p> -->
-                    <p class="mb-6">We are the leaders in mobile Proxy services, catering to provide you the optimal mobile internet experience. There are no network obstacles we can't overcome, only digital territories yet to be explored.</p>
+                    
+                    <p class="mb-4">Welcome to ProxyShop.io. As a network platform specializing in providing high-quality, fast, and secure 4GLTE and 5G mobile proxy services, we are dedicated to building a shield of protection for our global customers, ensuring online privacy and security, and helping our customers achieve tremendous business growth.</p>
+
+                    <p class="mb-4">Our team consists of a group of technology enthusiasts, they have rich experience and professional skills in the field of network security and data analysis. Our aim is to use advanced intelligent technology to provide the most convenient and reliable proxy server solutions for global users.</p>
+
+                    <p class="mb-4">At present, we offer mobile proxy services covering most major cities in the United States and Canada. We promise that all mobile proxies are provided by genuine 4GLTE and 5G devices, ensuring a high-speed and clean IP pool.</p>
+
+                    <p class="mb-6">Thank you for choosing ProxyShop.io, we are always ready to serve you.</p>
                     <div class="row gx-xl-10 gy-6">
                         <div class="col-md-6">
                             <div class="d-flex flex-row">
@@ -374,7 +303,7 @@
                                     d="M200.9 246.7c-8.8 0-17.2-3.5-23.5-9.7L145 204.5c-4.7-4.7-4.7-12.3 0-17s12.3-4.7 17 0l32.5 32.5c3.6 3.5 9.3 3.5 12.8 0l49.8-49.9c4.7-4.7 12.3-4.7 17 0s4.7 12.3 0 17L224.4 237c-6.2 6.2-14.7 9.7-23.5 9.7z">
                                 </path>
                             </svg>
-                            <h3 class="counter" style="visibility: visible;">7518</h3>
+                            <h3 class="counter" style="visibility: visible;">3619</h3>
                             <p class="mb-0">Completed Projects</p>
                         </div>
                         <!--/column -->
@@ -392,7 +321,7 @@
                                     d="M327.2 405.9c-2.5 0-5-.6-7.2-1.9l-24.9-13.9c-7.2-4-9.7-13-5.7-20.2s13-9.7 20.2-5.7l15.7 8.7 34.1-30.1c6.1-5.4 15.5-4.9 21 1.3 5.4 6.1 4.9 15.5-1.3 21l-42 37.1c-2.8 2.4-6.3 3.7-9.9 3.7z">
                                 </path>
                             </svg>
-                            <h3 class="counter" style="visibility: visible;">3472</h3>
+                            <h3 class="counter" style="visibility: visible;">1762</h3>
                             <p class="mb-0">Happy Customers</p>
                         </div>
                         <!--/column -->
@@ -425,7 +354,7 @@
                                     d="M294.9 300.4h-13.8c-15.5 0-28-12.5-28-28v-48.3c0-15.5 12.5-28 28-28h13.8c15.5 0 28 12.5 28 28v48.3c0 15.5-12.5 28-28 28zm-13.8-80.5c-2.3 0-4.2 1.9-4.2 4.2v48.3c0 2.3 1.9 4.2 4.2 4.2h13.8c2.3 0 4.2-1.9 4.2-4.2v-48.3c0-2.3-1.9-4.2-4.2-4.2h-13.8z">
                                 </path>
                             </svg>
-                            <h3 class="counter" style="visibility: visible;">2184</h3>
+                            <h3 class="counter" style="visibility: visible;">50+</h3>
                             <p class="mb-0">Expert Employees</p>
                         </div>
                         <!--/column -->
@@ -588,14 +517,8 @@
                             <div id="accordion-collapse-2-4" class="collapse" aria-labelledby="accordion-heading-2-4"
                                 data-bs-target="#accordion-2">
                                 <div class="card-body">
-                                    <p>the official payment methods we do accept are USDT.As for other payments，Please let
-                                        us know how many proxies you want to purchase so we can tell you if we can consider
-                                        other payments.
-                                        Should you have further questions, you may reach out to us as we are 24/7 available
-                                        through our contact information . Please feel free to contact us.
-                                        For your queries, suggestions, and/or clarifications, you may refer to these
-                                        point-of-contact information.<br />
-                                        Telegram: @Tunaproxy<br />
+                                    <p>The official payment methods we accept are credit cards, debit cards, and cryptocurrencies such as USDC, USDT, etc. As for other payments, please let us know how many proxies you want to purchase so we can tell you if we can consider other payments. Should you have further questions, you may reach out to us as we are available 24/7 through our contact information.<br />
+                                        Telegram: <a target="_blank" href="https://t.me/tunaproxysupport">@tunaproxy</a><br />
                                         Skype: 012135647265<br />
                                         Sales Email: Sales@proxyshop.io<br />
                                         Support Email: support@proxyshop.io</p>
@@ -676,6 +599,11 @@ const rightScroll = () => {
 </script>
 
 <style lang="less">
+.my-home {
+    background: url(/img/photos/blurry.png) no-repeat;
+    background-size: 90% 70%;
+    background-position: center 150px;
+}
 .card-body {
     .iconfont {
         color: #a07cc5;
