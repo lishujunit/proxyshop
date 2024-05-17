@@ -1,5 +1,5 @@
 <template>
-    <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 text-white" data-image-src="/img/photos/bg3.jpg" style="background-image: url(&quot;/img/photos/bg3.jpg&quot;);">
+    <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 text-white bg-img" >
       <div class="container pt-17 pb-20 pt-md-19 pb-md-21 text-center">
         <div class="row">
           <div class="col-lg-8 mx-auto">
@@ -129,3 +129,9 @@ const submit = async () => {
   }
 };
 </script>
+
+<style scoped>
+.bg-img {
+  background-image: url(../../../assets/img/bg3.jpg);
+}
+</style>

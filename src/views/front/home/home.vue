@@ -1,6 +1,6 @@
 <template>
 
-<section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300" data-image-src="/img/photos/bg16.png" style="background-image: url(/img/photos/bg16.png);">
+<section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-300 my-bg">
 <div class="container pt-md-15 pb-md-10 text-center">
 <div class="row">
     <div class="col-lg-8 col-xl-7 col-xxl-8 mx-auto" data-cues="slideInDown" data-group="page-title" data-disabled="true">
@@ -195,7 +195,7 @@
                 <div class="col-md-8 col-lg-6 col-xl-5 order-lg-2 position-relative">
                     <div class="shape bg-soft-primary rounded-circle rellax w-20 h-20" data-rellax-speed="1"
                         style="top: -2rem; right: -1.9rem; transform: translate3d(0px, -14px, 0px);"></div>
-                    <figure class="rounded"><img src="/img/photos/image.png" srcset="/img/photos/image.png 2x" alt="">
+                    <figure class="rounded"><img src="../../../assets/img/image.png" alt="">
                     </figure>
                 </div>
                 <!--/column -->
@@ -599,8 +599,11 @@ const rightScroll = () => {
 </script>
 
 <style lang="less">
+.my-bg {
+    background-image: url('../../../assets/img/bg16.png');
+}
 .my-home {
-    background: url(/img/photos/blurry.png) no-repeat;
+    background: url(../../../assets/img/blurry.png) no-repeat;
     background-size: 90% 70%;
     background-position: center 150px;
 }

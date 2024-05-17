@@ -4,7 +4,6 @@
             <a href="/#/dashboard" class="px-4">
                 <img class="d-none d-md-block" src="../../../assets/img/logo1.jpg" alt=""
                     width="100%" height="auto">
-                <!-- <img class="d-block d-md-none" src="/img/logo-icon.jpeg" alt="" width="20px" height="16px"> -->
             </a>
             <ul class="nav nav-pills flex-column mt-4" style="width: 100%;">
                 <li v-for="item in navList" :key="item.name" class="nav-item" :class="{'dash-nav-item-active': item.paths.includes(itemActivePath), 'dash-nav-item-disabled': item.disabled}">

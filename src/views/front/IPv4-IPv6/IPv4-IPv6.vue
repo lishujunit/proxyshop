@@ -1,6 +1,6 @@
 <template>
     <section style="padding: 100px 0; text-align: center;">
-        <img src="/img/illustrations/i12.png" />
+        <img src="../../../assets/img/i12.png" />
     </section>
     
     <!-- <section class="wrapper bg-soft-primary">

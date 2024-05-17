@@ -3,8 +3,7 @@
         <div class="container pt-12 pt-md-14 pb-14 pb-md-16">
             <div class="row">
                 <div class="col-lg-9 col-xl-8 mx-auto">
-                    <figure class="mb-10"><img class="img-fluid" src="/img/illustrations/404.png"
-                            srcset="/img/illustrations/404@2x.png 2x" alt=""></figure>
+                    <figure class="mb-10"><img class="img-fluid" src="../../assets/img/404.png" alt=""></figure>
                 </div>
                 <!-- /column -->
                 <div class="col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center">
