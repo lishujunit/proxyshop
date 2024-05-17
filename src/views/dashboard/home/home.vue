@@ -251,7 +251,7 @@
 
     <el-dialog
         v-model="dialogVisible3"
-        :title="is_connect ? 'Connecting '+connect_name : 'Connect'"
+        :title="'Connecting '+connect_name"
         width="800"
         :close-on-click-modal="false"
         :close-on-press-escape="false"
@@ -499,6 +499,8 @@ const current_dev_virtid = ref('');
 const handleLocation = async ({dev_virtid}: {dev_virtid: string}) => {
     current_dev_virtid.value = dev_virtid;
     const res = await regionList({dev_virtid});
+    const obj = await getRegion({dev_virtid});
+    connect_name.value = obj.name;
     if(res) {
         regionTableData.value = res;
     }
@@ -517,17 +519,17 @@ const handleSwitchRegion = async ({id}: {id: string}) => {
     });
     const dev_virtid = current_dev_virtid.value;
     try{
-        const obj = await getRegion({dev_virtid});
-        connect_name.value = obj.name;
         is_connect.value = true;
         state_id.value = id;
         const res = await switchRegion({dev_virtid, state_id: id});
-        connect_name.value = '';
+
+        const obj = await getRegion({dev_virtid});
+        connect_name.value = obj.name;
+
         is_connect.value = false;
         state_id.value = '';
         handleLocation({dev_virtid});
     } catch(err) {
-        connect_name.value = '';
         is_connect.value = false;
         state_id.value = '';
     }
