@@ -103,6 +103,9 @@
                             <div v-for="item in infosData" class="col-md-6 col-lg-4" :key="item.id">
                                 <div class="pricing card text-center">
                                     <div class="card-body">
+                                        <template v-if="item.payment_plan == 'hour'">
+                                            <span class="iconfont" style="font-size: 40px;">&#xe617;</span>
+                                        </template>
                                         <template v-if="item.payment_plan == 'day'">
                                             <span class="iconfont" style="font-size: 40px;">&#xe6e6;</span>
                                         </template>

@@ -17,6 +17,9 @@
 
                         <div class="pricing card text-center" :class="{'card-disabled': item.status === 0}">
                             <div class="card-body">
+                                <template v-if="item.payment_plan == 'hour'">
+                                    <span class="iconfont" style="font-size: 40px;">&#xe617;</span>
+                                </template>
                                 <template v-if="item.payment_plan == 'day'">
                                     <span class="iconfont" style="font-size: 40px;">&#xe6e6;</span>
                                 </template>

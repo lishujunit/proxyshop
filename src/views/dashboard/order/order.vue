@@ -21,6 +21,7 @@
                             <label for="id_payment_plan">Plan</label>
                             <div class="form-select-wrapper mb-4">
                                 <select name="payment_plan" v-model="payment_plan" class="form-control" id="id_payment_plan" @change="handleChangePlan">
+                                    <option value="hour">hour</option>
                                     <option value="day">day</option>
 
                                     <option value="week">week</option>
