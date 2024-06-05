@@ -88,7 +88,7 @@
 
                             <label for="">Discount Code</label>
                             <div class="form-floating mb-4">
-                                <input type="text" name="discount_code" v-model="formData.discount_code" class="form-control" id="discount_code">
+                                <input type="text" name="discount_code" v-model="formData.discount_code" @input="handleInput" class="form-control" id="discount_code">
                                 <label for="discount_code">Discount Code</label>
                             </div>
 
@@ -227,6 +227,7 @@ const payment_plan = ref(query.payment_plan);
 const product_desc = ref(query.product_desc);
 const is_autorenew = ref(false);
 
+
 const getOrderprice = async () => {
     let params = {
         product_id: formData.value.product_id,
@@ -236,6 +237,22 @@ const getOrderprice = async () => {
     const res = await orderprice(params);
     if(res && res.status === 1) {
         order_price.value = res.order_price;
+    }
+};
+let timer = null;
+
+const handleInput = () => {
+    if(timer) {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            getOrderprice();
+            clearTimeout(timer);
+        }, 500)
+    } else {
+        timer = setTimeout(() => {
+            getOrderprice();
+            clearTimeout(timer);
+        }, 500)
     }
 };
 

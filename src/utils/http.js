@@ -35,10 +35,15 @@ service.interceptors.response.use(
         return res;
     },
     error => {
+        const user = useStore();
         ElMessage({
             message: error.response.data.detail || error,
             type: 'error',
         })
+        if(error.response.data.detail === 'Could not validate credentials') {
+            user.updateUserData(null);
+            location.hash = '#/web/signin';
+        }
         return Promise.reject(error);
     }
 );

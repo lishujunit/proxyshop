@@ -226,7 +226,7 @@
 
 
                     <div class="form-check mb-4">
-                        <input class="form-check-input" v-model="formData.is_autorenew"
+                        <input class="form-check-input" :disabled="formData.plan === 'hour' || formData.plan === 'day'" v-model="formData.is_autorenew"
                             type="checkbox" name="auto_renew" id="is_autorenew">
                         <label class="form-check-label" for="is_autorenew">Auto Renew</label>
                     </div>
@@ -471,14 +471,19 @@ const submitOrder = async () => {
     };
     let data = JSON.parse(JSON.stringify(formData.value));
     data.is_autorenew = data.is_autorenew ? 1 : 0;
-    const res = await orderUpdate(params, data);
-    if(res && res.status) {
-        ElMessage.success(res.message);
-        dialogTableVisible2.value = false;
-        formData.value = {};
-        getProxylist();
+    try {
+        const res = await orderUpdate(params, data);
+        if(res && res.status) {
+            ElMessage.success(res.message);
+            dialogTableVisible2.value = false;
+            formData.value = {};
+            getProxylist();
+        }
+        loading.close();
+    } catch(err) {
+        loading.close();
     }
-    loading.close();
+    
 }
 
 const tableRowClassName = ({
