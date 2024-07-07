@@ -143,6 +143,24 @@ const router = createRouter({
           component: () => import('../views/dashboard/order/order.vue')
         },
       ],
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: DashboardView,
+      redirect: "/admin/overview",
+      children: [
+        {
+          path: 'overview',
+          name: 'overview',
+          component: () => import('../views/admin/overview/overview.vue')
+        },
+        {
+          path: 'coupon',
+          name: 'coupon',
+          component: () => import('../views/admin/coupon/coupon.vue')
+        },
+      ],
     }
   ],
   scrollBehavior() {

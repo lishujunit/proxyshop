@@ -103,8 +103,9 @@
                             <router-link class="btn btn-sm btn-secondary rounded-pill" to="/web/signin">Login</router-link>
                         </li>
                         <li v-else class="nav-item d-none d-md-block">
-                            <router-link to="/dashboard" class="btn btn-sm btn-primary rounded-pill">Dashboard</router-link>&nbsp;
-                            <router-link @click="handleLogout" to="" class="btn btn-sm btn-secondary rounded-pill">Logout</router-link>
+                            <router-link v-if="user.userData?.user.is_admin" to="/admin" class="btn btn-sm btn-primary rounded-pill">Admin</router-link>
+                            <router-link v-else to="/dashboard" class="btn btn-sm btn-primary rounded-pill">Dashboard</router-link>
+                            &nbsp;<router-link @click="handleLogout" to="" class="btn btn-sm btn-secondary rounded-pill">Logout</router-link>
                         </li>
                         <li class="nav-item d-lg-none">
                             <button class="hamburger offcanvas-nav-btn"><span></span></button>

@@ -42,6 +42,15 @@ export const rechargeurl = (params) => {
     })
 }
 
+// 生成账户充值URL
+export const crypturl = (params) => {
+    return service({
+        url: '/user/crypturl',
+        method: 'post',
+        params,
+    })
+}
+
 // 获取用户信息
 export const userInfo = () => {
     return service({

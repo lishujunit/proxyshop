@@ -16,15 +16,15 @@
                             <div id="id_provider">
                                 <div>
                                     <div class="form-check">
-                                        <input type="radio" name="provider" value="coingate" class="form-check-input"
+                                        <input type="radio" name="provider" v-model="rechargeType" value="1" class="form-check-input"
                                             required="" id="id_provider_1" checked="">
                                         <label class="form-check-label" for="id_provider_1">Credit or Debit Card</label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="form-check">
-                                        <input type="radio" name="provider" value="stripe" class="form-check-input"
-                                            id="id_provider_0" disabled>
+                                        <input type="radio" name="provider" v-model="rechargeType" value="2" class="form-check-input"
+                                            id="id_provider_0">
                                         <label class="form-check-label" for="id_provider_0">Cryptocurrency</label>
                                     </div>
                                 </div>
@@ -33,9 +33,9 @@
                             <br>
 
                             <div class="form-floating mb-4">
-                                <input type="number" v-model="amount" name="amount" min="1" step="0.01" class="form-control"
-                                    required="" id="id_amount">
-                                <label for="id_amount">Amount</label>
+                                <el-form-item label="Amount">
+                                    <el-input-number v-model="amount" :min="10" step="1" id="id_amount" />
+                                </el-form-item>
                             </div>
 
                             <button class="btn btn-primary btn-login mb-2" type="button" @click="handleRecharge">Add Funds</button>
@@ -93,7 +93,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from '@/stores/user';
-import { rechargeurl, recharges, rechargesNum } from '@/api/front/user.js'
+import { rechargeurl, crypturl, recharges, rechargesNum } from '@/api/front/user.js'
 
 const user = useStore();
 const router = useRouter();
@@ -101,9 +101,10 @@ const router = useRouter();
 const total = ref(0);
 const page = ref(1);
 
-
+const rechargeType = ref('1');
 const user_id = user.userData?.user.user_id;
 const amount = ref(10);
+const amountMin = ref(10);
 
 const rechargesList = ref();
 
@@ -119,7 +120,12 @@ const handleRecharge = async () => {
         user_id,
         amount: amount.value
     };
-    const res = await rechargeurl(params);
+    let res;
+    if(rechargeType.value === '1') {
+        res = await rechargeurl(params);
+    } else {
+        res = await crypturl(params);
+    }
     if(res && res.status === 1) {
         let url = res.recharge_url;
         frame = open(url, '_self', 'popup=yes,width=1000,height=1000')
