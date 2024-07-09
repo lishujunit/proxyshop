@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary">新建</el-button>
+    <el-button type="primary" @click="handleCreate">新建</el-button>
   </div>
   <div class="form-search">
     <el-form :inline="true" :model="formData">
@@ -55,10 +55,14 @@
   </div>
   <div class="list-table">
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="id" label="ID" />
+      <el-table-column prop="id" label="ID" width="100"/>
       <el-table-column prop="code" label="优惠码" />
       <el-table-column prop="discount" label="折扣" />
-      <el-table-column prop="type" label="类型" />
+      <el-table-column prop="type" label="类型">
+        <template #default="scope">
+          {{ scope.row.type === 1 ? '通用码' : '折扣码' }}
+        </template>
+      </el-table-column>
       <el-table-column prop="coupon_desc" label="描述" />
       <el-table-column prop="status" label="状态" />
       <el-table-column prop="is_autorenew" label="是否支持续期" />
@@ -66,17 +70,34 @@
       <el-table-column prop="valid_to" label="有效期-止" />
       <el-table-column prop="user_names" label="用户" />
       <el-table-column prop="product_names" label="产品" />
-      <el-table-column prop="controls" label="操作" />
+      <el-table-column prop="controls" label="操作" width="190">
+        <template #default="scope">
+          <el-button type="primary">更新</el-button>
+          <el-button type="danger">删除</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
   <div class="page-box">
     <el-pagination background layout="prev, pager, next" :current-page="pageOption.page" :page-size="pageOption.pageSize" :total="pageOption.total" @current-change="handlePageChange" />
   </div>
+
+  <el-dialog v-model="dialogTableVisible" :title="modelTitle" width="800">
+    <template #footer>
+      <div>dfdfdf</div>
+      <div class="dialog-footer">
+        <el-button type="primary">
+          确认
+        </el-button>
+      </div>
+    </template>
+  </el-dialog>
+
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { users, optlist, list } from '@/api/admin.js';
+import { users, optlist, list, create } from '@/api/admin.js';
 
 const loading = ref(false);
 const userOptions = ref([]);
@@ -97,6 +118,9 @@ const pageOption = ref({
   total: 0
 });
 
+const modelTitle = ref('新增');
+const dialogTableVisible = ref(false);
+
 const getUser = async () => {
   const res = await users();
   if(res) {
@@ -115,9 +139,20 @@ const getList = async () => {
   let params = {
     "limit": pageOption.value.pageSize,
     "page": pageOption.value.page,
-    ...formData.value
+    user_ids: formData.value.user_ids.length ? formData.value.user_ids : undefined,
+    product_ids: formData.value.product_ids.length ? formData.value.product_ids : undefined,
+    valid_date: (formData.value.valid_date && formData.value.valid_date.length) ? formData.value.valid_date : undefined,
+    type: formData.value.type ? formData.value.type : undefined
+    // ...formData.value
   };
   const res = await list(params);
+  if(res.data) {
+    tableData.value = res.data;
+  }
+};
+
+const handleCreate = () => {
+  dialogTableVisible.value = true;
 };
 
 const onSubmit = () => {
@@ -135,6 +170,9 @@ getList();
 </script>
 
 <style scoped>
+.list-table {
+  /* padding-right: 20px; */
+}
 .form-search {
   padding: 20px 0;
 }

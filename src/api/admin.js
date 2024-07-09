@@ -25,13 +25,23 @@ export const optlist = () => {
 }
 
 // 优惠券列表
-export const list = (params) => {
+export const list = (data) => {
   return service({
       url: '/admin/coupon/list',
-      method: 'get',
-      params
+      method: 'post',
+      data
   })
 }
+
+// 新建优惠卷
+export const create = (data) => {
+  return service({
+      url: '/admin/coupon/create',
+      method: 'post',
+      data
+  })
+}
+
 
 
 
