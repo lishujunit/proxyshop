@@ -42,6 +42,47 @@ export const create = (data) => {
   })
 }
 
+// 更新优惠卷
+export const update = (data) => {
+  return service({
+      url: '/admin/coupon/update',
+      method: 'post',
+      data
+  })
+}
+
+// 删除优惠卷
+export const couponDelete = (data) => {
+  return service({
+      url: '/admin/coupon/delete',
+      method: 'post',
+      data
+  })
+}
+
+// 查看product列表
+export const productList = (data) => {
+  return service({
+      url: '/admin/product/list',
+      method: 'post',
+      data
+  })
+}
+
+// product更新
+export const productUpdate = (data) => {
+  return service({
+      url: '/admin/product/update',
+      method: 'post',
+      data
+  })
+}
+
+
+
+
+
+
 
 
 
