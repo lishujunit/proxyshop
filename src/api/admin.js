@@ -114,6 +114,17 @@ export const deviceDel = (data) => {
   })
 }
 
+// admin用户列表
+export const userList = (data) => {
+  return service({
+      url: '/admin/user/list',
+      method: 'post',
+      data
+  })
+}
+
+
+
 
 
 

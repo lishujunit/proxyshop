@@ -2,90 +2,42 @@
   <div class="content" v-loading="loading">
     <div class="form-search">
       <el-form :inline="true" :model="formData">
-        <el-form-item label="国家">
+        <el-form-item label="激活">
           <el-select
-            v-model="formData.code_country"
-            placeholder="请选择国家"
+            v-model="formData.is_emailactivate"
             clearable
-            style="width: 150px"
-            @change="handleCountryChange"
-          >
-            <el-option
-              v-for="(item, key) in countryinfosData"
-              :label="key"
-              :value="key"
-              :key="key"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="区域">
-          <el-select
-            v-model="formData.state_ids"
-            placeholder="请选择区域"
-            clearable
-            multiple
-            style="width: 150px"
-          >
-            <el-option
-              v-for="item in statesOptions"
-              :label="item.label"
-              :value="item.value"
-              :key="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="运营商">
-          <el-select
-            v-model="formData.telecom_ops"
-            placeholder="请选择区域"
-            clearable
-            multiple
-            style="width: 150px"
-          >
-            <el-option
-              v-for="item in telecomOptions"
-              :label="item.label"
-              :value="item.value"
-              :key="item.value"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="网络类型">
-          <el-select
-            v-model="formData.network_type"
-            placeholder="请选择网络类型"
-            clearable
-            style="width: 150px"
-          >
-            <el-option label="4G" value="4G" />
-            <el-option label="5G" value="5G" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select
-            v-model="formData.status"
-            placeholder="请选择状态"
-            clearable
-            style="width: 150px"
-          >
-            <el-option label="是" value="1" />
-            <el-option label="否" value="0" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="出售">
-          <el-select
-            v-model="formData.is_4sale"
             placeholder="请选择"
-            clearable
             style="width: 150px"
           >
-            <el-option label="是" value="1" />
-            <el-option label="否" value="0" />
+            <el-option label="是" :value="true"/>
+            <el-option label="否" :value="false"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="标签">
-          <el-input v-model="formData.dev_tags" />
+        <el-form-item label="付费">
+          <el-select
+            v-model="formData.is_paid"
+            clearable
+            style="width: 150px"
+            placeholder="请选择"
+          >
+            <el-option label="是" :value="true"/>
+            <el-option label="否" :value="false"/>
+          </el-select>
         </el-form-item>
+        <el-form-item label="关键词">
+          <el-input v-model="formData.keyword" placeholder="邮箱/姓名/地址" />
+        </el-form-item>
+        <el-form-item label="注册时间">
+          <el-date-picker
+            v-model="formData.register_time_range"
+            type="daterange"
+            range-separator="To"
+            start-placeholder="开始时间"
+            end-placeholder="结束时间"
+            value-format="YYYY-MM-DD"
+          />
+        </el-form-item>
+        
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
@@ -93,27 +45,39 @@
     </div>
     <div class="list-table">
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column prop="id" label="ID" width="100" />
-        <el-table-column prop="dev_src" label="来源" />
-        <el-table-column prop="code_country" label="国家" />
-        <el-table-column prop="nm_state" label="区域" />
-        <el-table-column prop="telecom_op" label="运营商" />
-        <el-table-column prop="network_type" label="网络类型" />
-        <el-table-column prop="dev_tags" label="标签" />
-        <el-table-column prop="status_nm" label="状态" />
-        <el-table-column prop="service_status" label="服务状态" />
-        <el-table-column prop="is_4sale" label="出售" />
-        <el-table-column prop="user_name" label="用户" />
-        <el-table-column prop="running_time" label="运行时长" />
-        <el-table-column prop="controls" label="操作" width="190">
+        <el-table-column prop="user_id" label="ID" width="100" />
+        <el-table-column prop="user_name" label="用户名" width="100" />
+        <el-table-column prop="is_emailactivate" label="激活" width="100" />
+        <el-table-column prop="is_paid" label="付费" width="100" />
+        <el-table-column prop="full_name" label="姓名" width="100" />
+        <el-table-column prop="address" label="地址" width="100" />
+        <el-table-column prop="total_spent" label="消费总额" width="100" />
+        <el-table-column prop="user_balance" label="账户余额" width="100" />
+        <el-table-column prop="recharge_total" label="充值总额" width="100" />
+        <el-table-column prop="device_count" label="关联的设备数" width="100" />
+        <el-table-column prop="create_time" label="注册时间" width="100" />
+        <el-table-column prop="last_active" label="上次登录时间" width="100" />
+        <el-table-column prop="login_ip" label="登录地IP" width="100" />
+        <el-table-column prop="controls" label="操作" width="350" fixed="right">
           <template #default="scope">
             <el-button type="primary" @click="handleUpdate(scope.row)"
-              >更新</el-button
+              >重置密码</el-button
             >
+            <el-button type="primary" @click="handleUpdate(scope.row)"
+              >重置试用金</el-button
+            >
+            
             <el-button
+              v-if="scope.row.is_frozen === 0"
               type="danger"
               @click="handleDel(scope.row)"
-              >删除</el-button
+              >冻结</el-button
+            >
+            <el-button
+              v-if="scope.row.is_frozen === 1"
+              type="danger"
+              @click="handleDel(scope.row)"
+              >解冻</el-button
             >
           </template>
         </el-table-column>
@@ -235,11 +199,7 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import {
-  deviceList,
-  productUpdate,
-  countryinfos,
-  deviceUpdate,
-  deviceDel,
+  userList
 } from "@/api/admin.js";
 import { ElMessage, ElMessageBox } from "element-plus";
 
@@ -256,13 +216,10 @@ const statesOptions2 = ref([]);
 const telecomOptions2 = ref([]);
 
 const formData = ref({
-  code_country: "",
-  state_ids: [],
-  telecom_ops: [],
-  network_type: "",
-  status: "",
-  is_4sale: undefined,
-  dev_tags: "",
+  "register_time_range": null,
+  "is_emailactivate": null,
+  "is_paid": null,
+  "keyword": ""
 });
 
 const pageOption = ref({
@@ -349,22 +306,12 @@ const getList = async () => {
   let params = {
     page: pageOption.value.page,
     limit: pageOption.value.pageSize,
-    network_type: formData.value.network_type
-      ? [formData.value.network_type]
-      : undefined,
-    state_ids: formData.value.state_ids,
-    telecom_ops: formData.value.telecom_ops,
-    status: formData.value.status === "" ? undefined : formData.value.status,
-    is_4sale: formData.value.is_4sale,
-    dev_tags:
-      formData.value.dev_tags === "" ? undefined : formData.value.dev_tags,
-    code_country:
-      formData.value.code_country === ""
-        ? undefined
-        : formData.value.code_country,
-    // ...formData.value
+    "register_time_range": formData.value.register_time_range?.length ? formData.value.register_time_range : undefined,
+    "is_emailactivate": formData.value.is_emailactivate === '' ? undefined : formData.value.is_emailactivate,
+    "is_paid": formData.value.is_paid === '' ? undefined : formData.value.is_paid,
+    "keyword": formData.value.keyword === '' ? undefined : formData.value.keyword,
   };
-  const res = await deviceList(params);
+  const res = await userList(params);
   if (res.data) {
     tableData.value = res.data;
     pageOption.value.total = res.total_records;
@@ -448,11 +395,6 @@ const handleDel = (row) => {
     });
 };
 
-countryinfos().then((res) => {
-  if (res) {
-    countryinfosData.value = res;
-  }
-});
 getList();
 </script>
 

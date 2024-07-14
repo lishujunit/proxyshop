@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row flex-nowrap">
         <Menu />
-        <div class="col py-3">
+        <div class="col py-3" style="overflow: hidden;">
           <Nav />
           <RouterView />
         </div>

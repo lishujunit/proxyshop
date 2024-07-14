@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import WebView from '../views/WebView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import AdminView from '../views/AdminView.vue'
 
 import { useStore } from '@/stores/user';
 
@@ -147,7 +148,7 @@ const router = createRouter({
     {
       path: '/admin',
       name: 'admin',
-      component: DashboardView,
+      component: AdminView,
       redirect: "/admin/overview",
       children: [
         {
@@ -169,6 +170,11 @@ const router = createRouter({
           path: 'deviceList',
           name: 'deviceList',
           component: () => import('../views/admin/deviceList/deviceList.vue')
+        },
+        {
+          path: 'userList',
+          name: 'userList',
+          component: () => import('../views/admin/userList/userList.vue')
         },
       ],
     }
