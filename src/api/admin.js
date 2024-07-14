@@ -123,6 +123,24 @@ export const userList = (data) => {
   })
 }
 
+// 修改密码
+export const resetpassword = (data) => {
+  return service({
+      url: '/admin/user/resetpassword',
+      method: 'post',
+      data
+  })
+}
+
+// 充值试用金
+export const recharge = (data) => {
+  return service({
+      url: '/admin/user/recharge',
+      method: 'post',
+      data
+  })
+}
+
 
 
 

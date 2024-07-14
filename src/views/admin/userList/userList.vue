@@ -60,23 +60,23 @@
         <el-table-column prop="login_ip" label="登录地IP" width="100" />
         <el-table-column prop="controls" label="操作" width="350" fixed="right">
           <template #default="scope">
-            <el-button type="primary" @click="handleUpdate(scope.row)"
+            <el-button type="primary" @click="handleUpdate(scope.row, 'reset')"
               >重置密码</el-button
             >
-            <el-button type="primary" @click="handleUpdate(scope.row)"
-              >重置试用金</el-button
+            <el-button type="primary" @click="handleUpdate(scope.row, 'top-up')"
+              >充值试用金</el-button
             >
             
             <el-button
               v-if="scope.row.is_frozen === 0"
               type="danger"
-              @click="handleDel(scope.row)"
+              @click="handleUpdate(scope.row, 'dongjie')"
               >冻结</el-button
             >
             <el-button
               v-if="scope.row.is_frozen === 1"
               type="danger"
-              @click="handleDel(scope.row)"
+              @click="handleUpdate(scope.row, 'jiedong')"
               >解冻</el-button
             >
           </template>
@@ -98,92 +98,33 @@
   <el-dialog
     v-model="dialogTableVisible"
     :before-close="handleClose"
-    title="更新"
-    width="800"
+    :title="modelTitle"
+    width="400"
   >
     <el-form
       ref="ruleFormRef"
       :model="ruleForm"
       :rules="rules"
-      label-width="140px"
+      label-width="70px"
       class="demo-ruleForm"
       status-icon
     >
-      <el-form-item label="国家" prop="code_country">
-        <el-select
-          v-model="ruleForm.code_country"
-          placeholder="请选择国家"
-          clearable
-          style="width: 150px"
-          @change="handleCountryChange2"
-        >
-          <el-option
-            v-for="(item, key) in countryinfosData"
-            :label="key"
-            :value="key"
-            :key="key"
-          />
-        </el-select>
+    <!-- // reset
+    // top-up
+    // dongjie
+    // jiedong -->
+      <el-form-item v-if="actionType === 'reset'" label="新密码" prop="new_password">
+        <el-input v-model="ruleForm.new_password" />
       </el-form-item>
-      <el-form-item label="区域" prop="state_ids">
-        <el-select
-          v-model="ruleForm.state_id"
-          placeholder="请选择区域"
-          clearable
-          style="width: 150px"
-        >
-          <el-option
-            v-for="item in statesOptions2"
-            :label="item.label"
-            :value="item.value"
-            :key="item.value"
-          />
-        </el-select>
+      <el-form-item v-if="actionType === 'top-up'" label="金额" prop="amount">
+        <el-input-number v-model="ruleForm.amount" :min="1" :max="50" />
       </el-form-item>
-      <el-form-item label="运营商" prop="telecom_ops">
-        <el-select
-          v-model="ruleForm.telecom_op"
-          placeholder="请选择区域"
-          clearable
-          style="width: 150px"
-        >
-          <el-option
-            v-for="item in telecomOptions2"
-            :label="item.label"
-            :value="item.value"
-            :key="item.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="网络类型" prop="network_type">
-        <el-select
-          v-model="ruleForm.network_type"
-          placeholder="请选择网络类型"
-          clearable
-          style="width: 150px"
-        >
-          <el-option label="4G" value="4G" />
-          <el-option label="5G" value="5G" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="出售" prop="is_4sale">
-        <el-select
-          v-model="ruleForm.is_4sale"
-          placeholder="请选择"
-          clearable
-          style="width: 150px"
-        >
-          <el-option label="是" :value="1" />
-          <el-option label="否" :value="0" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="标签" prop="dev_tags">
-        <el-input v-model="ruleForm.dev_tags" />
-      </el-form-item>
+      <div style="margin-bottom: 30px;" v-if="actionType === 'dongjie'">确认冻结？</div>
+      <div style="margin-bottom: 30px;" v-if="actionType === 'jiedong'">确认解冻？</div>
 
       <el-form-item>
         <el-button type="primary" @click="submitForm(ruleFormRef)"
-          >更新</el-button
+          >确认</el-button
         >
         <el-button @click="resetForm(ruleFormRef)">取消</el-button>
       </el-form-item>
@@ -199,7 +140,9 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import {
-  userList
+  userList,
+  resetpassword,
+  recharge,
 } from "@/api/admin.js";
 import { ElMessage, ElMessageBox } from "element-plus";
 
@@ -222,6 +165,9 @@ const formData = ref({
   "keyword": ""
 });
 
+const actionType = ref('');
+const modelTitle = ref('');
+
 const pageOption = ref({
   page: 1,
   pageSize: 10,
@@ -232,47 +178,22 @@ const ruleFormRef = ref(null);
 const dialogTableVisible = ref(false);
 
 const ruleForm = reactive({
-  code_country: "",
-  state_id: '',
-  telecom_op: '',
-  network_type: "",
-  is_4sale: undefined,
-  dev_tags: "",
+  new_password: "ProxyshopVip66",
+  amount: 5,
 });
 const rules = reactive({
-  code_country: [
+  new_password: [
     {
       required: true,
-      trigger: "change",
-      message: "请选择国家",
+      trigger: "blur",
+      message: "请输入密码",
     },
   ],
-  state_id: [
+  amount: [
     {
       required: true,
-      trigger: "change",
-      message: "请选择区域",
-    },
-  ],
-  telecom_op: [
-    {
-      required: true,
-      trigger: "change",
-      message: "请选择运营商",
-    },
-  ],
-  network_type: [
-    {
-      required: true,
-      trigger: "change",
-      message: "请选择网络类型",
-    },
-  ],
-  is_4sale: [
-    {
-      required: true,
-      trigger: "change",
-      message: "请选择是否出售",
+      trigger: "blur",
+      message: "请输入金额",
     },
   ],
 });
@@ -288,15 +209,31 @@ const resetForm = (formEl) => {
   dialogTableVisible.value = false;
 };
 
-const handleUpdate = (row) => {
+const handleUpdate = (row, type) => {
   current_row.value = row;
-  handleCountryChange2(row.code_country);
-  ruleForm.code_country = row.code_country
-  ruleForm.state_id = row.state_id || row.nm_state 
-  ruleForm.telecom_op = row.telecom_op_id || row.telecom_op
-  ruleForm.network_type = row.network_type
-  ruleForm.is_4sale = row.is_4sale
-  ruleForm.dev_tags = row.dev_tags
+  actionType.value = type;
+  // reset
+  // top-up
+  // dongjie
+  // jiedong
+  switch(type) {
+    case 'reset':
+      modelTitle.value = '重置密码';
+      break;
+    case 'top-up':
+      modelTitle.value = '充值试用金';
+      break;
+    case 'dongjie':
+      modelTitle.value = '冻结';
+      break;
+    case 'jiedong':
+      modelTitle.value = '解冻';
+      break;
+    default:
+      break;
+  }
+  // ruleForm.code_country = row.code_country
+
 
   dialogTableVisible.value = true;
 };
@@ -333,20 +270,76 @@ const submitForm = async (formEl) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
-      let params = {
-        device_id: current_row.value.id,
-        ...ruleForm,
-      };
-      deviceUpdate(params).then((res) => {
-        if (res.status === 1) {
-          ElMessage({
-            message: "更新成功",
-            type: "success",
+      const type = actionType.value;
+      switch(type) {
+        case 'reset':
+          let params = {
+            "user_id": current_row.value.user_id,
+            "new_password": ruleForm.new_password
+          };
+          resetpassword(params).then((res) => {
+            if (res.status === 1) {
+              ElMessage({
+                message: "修改成功",
+                type: "success",
+              });
+              resetForm(ruleFormRef.value);
+              getList();
+            }
           });
-          resetForm(ruleFormRef.value);
-          getList();
-        }
-      });
+          break;
+        case 'top-up':
+          let params2 = {
+            "user_id": current_row.value.user_id,
+            "amount": ruleForm.amount
+          };
+          recharge(params2).then((res) => {
+            if (res.status === 1) {
+              ElMessage({
+                message: "充值成功",
+                type: "success",
+              });
+              resetForm(ruleFormRef.value);
+              getList();
+            }
+          });
+          break;
+        case 'dongjie':
+          let params3 = {
+            "user_id": current_row.value.user_id,
+            "amount": ruleForm.amount
+          };
+          recharge(params3).then((res) => {
+            if (res.status === 1) {
+              ElMessage({
+                message: "冻结成功",
+                type: "success",
+              });
+              resetForm(ruleFormRef.value);
+              getList();
+            }
+          });
+          break;
+        case 'jiedong':
+          let params4 = {
+            "user_id": current_row.value.user_id,
+            "amount": ruleForm.amount
+          };
+          recharge(params4).then((res) => {
+            if (res.status === 1) {
+              ElMessage({
+                message: "解冻成功",
+                type: "success",
+              });
+              resetForm(ruleFormRef.value);
+              getList();
+            }
+          });
+          break;
+        default:
+          break;
+      }
+      
     }
   });
 };
