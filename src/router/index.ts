@@ -165,6 +165,11 @@ const router = createRouter({
           name: 'productList',
           component: () => import('../views/admin/productList/productList.vue')
         },
+        {
+          path: 'deviceList',
+          name: 'deviceList',
+          component: () => import('../views/admin/deviceList/deviceList.vue')
+        },
       ],
     }
   ],

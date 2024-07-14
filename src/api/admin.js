@@ -78,9 +78,41 @@ export const productUpdate = (data) => {
   })
 }
 
+// 设备列表
+export const deviceList = (data) => {
+  return service({
+      url: '/admin/device/list',
+      method: 'post',
+      data
+  })
+}
 
+// 国家区域
+export const countryinfos = (data) => {
+  return service({
+      url: '/admin/device/countryinfos',
+      method: 'post',
+      data
+  })
+}
 
+// 设备更新
+export const deviceUpdate = (data) => {
+  return service({
+      url: '/admin/device/update',
+      method: 'post',
+      data
+  })
+}
 
+// 设备删除
+export const deviceDel = (data) => {
+  return service({
+      url: '/admin/device/delete',
+      method: 'post',
+      data
+  })
+}
 
 
 

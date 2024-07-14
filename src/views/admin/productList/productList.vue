@@ -83,7 +83,7 @@
         ref="ruleFormRef"
         :model="ruleForm"
         :rules="rules"
-        label-width="120px"
+        label-width="140px"
         class="demo-ruleForm"
         status-icon
       >
@@ -142,6 +142,7 @@ import { ElMessage, ElMessageBox } from "element-plus";
 const loading = ref(false);
 
 const tableData = ref([]);
+const current_row = ref({});
 
 const formData = ref({
   code_country: "",
@@ -209,8 +210,21 @@ const handleClose = () => {
   dialogTableVisible.value = false;
 };
 
+const resetForm = (formEl) => {
+  if (!formEl) return;
+  formEl.resetFields();
+  dialogTableVisible.value = false;
+};
+
 const handleUpdate = (row) => {
-  //
+  current_row.value = row;
+  ruleForm.product_name = row.product_name;
+  ruleForm.product_desc = row.product_desc;
+  ruleForm.plan_desc = row.plan_desc;
+  ruleForm.is_autorenew = row.is_autorenew;
+  ruleForm.price = row.price;
+  ruleForm.tax_rate = row.tax_rate;
+  dialogTableVisible.value = true;
 };
 
 const getList = async () => {
@@ -233,6 +247,7 @@ const getList = async () => {
 
 
 const onSubmit = () => {
+  pageOption.value.page = 1;
   getList();
 };
 
@@ -241,10 +256,27 @@ const handlePageChange = (val) => {
   getList();
 };
 
-
-
-
-
+const submitForm = async (formEl) => {
+  if (!formEl) return;
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      let params = {
+        product_id: current_row.value.id,
+        ...ruleForm
+      };
+      productUpdate(params).then((res) => {
+        if(res.status === 1) {
+          ElMessage({
+            message: "更新成功",
+            type: "success",
+          });
+          resetForm(ruleFormRef.value);
+          getList();
+        }
+      })
+    }
+  })
+}
 
 getList();
 </script>
