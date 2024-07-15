@@ -143,6 +143,7 @@ import {
   userList,
   resetpassword,
   recharge,
+  frozen
 } from "@/api/admin.js";
 import { ElMessage, ElMessageBox } from "element-plus";
 
@@ -307,9 +308,9 @@ const submitForm = async (formEl) => {
         case 'dongjie':
           let params3 = {
             "user_id": current_row.value.user_id,
-            "amount": ruleForm.amount
+            "is_frozen": true
           };
-          recharge(params3).then((res) => {
+          frozen(params3).then((res) => {
             if (res.status === 1) {
               ElMessage({
                 message: "冻结成功",
@@ -323,9 +324,9 @@ const submitForm = async (formEl) => {
         case 'jiedong':
           let params4 = {
             "user_id": current_row.value.user_id,
-            "amount": ruleForm.amount
+            "is_frozen": false
           };
-          recharge(params4).then((res) => {
+          frozen(params4).then((res) => {
             if (res.status === 1) {
               ElMessage({
                 message: "解冻成功",

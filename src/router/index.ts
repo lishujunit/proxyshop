@@ -176,6 +176,11 @@ const router = createRouter({
           name: 'userList',
           component: () => import('../views/admin/userList/userList.vue')
         },
+        {
+          path: 'orderList',
+          name: 'orderList',
+          component: () => import('../views/admin/orderList/orderList.vue')
+        }
       ],
     }
   ],

@@ -141,7 +141,32 @@ export const recharge = (data) => {
   })
 }
 
+// 冻结/解冻账号
+export const frozen = (data) => {
+  return service({
+      url: '/admin/user/frozen',
+      method: 'post',
+      data
+  })
+}
 
+// 订单列表
+export const orderList = (data) => {
+  return service({
+      url: '/admin/order/list',
+      method: 'post',
+      data
+  })
+}
+
+// 延长订单-设备到期时间
+export const extend = (data) => {
+  return service({
+      url: '/admin/order/extend',
+      method: 'post',
+      data
+  })
+}
 
 
 
