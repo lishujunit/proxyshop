@@ -169,6 +169,35 @@ export const extend = (data) => {
 }
 
 
+// 可供切换的区域及数量
+export const regionList = (data) => {
+  return service({
+      url: '/admin/order/region-list',
+      method: 'post',
+      data
+  })
+}
+
+// 当前所在区域
+export const getRegion = (params) => {
+  return service({
+      url: '/proxy/region',
+      method: 'get',
+      params
+  })
+}
+
+// 切换设备所在区域
+export const switchRegion = (data) => {
+  return service({
+      url: '/admin/order/switch-region',
+      method: 'post',
+      data
+  })
+}
+
+
+
 
 
 

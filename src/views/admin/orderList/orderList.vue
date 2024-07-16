@@ -71,7 +71,7 @@
                 <el-table-column prop="controls" label="操作" width="350" fixed="right">
                     <template #default="scope">
                         <el-button type="primary" @click="handleUpdate(scope.row)">延长订单时间</el-button>
-                        <el-button type="primary" @click="handleUpdate(scope.row)">设备区域切换</el-button>
+                        <el-button type="primary" @click="handleLocation(scope.row)">设备区域切换</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -105,16 +105,56 @@
           </div>
         </template> -->
     </el-dialog>
+
+    <el-dialog
+        v-model="dialogVisible3"
+        :title="'Connecting '+connect_name"
+        width="800"
+        :close-on-click-modal="false"
+        :close-on-press-escape="false"
+    >
+        <el-table :data="regionTableData" style="width: 100%">
+            <el-table-column prop="name" label="LOCAIOTION" />
+            <el-table-column label="STATUS" width="300">
+                <template #default="{row}">
+                    <template v-if="row.devnum_avail > 0">
+                        <el-button v-if="is_connect && state_id === row.id" plain type="success" :icon="Connection">
+                            Connecting  Canada,Ontario
+                        </el-button>
+
+                        <el-button v-else type="success" @click="handleSwitchRegion(row)">
+                            Connect
+                        </el-button>
+                    </template>
+                    
+                    <el-button v-else type="info" plain disabled> LOCATION FULL（TRYAGAIN LATER）</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-dialog>
+
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+import { Connection } from '@element-plus/icons-vue'
+import { ArrowDown } from '@element-plus/icons-vue'
 import {
     users,
     orderList,
-    extend
+    extend,
+    regionList,
+    getRegion,
+    switchRegion
 } from "@/api/admin.js";
-import { ElMessage, ElMessageBox } from "element-plus";
+import { ElMessage, ElMessageBox, ElLoading } from "element-plus";
+
+const dialogVisible3 = ref(false);
+const connect_name = ref('');
+const regionTableData = ref();
+const is_connect = ref(false);
+const state_id = ref('');
+const current_dev_virtid = ref('');
 
 const loading = ref(false);
 const countryinfosData = ref();
@@ -166,6 +206,42 @@ const getUser = async () => {
         userOptions.value = res.data;
     }
 };
+
+const handleLocation = async ({dev_virtid}: {dev_virtid: string}) => {
+    current_dev_virtid.value = dev_virtid;
+    const res = await regionList({dev_virtid});
+    const obj = await getRegion({dev_virtid});
+    connect_name.value = obj.name;
+    if(res) {
+        regionTableData.value = res;
+    }
+    dialogVisible3.value = true;
+}
+
+const handleSwitchRegion = async ({id}: {id: string}) => {
+    const loading = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(255, 255, 255, 0.7)',
+    });
+    const dev_virtid = current_dev_virtid.value;
+    try{
+        is_connect.value = true;
+        state_id.value = id;
+        const res = await switchRegion({dev_virtid, state_id: id});
+
+        const obj = await getRegion({dev_virtid});
+        connect_name.value = obj.name;
+
+        is_connect.value = false;
+        state_id.value = '';
+        handleLocation({dev_virtid});
+    } catch(err) {
+        is_connect.value = false;
+        state_id.value = '';
+    }
+    loading.close();
+}
 
 const handleClose = () => {
     ruleFormRef.value.resetFields();
