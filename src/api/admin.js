@@ -170,11 +170,11 @@ export const extend = (data) => {
 
 
 // 可供切换的区域及数量
-export const regionList = (data) => {
+export const regionList = (params) => {
   return service({
       url: '/admin/order/region-list',
       method: 'post',
-      data
+      params
   })
 }
 
@@ -188,16 +188,25 @@ export const getRegion = (params) => {
 }
 
 // 切换设备所在区域
-export const switchRegion = (data) => {
+export const switchRegion = (params) => {
   return service({
       url: '/admin/order/switch-region',
       method: 'post',
-      data
+      params
   })
 }
 
 
 
+
+// 充值列表
+export const deposits = (data) => {
+  return service({
+      url: '/admin/deposits/list',
+      method: 'post',
+      data
+  })
+}
 
 
 

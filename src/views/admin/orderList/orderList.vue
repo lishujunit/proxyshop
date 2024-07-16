@@ -71,7 +71,7 @@
                 <el-table-column prop="controls" label="操作" width="350" fixed="right">
                     <template #default="scope">
                         <el-button type="primary" @click="handleUpdate(scope.row)">延长订单时间</el-button>
-                        <el-button type="primary" @click="handleLocation(scope.row)">设备区域切换</el-button>
+                        <el-button type="primary" @click="handleLocation(scope.row.id)">设备区域切换</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -207,10 +207,10 @@ const getUser = async () => {
     }
 };
 
-const handleLocation = async ({dev_virtid}: {dev_virtid: string}) => {
+const handleLocation = async (dev_virtid) => {
     current_dev_virtid.value = dev_virtid;
-    const res = await regionList({dev_virtid});
-    const obj = await getRegion({dev_virtid});
+    const res = await regionList({id:dev_virtid});
+    const obj = await getRegion({id:dev_virtid});
     connect_name.value = obj.name;
     if(res) {
         regionTableData.value = res;
