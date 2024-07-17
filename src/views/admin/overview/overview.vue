@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { overview } from '@/api/admin.js';
 import * as echarts from 'echarts';
 
@@ -164,6 +164,12 @@ const initEcharts = () => {
 
 onMounted(() => {
   getOverview();
+})
+
+onUnmounted(() => {
+  if(myChart) {
+    myChart.dispose();
+  }
 })
 
 

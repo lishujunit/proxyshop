@@ -1,7 +1,7 @@
 <template>
     <div class="col-auto col-md-2 px-0 bg-soft-primary" style="max-width: 200px">
         <div class="d-flex flex-column align-items-center align-items-sm-start pt-4 text-white min-vh-100">
-            <a href="/#/dashboard" class="px-4">
+            <a href="/#/admin" class="px-4">
                 <img class="d-none d-md-block" src="../../../assets/img/logo1.jpg" alt=""
                     width="100%" height="auto">
             </a>
@@ -33,13 +33,13 @@ watch(() => route.path, (to, from) => {
 itemActivePath.value = route.path;
 
 const navList = ref([
-    {name: 'Proxies', link: '/dashboard/proxies', paths: ['/dashboard/proxies', '/dashboard/order', '/dashboard/new-order'], disabled: false, class: 'uil-server'},
-    {name: 'IPv4/IPv6', link: '', paths: [], disabled: true, class: 'uil-brackets-curly'},
-    {name: 'Add funds', link: '/dashboard/Add-funds', paths: ['/dashboard/Add-funds'], disabled: false, class: 'uil-credit-card'},
-    {name: 'Affiliate', link: '/dashboard/affiliate', paths: ['/dashboard/affiliate'], disabled: false, class: 'uil-dollar-sign'},
-    {name: 'Settings', link: '/dashboard/settings', paths: ['/dashboard/settings'], disabled: false, class: 'uil-cog'},
-    {name: 'API', link: '/dashboard/api', paths: ['/dashboard/api'], disabled: false, class: 'uil-code-branch'},
-    {name: 'Contact', link: '/web/contact', paths: ['/web/contact'], disabled: false, class: 'uil-fast-mail'},
+    {name: '概览', link: '/admin/overview', paths: ['/admin/overview'], disabled: false, class: ''},
+    {name: '优惠券', link: '/admin/coupon', paths: ['/admin/coupon'], disabled: false, class: ''},
+    {name: '产品', link: '/admin/productList', paths: ['/admin/productList'], disabled: false, class: ''},
+    {name: '设备', link: '/admin/deviceList', paths: ['/admin/deviceList'], disabled: false, class: ''},
+    {name: '用户', link: '/admin/userList', paths: ['/admin/userList'], disabled: false, class: ''},
+    {name: '订单', link: '/admin/orderList', paths: ['/admin/orderList'], disabled: false, class: ''},
+    {name: '资金', link: '/admin/fund', paths: ['/admin/fund'], disabled: false, class: ''},
 ])
 </script>
 

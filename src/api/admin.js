@@ -208,5 +208,16 @@ export const deposits = (data) => {
   })
 }
 
+// 消费列表
+export const consumList = (data) => {
+  return service({
+      url: '/admin/consum/list',
+      method: 'post',
+      data
+  })
+}
+
+
+
 
 

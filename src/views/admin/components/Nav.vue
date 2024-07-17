@@ -7,30 +7,33 @@
                             data-bs-toggle="dropdown">{{ user.userData?.user.user_name }}</a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <router-link class="dropdown-item" to="/dashboard">Dashboard</router-link>
+                                <router-link class="dropdown-item" to="/admin">概览</router-link>
                             </li>
-                            <li class="nav-item nav-item-disabled">
+                            <!-- <li class="nav-item nav-item-disabled">
                                 <router-link class="dropdown-item" to="">IPv4/IPv6</router-link>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
-                                <router-link class="dropdown-item" to="/dashboard/Add-funds">Add funds</router-link>
-                            </li>
-
-                            <li class="nav-item">
-                                <router-link class="dropdown-item" to="/dashboard/Affiliate">Affiliate</router-link>
+                                <router-link class="dropdown-item" to="/admin/coupon">优惠券</router-link>
                             </li>
 
                             <li class="nav-item">
-                                <router-link class="dropdown-item" to="/dashboard/settings">Settings</router-link>
+                                <router-link class="dropdown-item" to="/admin/productList">产品</router-link>
+                            </li>
+
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/admin/deviceList">设备</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="dropdown-item" to="/dashboard/api">API</router-link>
+                                <router-link class="dropdown-item" to="/admin/userList">用户</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="dropdown-item" to="/web/contact">Contact</router-link>
+                                <router-link class="dropdown-item" to="/admin/orderList">订单</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link class="dropdown-item" to="/admin/fund">资金</router-link>
                             </li>
                             <li class="nav-item" @click="handleLogout">
-                                <router-link class="dropdown-item" to="">Logout</router-link>
+                                <router-link class="dropdown-item" to="">退出</router-link>
                             </li>
                         </ul>
                     </li>
