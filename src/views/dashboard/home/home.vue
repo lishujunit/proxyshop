@@ -57,7 +57,7 @@
                                 <el-table-column prop="is_autorenew" label="Autorenew" width="105" />
                                 <el-table-column prop="is_rotateip" label="Rotateip" width="90" />
                                 <el-table-column prop="end_time" label="Expires" width="170" />
-                                <el-table-column label="Operate" width="150">
+                                <el-table-column label="Operate" width="150" fixed="right">
                                     <template #default="scope">
                                         <el-dropdown>
                                             <el-button type="primary">
@@ -262,7 +262,7 @@
                 <template #default="{row}">
                     <template v-if="row.devnum_avail > 0">
                         <el-button v-if="is_connect && state_id === row.id" plain type="success" :icon="Connection">
-                            Connecting  Canada,Ontario
+                            Connecting  {{row.name}}
                         </el-button>
 
                         <el-button v-else type="success" @click="handleSwitchRegion(row)">
@@ -560,11 +560,21 @@ const handleSwitchRegion = async ({id}: {id: string}) => {
   --el-table-tr-bg-color: var(--el-color-success-light-9);
 }
 .el-table th.el-table__cell {
-    /* background-color: #8c8bc1; */
     background-color: #a07cc5;
     text-align: center;
     font-size: 16px;
     color: #fff;
 }
-
+.el-table.is-scrolling-right th.el-table-fixed-column--right {
+    background-color: #a07cc5;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+.el-table__header-wrapper tr th.el-table-fixed-column--right  {
+    background-color: #a07cc5;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
 </style>

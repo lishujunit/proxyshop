@@ -235,7 +235,7 @@ const getOrderprice = async () => {
         discount_code: formData.value.discount_code,
     };
     const res = await orderprice(params);
-    if(res && res.status === 1) {
+    if(res && res.status == 1) {
         order_price.value = res.order_price;
     }
 };

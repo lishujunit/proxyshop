@@ -265,7 +265,7 @@ const submitForm = async (formEl) => {
         ...ruleForm
       };
       productUpdate(params).then((res) => {
-        if(res.status === 1) {
+        if(res.status == 1) {
           ElMessage({
             message: "更新成功",
             type: "success",

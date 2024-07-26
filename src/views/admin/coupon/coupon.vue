@@ -86,8 +86,8 @@
         </el-table-column>
         <el-table-column prop="valid_from" label="有效期-起" />
         <el-table-column prop="valid_to" label="有效期-止" />
-        <el-table-column prop="user_names" label="用户" />
-        <el-table-column prop="product_names" label="产品" />
+        <el-table-column prop="user_names" label="用户" width="240" show-overflow-tooltip />
+        <el-table-column prop="product_names" label="产品" width="240" show-overflow-tooltip />
         <el-table-column prop="controls" label="操作" width="190">
           <template #default="scope">
             <el-button
@@ -132,7 +132,7 @@
         status-icon
       >
         <el-form-item label="优惠码" prop="code">
-          <el-input v-model="ruleForm.code" :disabled="action === 'edit'" />
+          <el-input v-model="ruleForm.code" maxlength="20" show-word-limit :disabled="action === 'edit'" />
         </el-form-item>
         <el-form-item label="折扣" prop="discount">
           <el-input-number
@@ -264,17 +264,20 @@ const ruleForm = reactive({
   coupon_desc: "",
 });
 
+const checkCode = (rule: any, value: any, callback: any) => {
+  if (value === '') {
+    callback(new Error('优惠码不能为空'))
+  } else if (!/^[A-Za-z0-9]{1,20}$/.test(value)) {
+    callback(new Error("请输入大小写字母和数字组成的20位以内的优惠码"))
+  } else {
+    callback()
+  }
+}
+
 const rules = reactive({
   code: [
     {
-      required: true,
-      trigger: "blur",
-      message: "优惠码不能为空",
-    },
-    {
-      min: 8,
-      max: 8,
-      message: "请输入大小写字母加数字组成的8位优惠码",
+      validator: checkCode,
       trigger: "blur",
       informType: "warning",
     },
@@ -347,7 +350,7 @@ const submitForm = async (formEl) => {
       delete params.valid_date;
       if (action.value === "add") {
         create(params).then((res) => {
-          if (res.status === 1) {
+          if (res.status == 1) {
             ElMessage({
               message: "创建成功",
               type: "success",
@@ -365,7 +368,7 @@ const submitForm = async (formEl) => {
         params.is_autorenew = params.is_autorenew === 0 ? false : true;
         console.log(params);
         update(params).then((res) => {
-          if (res.status === 1) {
+          if (res.status == 1) {
             ElMessage({
               message: "更新成功",
               type: "success",
@@ -472,7 +475,7 @@ const handleDel = (row) => {
   })
     .then(() => {
       couponDelete({ coupon_id: row.id }).then((res) => {
-        if (res.status === 1) {
+        if (res.status == 1) {
           ElMessage({
             type: "success",
             message: "删除成功",

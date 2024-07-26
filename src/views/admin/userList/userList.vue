@@ -279,7 +279,7 @@ const submitForm = async (formEl) => {
             "new_password": ruleForm.new_password
           };
           resetpassword(params).then((res) => {
-            if (res.status === 1) {
+            if (res.status == 1) {
               ElMessage({
                 message: "修改成功",
                 type: "success",
@@ -295,7 +295,7 @@ const submitForm = async (formEl) => {
             "amount": ruleForm.amount
           };
           recharge(params2).then((res) => {
-            if (res.status === 1) {
+            if (res.status == 1) {
               ElMessage({
                 message: "充值成功",
                 type: "success",
@@ -311,7 +311,7 @@ const submitForm = async (formEl) => {
             "is_frozen": true
           };
           frozen(params3).then((res) => {
-            if (res.status === 1) {
+            if (res.status == 1) {
               ElMessage({
                 message: "冻结成功",
                 type: "success",
@@ -327,7 +327,7 @@ const submitForm = async (formEl) => {
             "is_frozen": false
           };
           frozen(params4).then((res) => {
-            if (res.status === 1) {
+            if (res.status == 1) {
               ElMessage({
                 message: "解冻成功",
                 type: "success",
@@ -374,7 +374,7 @@ const handleDel = (row) => {
   })
     .then(() => {
       deviceDel({ device_id: row.id }).then((res) => {
-        if (res.status === 1) {
+        if (res.status == 1) {
           ElMessage({
             type: "success",
             message: "删除成功",

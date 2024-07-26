@@ -95,7 +95,7 @@ const submit = async () => {
             new_password: new_password1.value
         }
         const res = await resetpassword(params);
-        if(res && res.status === 1) {
+        if(res && res.status == 1) {
             router.push({
                 path: '/web/forgot-password/password-reset-complete'
             })

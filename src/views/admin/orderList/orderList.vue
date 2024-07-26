@@ -66,11 +66,13 @@
                 <el-table-column prop="telecom_op" label="运营商" width="100" />
                 <el-table-column prop="flow_total" label="合计使用流量" width="100" />
                 <el-table-column prop="flow_thismon" label="本月使用量" width="100" />
+                <el-table-column prop="user_port" label="用户PORT" width="100" />
+                <el-table-column prop="proxy_port" label="设备PORT" width="100" />
                 <el-table-column prop="start_time" label="下单时间" width="100" />
                 <el-table-column prop="end_time" label="到期时间" width="100" />
                 <el-table-column prop="controls" label="操作" width="350" fixed="right">
                     <template #default="scope">
-                        <el-button type="primary" @click="handleUpdate(scope.row)">延长订单时间</el-button>
+                        <el-button type="primary" :disabled="scope.row.order_status === '到期未续费'" @click="handleUpdate(scope.row)">延长订单时间</el-button>
                         <el-button type="primary" @click="handleLocation(scope.row.id)">设备区域切换</el-button>
                     </template>
                 </el-table-column>
@@ -119,7 +121,7 @@
                 <template #default="{row}">
                     <template v-if="row.devnum_avail > 0">
                         <el-button v-if="is_connect && state_id === row.id" plain type="success" :icon="Connection">
-                            Connecting  Canada,Ontario
+                            Connecting {{row.name}}
                         </el-button>
 
                         <el-button v-else type="success" @click="handleSwitchRegion(row)">
@@ -210,8 +212,8 @@ const getUser = async () => {
 const handleLocation = async (dev_virtid) => {
     current_dev_virtid.value = dev_virtid;
     const res = await regionList({id:dev_virtid});
-    const obj = await getRegion({id:dev_virtid});
-    connect_name.value = obj.name;
+    // const obj = await getRegion({id:dev_virtid});
+    // connect_name.value = obj.name;
     if(res) {
         regionTableData.value = res;
     }
@@ -228,14 +230,16 @@ const handleSwitchRegion = async ({id}: {id: string}) => {
     try{
         is_connect.value = true;
         state_id.value = id;
-        const res = await switchRegion({dev_virtid, state_id: id});
+        const res = await switchRegion({id: dev_virtid, state_id: id});
 
-        const obj = await getRegion({dev_virtid});
-        connect_name.value = obj.name;
+        // const obj = await getRegion({dev_virtid});
+        // connect_name.value = obj.name;
 
         is_connect.value = false;
         state_id.value = '';
-        handleLocation({dev_virtid});
+        dialogVisible3.value = false;
+        getList();
+        // handleLocation({dev_virtid});
     } catch(err) {
         is_connect.value = false;
         state_id.value = '';
@@ -301,7 +305,7 @@ const submitForm = async (formEl) => {
                 "end_time": ruleForm.end_time
             };
             extend(params).then((res) => {
-                if (res.status === 1) {
+                if (res.status == 1) {
                     ElMessage({
                         message: "修改成功",
                         type: "success",
@@ -343,7 +347,7 @@ const handleDel = (row) => {
     })
         .then(() => {
             deviceDel({ device_id: row.id }).then((res) => {
-                if (res.status === 1) {
+                if (res.status == 1) {
                     ElMessage({
                         type: "success",
                         message: "删除成功",

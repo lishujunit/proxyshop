@@ -2,7 +2,7 @@
     <div class="content-wrapper">
         <nav class="navbar navbar-expand-lg center-nav transparent navbar-light">
             <div class="container flex-lg-row flex-nowrap align-items-center">
-                <div class="navbar-brand w-100">
+                <div class="navbar-brand" style="width: 85%;">
                     <a href="/">
                         <img src="../assets/img/logo2.jpg" width="150px" alt="">
                     </a>
@@ -103,8 +103,13 @@
                             <router-link class="btn btn-sm btn-secondary rounded-pill" to="/web/signin">Login</router-link>
                         </li>
                         <li v-else class="nav-item d-none d-md-block">
-                            <router-link v-if="user.userData?.user.is_admin" to="/admin" class="btn btn-sm btn-primary rounded-pill">Admin</router-link>
-                            <router-link v-else to="/dashboard" class="btn btn-sm btn-primary rounded-pill">Dashboard</router-link>
+                            <template v-if="user.userData?.user.is_admin">
+                                <router-link to="/admin" class="btn btn-sm btn-primary rounded-pill">Admin</router-link>&nbsp;
+                                <router-link to="/dashboard" class="btn btn-sm btn-primary rounded-pill">Dashboard</router-link>
+                            </template>
+                            <template v-else>
+                                <router-link to="/dashboard" class="btn btn-sm btn-primary rounded-pill">Dashboard</router-link>
+                            </template>
                             &nbsp;<router-link @click="handleLogout" to="" class="btn btn-sm btn-secondary rounded-pill">Logout</router-link>
                         </li>
                         <li class="nav-item d-lg-none">

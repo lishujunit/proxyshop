@@ -67,7 +67,7 @@
                                     <template v-for="(item, index) in productData" :key="item.product_code">
                                         <li class="nav-item scrollbar-demo-item" role="presentation">
                                             <button class="nav-link" @click="handleProductChange(item.product_code)" :class="{active: index == 0}" data-bs-toggle="pill"
-                                                type="button" role="tab" aria-selected="false" :disabled="item.network_type === '5G'">{{ item.product_name }}</button>
+                                                type="button" role="tab" aria-selected="false">{{ item.product_name }}</button>
                                         </li>
                                     </template>
                                     

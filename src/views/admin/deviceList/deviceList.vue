@@ -95,6 +95,8 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column prop="id" label="ID" width="100" />
         <el-table-column prop="dev_src" label="来源" />
+        <el-table-column prop="dev_code" label="设备编码" />
+        <el-table-column prop="proxy_port" label="代理端口" />
         <el-table-column prop="code_country" label="国家" />
         <el-table-column prop="nm_state" label="区域" />
         <el-table-column prop="telecom_op" label="运营商" />
@@ -179,7 +181,7 @@
       <el-form-item label="运营商" prop="telecom_ops">
         <el-select
           v-model="ruleForm.telecom_op"
-          placeholder="请选择区域"
+          placeholder="请选择"
           clearable
           style="width: 150px"
         >
@@ -391,7 +393,7 @@ const submitForm = async (formEl) => {
         ...ruleForm,
       };
       deviceUpdate(params).then((res) => {
-        if (res.status === 1) {
+        if (res.status == 1) {
           ElMessage({
             message: "更新成功",
             type: "success",
@@ -433,7 +435,7 @@ const handleDel = (row) => {
   })
     .then(() => {
       deviceDel({ device_id: row.id }).then((res) => {
-        if (res.status === 1) {
+        if (res.status == 1) {
           ElMessage({
             type: "success",
             message: "删除成功",

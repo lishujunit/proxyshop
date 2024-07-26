@@ -122,7 +122,7 @@ const submit = async () => {
   if(!user_id) return;
   let data = formData.value;
   const res = await feedback(user_id, data);
-  if(res && res.status === 1) {
+  if(res && res.status == 1) {
     ElMessage.success(res.message);
     formData.value.feed_title = '';
     formData.value.feed_msg = '';

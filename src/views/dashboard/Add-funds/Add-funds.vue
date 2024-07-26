@@ -126,7 +126,7 @@ const handleRecharge = async () => {
     } else {
         res = await crypturl(params);
     }
-    if(res && res.status === 1) {
+    if(res && res.status == 1) {
         let url = res.recharge_url;
         frame = open(url, '_self', 'popup=yes,width=1000,height=1000')
     }
