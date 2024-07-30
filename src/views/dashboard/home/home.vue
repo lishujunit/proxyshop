@@ -351,9 +351,10 @@ const setTtemRefs = ($event, language, code) => {
         [language]: $event,
         code,
     }
-    if(!itemRefs.value[language]) {
-        itemRefs.value[language] = obj;
-    }
+    itemRefs.value[language] = obj;
+    // if(!itemRefs.value[language]) {
+    //     itemRefs.value[language] = obj;
+    // }
 }
 
 const rotate_minute_options = [
