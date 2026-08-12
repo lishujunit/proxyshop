@@ -1,0 +1,17 @@
+{
+  "name": "proxyshop",
+  "install": "npm ci",
+  "terminals": [
+    {
+      "name": "dev server",
+      "command": "npm run dev -- --host 0.0.0.0",
+      "description": "Vite dev server for the proxyshop Vue 3 app. Serves the app on port 5173 with hot-reload. Requests to /api are proxied to https://proxyshop.io."
+    }
+  ],
+  "ports": [
+    {
+      "name": "vite dev server",
+      "port": 5173
+    }
+  ]
+}
